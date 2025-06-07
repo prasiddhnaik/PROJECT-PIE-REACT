@@ -1,0 +1,548 @@
+# 🤖 AI Portfolio Return Calculator - Professional .gitignore
+# Comprehensive exclusion patterns for clean repository management
+# Last Updated: December 2024
+
+# ==========================================
+# 🐍 PYTHON SPECIFIC
+# ==========================================
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+*.pyd
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+cover/
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+.pybuilder/
+target/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# pyenv
+.python-version
+
+# pipenv
+Pipfile.lock
+
+# poetry
+poetry.lock
+
+# pdm
+.pdm.toml
+
+# PEP 582
+__pypackages__/
+
+# Celery stuff
+celerybeat-schedule
+celerybeat.pid
+
+# SageMath parsed files
+*.sage.py
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# pytype static type analyzer
+.pytype/
+
+# Cython debug symbols
+cython_debug/
+
+# ==========================================
+# 🌐 STREAMLIT SPECIFIC
+# ==========================================
+
+# Streamlit cache and session files
+.streamlit/
+streamlit_cache/
+.streamlit_cache/
+
+# Streamlit secrets and config
+secrets.toml
+config.toml
+*.streamlit/
+
+# Streamlit temporary files
+*.tmp
+*.temp
+
+# ==========================================
+# 📊 DATA & ANALYSIS FILES
+# ==========================================
+
+# Large datasets (keep sample data only)
+data/large_datasets/
+data/raw/
+data/processed/
+*.pickle
+*.pkl
+
+# Temporary analysis files
+analysis_temp/
+temp_charts/
+scratch/
+experiments/
+
+# Excel and CSV temporary files
+~$*.xlsx
+~$*.xls
+~$*.csv
+*.xlsb
+*.xlsm
+
+# ==========================================
+# 📈 VISUALIZATION & CHARTS
+# ==========================================
+
+# Generated chart files (keep as needed)
+charts/generated/
+plots/temp/
+figures/temp/
+
+# Large image files
+*.png
+
+# ==========================================
+# 🔒 PERSONAL & SENSITIVE DATA
+# ==========================================
+
+# Personal configuration files
+config_personal.py
+*_personal.py
+
+# Email and tracking logs
+*tracker*.log
+*tracker*.json
+background_tracker_*
+email_test_*
+
+# Personal email scripts (if recreated)
+send_*_to_*.py
+*email*.py
+
+# Any files with personal info
+*prasiddh*
+*gajesh*
+*.jpg
+*.jpeg
+*.gif
+*.svg
+*.pdf
+!screenshots/
+!docs/images/
+
+# Plotly cache
+.plotly_cache/
+
+# ==========================================
+# 🔧 DEVELOPMENT TOOLS
+# ==========================================
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# JetBrains IDEs
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.vim
+.vimrc
+
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+
+# ==========================================
+# 🚀 DEPLOYMENT & CLOUD
+# ==========================================
+
+# Heroku
+Procfile.local
+.env.local
+
+# Docker
+Dockerfile.local
+docker-compose.override.yml
+.dockerignore
+
+# AWS
+.aws/
+*.pem
+
+# Google Cloud
+gcloud/
+*.json
+service-account*.json
+
+# Azure
+.azure/
+
+# Terraform
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+
+# ==========================================
+# 🗄️ DATABASE & CACHE
+# ==========================================
+
+# SQLite
+*.db
+*.sqlite
+*.sqlite3
+
+# Redis
+dump.rdb
+
+# MongoDB
+*.bson
+
+# Cache files
+.cache/
+cache/
+*_cache/
+
+# ==========================================
+# 📝 LOGS & MONITORING
+# ==========================================
+
+# Log files
+*.log
+logs/
+log/
+*.log.*
+
+# Debug files
+debug/
+*.debug
+
+# Performance monitoring
+.prof
+*.prof
+profiling/
+
+# ==========================================
+# 🔐 SECURITY & SECRETS
+# ==========================================
+
+# Environment variables
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# API keys and secrets
+secrets/
+config/secrets/
+*.key
+*.pem
+*.crt
+*.csr
+
+# Authentication
+.auth
+auth.json
+credentials.json
+
+# ==========================================
+# 📦 PACKAGE MANAGEMENT
+# ==========================================
+
+# npm (if using Node.js components)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.npm
+.yarn-integrity
+
+# Conda
+.conda/
+
+# ==========================================
+# 📱 MOBILE & DEVICES
+# ==========================================
+
+# iOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Android
+*.apk
+*.dex
+
+# ==========================================
+# 🧪 TESTING & QA
+# ==========================================
+
+# Test results
+test-results/
+test-reports/
+.nyc_output
+
+# Performance testing
+load_test_results/
+benchmark_results/
+
+# ==========================================
+# 📊 SPECIFIC PROJECT FILES
+# ==========================================
+
+# Portfolio calculator specific
+portfolio_temp/
+calculation_cache/
+nav_data_cache/
+
+# Generated reports
+reports/generated/
+exports/temp/
+
+# User uploads (keep structure, remove files)
+uploads/*
+!uploads/.gitkeep
+
+# Configuration backups
+config_backup/
+settings_backup/
+
+# ==========================================
+# 🌟 CUSTOM EXCLUSIONS
+# ==========================================
+
+# Add project-specific exclusions here
+# Example:
+# my_custom_folder/
+# *.custom_extension
+
+# Temporary folders
+tmp/
+temp/
+temporary/
+
+# Backup files
+*.bak
+*.backup
+*.old
+
+# Archive files
+*.tar
+*.tar.gz
+*.tgz
+*.zip
+*.rar
+*.7z
+
+# ==========================================
+# 📋 KEEP THESE IMPORTANT FILES
+# ==========================================
+
+# Important: DO NOT ignore these files
+!README.md
+!LICENSE
+!requirements.txt
+!setup.py
+!.gitignore
+!.github/
+!docs/
+!examples/
+!tests/
+
+# Sample data files to keep
+!*_sample.csv
+!*_demo.csv
+!example_data.csv
+
+# Documentation images
+!docs/images/*
+!screenshots/*
+!assets/images/*
+
+# ==========================================
+# 🔄 VERSION CONTROL
+# ==========================================
+
+# Git specific
+.git/
+*.orig
+*.patch
+
+# SVN
+.svn/
+
+# Mercurial
+.hg/
+
+# ==========================================
+# 📊 ANALYTICS & METRICS
+# ==========================================
+
+# Google Analytics
+ga-*.json
+
+# Application insights
+application-insights.json
+
+# Performance metrics
+metrics/
+analytics_data/
+
+# ==========================================
+# 💻 SYSTEM FILES
+# ==========================================
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Linux
+*~
+.directory
+.Trash-*
+
+# ==========================================
+# 🎯 END OF GITIGNORE
+# ==========================================
+
+# Note: This gitignore is designed for professional development
+# Modify according to your specific project needs
+# Last updated: December 2024 
