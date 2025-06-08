@@ -16,6 +16,7 @@ from plotly.subplots import make_subplots
 import plotly.io as pio
 from datetime import datetime
 import seaborn as sns
+import streamlit as st
 
 # Set style for better plots
 plt.style.use('seaborn-v0_8')
@@ -341,11 +342,11 @@ class FundComparator:
             }
         }
         
-        fig.show(config=config)
-        
-        # Save interactive HTML with scroll wheel
-        fig.write_html("fund_comparison_interactive.html", config=config)
-        print("💾 Saved interactive chart as 'fund_comparison_interactive.html'")
+        # Display chart inline in Streamlit instead of saving to file
+        if 'st' in globals():
+            st.plotly_chart(fig, use_container_width=True, key="fund_comparison")
+        else:
+            fig.show()
         
         return fig
         
@@ -480,9 +481,11 @@ class FundComparator:
             'displaylogo': False
         }
         
-        fig.show(config=config)
-        fig.write_html("detailed_fund_comparison.html", config=config)
-        print("💾 Saved detailed comparison as 'detailed_fund_comparison.html'")
+        # Display detailed comparison inline in Streamlit instead of saving to file
+        if 'st' in globals():
+            st.plotly_chart(fig, use_container_width=True, key="detailed_comparison")
+        else:
+            fig.show()
         
         return fig
         

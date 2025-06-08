@@ -417,14 +417,16 @@ def main():
     if returns_data:
         # Bar chart for returns
         bar_fig = calc.create_return_bar_chart(returns_data)
-        bar_fig.write_html("fund_returns_bar_chart.html")
-        print("  ✅ Bar chart saved as 'fund_returns_bar_chart.html'")
+        
+        # Display charts inline instead of saving files
+        st.plotly_chart(bar_fig, use_container_width=True, key="bar_chart")
     
     if allocations:
         # Pie chart for current allocation
         pie_fig = calc.create_allocation_pie_chart(allocations, "Current Portfolio Allocation")
-        pie_fig.write_html("portfolio_allocation_pie_chart.html")
-        print("  ✅ Pie chart saved as 'portfolio_allocation_pie_chart.html'")
+        
+        # Display pie chart inline
+        st.plotly_chart(pie_fig, use_container_width=True, key="pie_chart")
         
         # AI-adjusted allocation pie chart
         ai_adjustments = calc.ai_weight_adjustment(allocations, returns_data)
@@ -432,8 +434,9 @@ def main():
             ai_adjustments['adjusted_weights'], 
             "AI-Recommended Portfolio Allocation"
         )
-        ai_pie_fig.write_html("ai_adjusted_allocation_pie_chart.html")
-        print("  ✅ AI-adjusted pie chart saved as 'ai_adjusted_allocation_pie_chart.html'")
+        
+        # AI-adjusted allocation pie chart
+        st.plotly_chart(ai_pie_fig, use_container_width=True, key="ai_pie_chart")
     
     print("\n✨ Analysis complete! Check the generated HTML files for interactive charts.")
 

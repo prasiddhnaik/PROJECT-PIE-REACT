@@ -269,7 +269,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🚀 **Transform Your Financial Analysis Today!**
 
-### **[⭐ Star this repository](https://github.com/prasiddhnaik/-Financial-Analytics-Hub) • [🍴 Fork it](https://github.com/prasiddhnaik/-Financial-Analytics-Hub/fork) • [📖 Read the docs](docs/guides/PROJECT_SUMMARY.md)**
+### **[⭐ Star this repository](https://github.com/prasiddhnaik/-Financial-Analytics-Hub) • [📖 Read the docs](docs/guides/PROJECT_SUMMARY.md)**
 
 ---
 

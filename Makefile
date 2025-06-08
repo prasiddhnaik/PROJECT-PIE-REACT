@@ -66,8 +66,7 @@ run-api-dashboard: ## Run the API dashboard
 stock-tracker: ## Run background stock tracker
 	$(PYTHON) src/core/background_stock_tracker.py
 
-demo-features: ## Run feature demonstrations
-	$(PYTHON) src/utils/demo_features.py
+# Demo features removed
 
 quick-start: ## Quick start with setup script
 	./scripts/quick_start.sh

@@ -8,6 +8,7 @@ import yfinance as yf
 import math
 from typing import Dict, List, Optional, Union
 import random
+from requests.adapters import HTTPAdapter
 
 class FinancialAPIIntegrator:
     """
@@ -1904,6 +1905,35 @@ class FinancialAPIIntegrator:
             'AMD': 105.00, 'INTC': 45.00
         }
         return base_prices.get(symbol, random.uniform(50, 200))
+
+    def get_stock_data(self, symbol: str) -> Dict:
+        """Get REAL stock data with LIVE pricing ONLY"""
+        try:
+            # Use direct API calls with session pooling
+            with requests.Session() as session:
+                session.mount('http://', HTTPAdapter(max_retries=3))
+                session.mount('https://', HTTPAdapter(max_retries=3))
+                
+                # Try multiple reliable APIs in parallel
+                apis = [
+                    lambda: self._try_yahoo_finance(symbol, session),
+                    lambda: self._try_alpha_vantage(symbol, session),
+                    lambda: self._try_twelve_data(symbol, session)
+                ]
+                
+                for api_call in apis:
+                    try:
+                        result = api_call()
+                        if result and result.get('price'):
+                            return result
+                    except:
+                        continue
+                        
+            return None
+            
+        except Exception as e:
+            print(f"❌ All APIs failed for {symbol}: {str(e)}")
+            return None
 
 def test_api_integration():
     """Comprehensive test of the enhanced financial API integration"""
