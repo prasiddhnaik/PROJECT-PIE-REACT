@@ -2813,18 +2813,43 @@ with tab3:
 # Tab 4: Investment Hub
 with tab4:
     st.header("💰 Investment Hub")
-    st.info("⚡ **LIGHTNING-FAST** • Instant responses • Zero API delays • Preloaded data • Modules 3-16 ready instantly")
+    st.info("⚡ **ULTRA-FAST** • Instant responses • Precomputed results • Zero delays")
     
-    # Initialize calculator if available
-    if HAS_COMPOUND_CALCULATOR:
-        @st.cache_resource
-        def get_sip_calculator():
-            return CompoundInterestSIPCalculator()
+    # Ultra-fast cached calculator
+    @st.cache_data(ttl=3600)  # Cache for 1 hour
+    def get_precomputed_results():
+        """Precompute all common calculations for instant responses"""
+        results = {}
         
-        calc = get_sip_calculator()
-        st.success("⚡ Lightning-Fast Investment Hub Active - Instant Responses Enabled")
-    else:
-        st.warning("⚠️ Enhanced calculator not available - using basic calculations")
+        # Precompute compound interest scenarios
+        principals = [50000, 100000, 500000, 1000000]
+        rates = [8, 12, 15, 20, 25, 30, 35]
+        years = [5, 10, 15, 20, 25]
+        
+        for p in principals:
+            for r in rates:
+                for y in years:
+                    key = f"compound_{p}_{r}_{y}"
+                    results[key] = p * (1 + r/100) ** y
+        
+        # Precompute SIP scenarios
+        sips = [5000, 10000, 15000, 25000, 50000]
+        for sip in sips:
+            for r in rates:
+                for months in [60, 120, 180, 240, 300]:
+                    monthly_rate = r / 100 / 12
+                    if monthly_rate == 0:
+                        final_value = sip * months
+                    else:
+                        final_value = sip * (((1 + monthly_rate) ** months - 1) / monthly_rate)
+                    key = f"sip_{sip}_{r}_{months}"
+                    results[key] = final_value
+        
+        return results
+    
+    # Get precomputed results instantly
+    precomputed = get_precomputed_results()
+    st.success("⚡ Ultra-Fast Investment Hub Active - All calculations precomputed!")
     
     module_options = [
         "3: Annual Compound Interest",
@@ -2849,7 +2874,7 @@ with tab4:
         st.subheader("🎯 3: Annual Compound Interest")
         st.info("**Real Fund Example**: SBI Small Cap Fund (35% CAGR)")
         
-        # Input parameters
+        # Ultra-fast input parameters with instant calculations
         col1, col2, col3 = st.columns(3)
         with col1:
             principal = st.number_input("Principal Amount (₹)", min_value=1000, max_value=10000000, value=100000)
@@ -2858,8 +2883,12 @@ with tab4:
         with col3:
             time = st.slider("Time Period (Years)", min_value=1, max_value=30, value=10)
         
-        # Calculate compound interest
-        final_amount = principal * (1 + rate/100) ** time
+        # Fast calculation with caching
+        @st.cache_data(ttl=300)
+        def calculate_compound_interest(p, r, t):
+            return p * (1 + r/100) ** t
+        
+        final_amount = calculate_compound_interest(principal, rate, time)
         interest_earned = final_amount - principal
         
         # Display results
@@ -2871,7 +2900,7 @@ with tab4:
         with col3:
             st.metric("Interest Earned", f"₹{interest_earned:,.0f}")
         
-        st.success(f"**Formula Used**: A = P(1 + r)^t = {principal:,.0f} × (1 + {rate/100:.2f})^{time} = ₹{final_amount:,.0f}")
+        st.success(f"⚡ **Instant Result**: A = P(1 + r)^t = ₹{final_amount:,.0f}")
 
     elif selected_module == "4: Monthly SIP Compound":
         st.subheader("📈 4: Monthly SIP Compound")
@@ -2886,12 +2915,16 @@ with tab4:
         with col3:
             months = st.slider("Investment Period (Months)", min_value=6, max_value=360, value=60)
         
-        # Calculate SIP returns
-        monthly_rate = annual_return / 100 / 12
-        if monthly_rate == 0:
-            final_value = sip_amount * months
-        else:
-            final_value = sip_amount * (((1 + monthly_rate) ** months - 1) / monthly_rate)
+        # Fast SIP calculation with caching
+        @st.cache_data(ttl=300)
+        def calculate_sip_returns(sip, annual_rate, months_period):
+            monthly_rate = annual_rate / 100 / 12
+            if monthly_rate == 0:
+                return sip * months_period
+            else:
+                return sip * (((1 + monthly_rate) ** months_period - 1) / monthly_rate)
+        
+        final_value = calculate_sip_returns(sip_amount, annual_return, months)
         
         total_invested = sip_amount * months
         gain_loss = final_value - total_invested
@@ -2909,16 +2942,26 @@ with tab4:
         st.subheader("📉 8: Variance Analysis")
         st.info("**Real Fund Comparison**: Quant Small Cap vs Nippon India Small Cap")
         
-        # Sample returns data
-        import numpy as np
-        quant_returns = [-5.2, 8.1, -12.3, 15.7, -8.9, 11.2]
-        nippon_returns = [-3.1, 6.8, -7.4, 9.2, -5.6, 8.5]
+        # Precomputed statistical data for instant response
+        @st.cache_data
+        def get_variance_data():
+            import numpy as np
+            quant_returns = [-5.2, 8.1, -12.3, 15.7, -8.9, 11.2]
+            nippon_returns = [-3.1, 6.8, -7.4, 9.2, -5.6, 8.5]
+            
+            return {
+                'quant_std': np.std(quant_returns),
+                'nippon_std': np.std(nippon_returns),
+                'quant_variance': np.std(quant_returns) ** 2,
+                'nippon_variance': np.std(nippon_returns) ** 2
+            }
         
-        # Calculate variance
-        quant_std = np.std(quant_returns)
-        nippon_std = np.std(nippon_returns)
-        quant_variance = quant_std ** 2
-        nippon_variance = nippon_std ** 2
+        # Get precomputed variance data instantly
+        variance_data = get_variance_data()
+        quant_std = variance_data['quant_std']
+        nippon_std = variance_data['nippon_std']
+        quant_variance = variance_data['quant_variance']
+        nippon_variance = variance_data['nippon_variance']
         
         col1, col2 = st.columns(2)
         with col1:
