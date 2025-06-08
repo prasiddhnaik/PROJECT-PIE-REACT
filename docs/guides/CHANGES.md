@@ -12,7 +12,7 @@
 - **7-Tab Comprehensive Dashboard**: Transformed from single-purpose Nippon India analyzer to full financial analytics platform
 - **Real-Data-Only Philosophy**: Eliminated all demo/fallback data for authentic financial analysis
 - **Multi-API Integration**: CoinGecko, Frankfurter, Yahoo Finance with robust error handling
-- **Educational Financial Modules**: Week 3-9 curriculum with real fund examples
+- **Educational Financial Modules**: Modules 3-16 curriculum with real fund examples (52-week complete plan)
 - **Advanced Analytics Engine**: Professional-grade risk assessment and technical analysis
 
 ### 🪙 **Tab 1: Enhanced Cryptocurrency Hub**
