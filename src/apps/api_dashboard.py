@@ -2480,16 +2480,18 @@ with tab1:
     st.header("🪙 Cryptocurrency Hub - Multi-Coin Analytics")
     st.info("🌟 Track multiple cryptocurrencies with live data from various exchanges")
     
-    # Crypto selection
+    # Top 20 Cryptocurrencies
     available_cryptos = [
-        "ethereum", "binancecoin", "cardano", "solana", "polkadot", 
-        "chainlink", "litecoin", "stellar", "vechain", "algorand"
+        "bitcoin", "ethereum", "binancecoin", "cardano", "solana", 
+        "xrp", "polkadot", "dogecoin", "avalanche-2", "shiba-inu",
+        "chainlink", "polygon", "litecoin", "bitcoin-cash", "stellar",
+        "uniswap", "ethereum-classic", "monero", "tron", "algorand"
     ]
     
     selected_cryptos = st.multiselect(
-        "📈 Select Cryptocurrencies to Track:",
+        "📈 Select Cryptocurrencies to Track (Top 20):",
         available_cryptos,
-        default=["ethereum", "cardano"]
+        default=["bitcoin", "ethereum", "cardano"]
     )
     
     if selected_cryptos:
