@@ -2151,10 +2151,10 @@ st.markdown("""
 # Replace the existing header with the new hero section
 st.markdown("""
 <div class="hero-section">
-    <h1 class="hero-title">🚀 Financial Analytics Hub</h1>
+            <h1 class="hero-title">🚀 Financial Analytics Hub</h1>
     <h2 class="hero-subtitle">Professional Market Intelligence Platform</h2>
     <p style="font-size: 1.2rem; margin-top: 1rem; opacity: 0.9;">
-        🛡️ Smart API Failover • 📊 Live Data • 🚀 17 APIs • 💰 SIP Calculator
+                    🛡️ Smart API Failover • 📊 Live Data • 🚀 17 APIs • 💰 Investment Hub
     </p>
     <p style="font-size: 1rem; margin-top: 0.5rem; opacity: 0.8;">
         Real-time market data from multiple sources with enterprise-grade backup systems
@@ -2390,7 +2390,7 @@ tab1, tab2, tab3, tab4, tab5, tab6, tab7 = st.tabs([
     "🪙 Cryptocurrency Market Hub", 
     "💱 Forex Exchange Analytics", 
     "📈 Stock Market Intelligence",
-    "💹 Investment Calculator Hub",
+                    "💹 Investment Hub",
     "📊 Portfolio Performance Analytics",
     "🚀 Advanced Market Analytics",
     "🔗 Multi-Source API Integration"
@@ -2667,8 +2667,8 @@ with tab1:
             st.info("💡 Navigate to **Advanced Analytics** tab for detailed technical analysis")
 
     with col3:
-        if st.button("💰 SIP Calculator", type="secondary"):
-            st.info("💡 Check the **SIP Calculator** tab for investment planning with real returns")
+        if st.button("💰 Investment Hub", type="secondary"):
+            st.info("💡 Check the **Investment Hub** tab for investment planning with real returns")
 
     with col4:
         if st.button("🛡️ Full API Status", type="secondary"):
@@ -3065,9 +3065,9 @@ with tab3:
     else:
         st.info("👆 Select stocks from the dropdown above to begin analysis")
 
-# Tab 4: Compound Interest SIP Calculator
+# Tab 4: Investment Hub
 with tab4:
-    st.header("💰 Compound Interest SIP Calculator")
+    st.header("💰 Investment Hub")
     st.info("🚀 **ULTRA-FAST PERFORMANCE** • All modules 3-16 with instant calculations • Parallel API processing • Aggressive caching")
     
     # Initialize calculator if available
@@ -3077,7 +3077,7 @@ with tab4:
             return CompoundInterestSIPCalculator()
         
         calc = get_sip_calculator()
-        st.success("✅ Enhanced SIP Calculator Active")
+        st.success("✅ Enhanced Investment Hub Active")
     else:
         st.warning("⚠️ Enhanced calculator not available - using basic calculations")
     
