@@ -2475,423 +2475,87 @@ tab1, tab2, tab3, tab4, tab5, tab6, tab7 = st.tabs([
     "🔗 Multi-Source API Integration"
 ])
 
-# Enhanced Cryptocurrency Tab with Bitcoin dashboard and failsafe indicators
+# Enhanced Cryptocurrency Tab with simplified crypto tracking
 with tab1:
-    st.header("🪙 Cryptocurrency Hub - Bitcoin (₿) with CryptoCompare/Binance live data")
-    st.info("🛡️ Live cryptocurrency prices with automatic failsafe - Always shows the most recent data available")
+    st.header("🪙 Cryptocurrency Hub - Multi-Coin Analytics")
+    st.info("🌟 Track multiple cryptocurrencies with live data from various exchanges")
     
-    # Bitcoin Live Dashboard Section
-    st.markdown("### ₿ Bitcoin Live Dashboard - High Priority")
-    st.markdown("Real-time data from CryptoCompare, Binance, and backup APIs")
+    # Crypto selection
+    available_cryptos = [
+        "ethereum", "binancecoin", "cardano", "solana", "polkadot", 
+        "chainlink", "litecoin", "stellar", "vechain", "algorand"
+    ]
     
-    # Create main layout for Bitcoin chart
-    col1, col2 = st.columns([2.5, 1])
-
-    with col1:
-        # Bitcoin Chart with REAL DATA
-        with st.spinner("🚀 Loading Live Bitcoin Data..."):
-            # Fetch REAL Bitcoin price from your API
-            btc_data = api_integrator.get_crypto_price("bitcoin")
-            
-            if btc_data:
-                # Extract real values
-                current_btc_price = btc_data.get('price_usd', 0)
-                btc_24h_change = btc_data.get('change_24h', 0)
-                btc_source = btc_data.get('source', 'API')
-                is_cached = btc_data.get('is_cached', False)
-                
-                # Create realistic historical data based on current price
-                hours_back = 24
-                dates = pd.date_range(end=pd.Timestamp.now(), periods=hours_back, freq='H')
-                
-                # Generate realistic price movement around current price
-                np.random.seed(int(current_btc_price) % 1000)  # Deterministic based on price
-                base_price = current_btc_price * 0.98  # Start slightly lower
-                
-                # Create realistic Bitcoin volatility
-                hourly_changes = np.random.normal(0, 0.015, hours_back-1)  # 1.5% hourly volatility
-                prices = [base_price]
-                
-                for change in hourly_changes:
-                    new_price = prices[-1] * (1 + change)
-                    prices.append(new_price)
-                
-                # Ensure the last price matches current real price
-                prices[-1] = current_btc_price
-                
-                btc_df = pd.DataFrame({
-                    'Date': dates,
-                    'Price': prices
-                })
-                
-                # Create stunning Bitcoin chart
-                fig = go.Figure()
-                
-                # Main price line
-                fig.add_trace(go.Scatter(
-                    x=btc_df['Date'],
-                    y=btc_df['Price'],
-                    mode='lines',
-                    name='Bitcoin Price',
-                    line=dict(color='#f39c12', width=3),
-                    fill='tonexty',
-                    fillcolor='rgba(243, 156, 18, 0.1)',
-                    hovertemplate='<b>%{y:$,.0f}</b><br>%{x}<extra></extra>'
-                ))
-                
-                # Add trend indicators
-                if btc_24h_change > 0:
-                    trend_color = '#27ae60'
-                    trend_icon = '📈'
-                else:
-                    trend_color = '#e74c3c'
-                    trend_icon = '📉'
-                
-                fig.update_layout(
-                    title={
-                        'text': f'{trend_icon} Bitcoin Live: ${current_btc_price:,.0f} ({btc_24h_change:+.2f}%)',
-                        'x': 0.5,
-                        'font': {'size': 26, 'color': trend_color, 'family': 'Arial Black'}
-                    },
-                    xaxis_title='Time (Last 24 Hours)',
-                    yaxis_title='Price (USD)',
-                    template='plotly_white',
-                    height=450,
-                    showlegend=False,
-                    plot_bgcolor='rgba(0,0,0,0)',
-                    paper_bgcolor='rgba(0,0,0,0)',
-                    xaxis=dict(
-                        showgrid=True, 
-                        gridcolor='rgba(128,128,128,0.2)',
-                        tickformat='%H:%M'
-                    ),
-                    yaxis=dict(
-                        showgrid=True, 
-                        gridcolor='rgba(128,128,128,0.2)',
-                        tickformat='$,.0f'
-                    ),
-                    annotations=[
-                        dict(
-                            x=1,
-                            y=0.02,
-                            xref='paper',
-                            yref='paper',
-                            text=f"Source: {btc_source} {"(Cached)" if is_cached else "(Live)"}",
-                            showarrow=False,
-                            font=dict(size=10, color='gray'),
-                            xanchor='right'
-                        )
-                    ]
-                )
-                
-                st.markdown('<div class="chart-container">', unsafe_allow_html=True)
-                st.plotly_chart(fig, use_container_width=True, config={'displayModeBar': False})
-                st.markdown('</div>', unsafe_allow_html=True)
-                
-            else:
-                st.error("❌ Unable to fetch live Bitcoin data - All APIs currently unavailable")
-
-    with col2:
-        # Smart API Failover Status
-        st.markdown("""
-        <div class="api-status-card">
-            <h3>🛡️ Smart API Failover</h3>
-            <p>Enterprise-grade backup systems ensure 100% uptime</p>
-        </div>
-        """, unsafe_allow_html=True)
-        
-        # Real-time API status check
-        st.markdown("**🔴 Live API Status:**")
-        
-        try:
-            # Test crypto APIs
-            btc_cryptocompare = api_integrator._get_crypto_from_cryptocompare("bitcoin")
-            btc_binance = api_integrator._get_crypto_from_binance("bitcoin")
-            
-            if btc_cryptocompare:
-                st.markdown('<span class="status-indicator success-indicator"></span>**CryptoCompare** - Active', unsafe_allow_html=True)
-            else:
-                st.markdown('<span class="status-indicator error-indicator"></span>**CryptoCompare** - Standby', unsafe_allow_html=True)
-                
-            if btc_binance:
-                st.markdown('<span class="status-indicator success-indicator"></span>**Binance** - Active', unsafe_allow_html=True)
-            else:
-                st.markdown('<span class="status-indicator error-indicator"></span>**Binance** - Standby', unsafe_allow_html=True)
-                
-        except Exception as e:
-            st.markdown('<span class="status-indicator warning-indicator"></span>**Checking APIs...** - Loading', unsafe_allow_html=True)
-        
-        # Show total coverage
-        st.info("📊 **17 Total APIs**\n- 4 Crypto APIs\n- 10 Stock APIs\n- 3 Forex APIs")
-
-    # Live Data Section with REAL PRICES
-    st.markdown("---")
-    st.markdown("## 📊 Live Market Data")
-
-    # Create grid for live data
-    st.markdown('<div class="live-data-grid">', unsafe_allow_html=True)
-
-    col1, col2, col3 = st.columns(3)
-
-    with col1:
-        # Bitcoin - Real Data
-        if btc_data:
-            btc_price = btc_data.get('price_usd', 0)
-            btc_change = btc_data.get('change_24h', 0)
-            btc_source = btc_data.get('source', 'API')
-            is_cached = btc_data.get('is_cached', False)
-            
-            change_color = "#27ae60" if btc_change >= 0 else "#e74c3c"
-            status_text = "🛡️ Cached" if is_cached else "🟢 Live"
-            
-            st.markdown(f"""
-            <div class="data-card">
-                <h3>₿ Bitcoin</h3>
-                <div class="price">${btc_price:,.0f}</div>
-                <div class="change" style="color: {change_color}">
-                    {btc_change:+.2f}% (24h)
-                </div>
-                <small style="opacity: 0.8;">{status_text} • {btc_source}</small>
-            </div>
-            """, unsafe_allow_html=True)
-        else:
-            st.markdown("""
-            <div class="data-card" style="background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);">
-                <h3>₿ Bitcoin</h3>
-                <div class="price">API Error</div>
-                <div class="change">Retrying...</div>
-            </div>
-            """, unsafe_allow_html=True)
-
-    with col2:
-        # AAPL - Real Data  
-        with st.spinner("Loading AAPL..."):
-            aapl_data = api_integrator.get_yfinance_data("AAPL", "1d")
-            if aapl_data and aapl_data.get('current_price'):
-                aapl_price = aapl_data.get('current_price', 0)
-                aapl_change = aapl_data.get('return_percent', 0)
-                aapl_source = aapl_data.get('source', 'API')
-                
-                change_color = "#27ae60" if aapl_change >= 0 else "#e74c3c"
-                
-                st.markdown(f"""
-                <div class="data-card">
-                    <h3>🍎 AAPL</h3>
-                    <div class="price">${aapl_price:.2f}</div>
-                    <div class="change" style="color: {change_color}">
-                        {aapl_change:+.2f}%
-                    </div>
-                    <small style="opacity: 0.8;">🟢 Live • {aapl_source}</small>
-                </div>
-                """, unsafe_allow_html=True)
-            else:
-                # Show range from working backup APIs
-                st.markdown("""
-                <div class="data-card">
-                    <h3>🍎 AAPL</h3>
-                    <div class="price">$200.63-$201.95</div>
-                    <div class="change" style="color: #27ae60">
-                        🛡️ Backup APIs Active
-                    </div>
-                    <small style="opacity: 0.8;">Direct HTTP • Google Finance</small>
-                </div>
-                """, unsafe_allow_html=True)
-
-    with col3:
-        # AMZN - Real Data
-        with st.spinner("Loading AMZN..."):
-            amzn_data = api_integrator.get_yfinance_data("AMZN", "1d")
-            if amzn_data and amzn_data.get('current_price'):
-                amzn_price = amzn_data.get('current_price', 0)
-                amzn_change = amzn_data.get('return_percent', 0)
-                amzn_source = amzn_data.get('source', 'API')
-                
-                change_color = "#27ae60" if amzn_change >= 0 else "#e74c3c"
-                
-                st.markdown(f"""
-                <div class="data-card">
-                    <h3>📦 AMZN</h3>
-                    <div class="price">${amzn_price:.2f}</div>
-                    <div class="change" style="color: {change_color}">
-                        {amzn_change:+.2f}%
-                    </div>
-                    <small style="opacity: 0.8;">🟢 Live • {amzn_source}</small>
-                </div>
-                """, unsafe_allow_html=True)
-            else:
-                # Show range from working backup APIs
-                st.markdown("""
-                <div class="data-card">
-                    <h3>📦 AMZN</h3>
-                    <div class="price">$207.91-$209.69</div>
-                    <div class="change" style="color: #27ae60">
-                        🛡️ Multiple Sources
-                    </div>
-                    <small style="opacity: 0.8;">Google Finance • Backup APIs</small>
-                </div>
-                """, unsafe_allow_html=True)
-
-    st.markdown("</div>", unsafe_allow_html=True)
-
-    # Quick Action Buttons
-    st.markdown("---")
-    col1, col2, col3, col4 = st.columns(4)
-
-    with col1:
-        if st.button("🔄 Refresh Live Data", type="primary"):
-            st.rerun()
-
-    with col2:
-        if st.button("📊 Advanced Analytics", type="secondary"):
-            st.info("💡 Navigate to **Advanced Analytics** tab for detailed technical analysis")
-
-    with col3:
-        if st.button("💰 Investment Hub", type="secondary"):
-            st.info("💡 Check the **Investment Hub** tab for investment planning with real returns")
-
-    with col4:
-        if st.button("🛡️ Full API Status", type="secondary"):
-            st.info("💡 Complete API status available in the sidebar")
-
-    # System Status Summary
-    st.markdown("---")
-    st.markdown("### 🚀 System Performance")
-
-    perf_col1, perf_col2, perf_col3, perf_col4 = st.columns(4)
-
-    with perf_col1:
-        st.metric("🔗 Total APIs", "17", delta="All Active")
-
-    with perf_col2:
-        st.metric("🛡️ Failsafe Cache", "3+ Items", delta="Auto-Updated")
-
-    with perf_col3:
-        st.metric("⚡ Response Time", "< 2s", delta="Optimized")
-
-    with perf_col4:
-        st.metric("🎯 Uptime", "99.9%", delta="Enterprise Grade")
-    
-    st.markdown("---")
-    
-    # Cryptocurrency categories section
-    st.markdown("### 🪙 Multi-Cryptocurrency Analysis")
-    crypto_categories = {
-        "🥇 Top 10": [
-            "bitcoin", "ethereum", "binancecoin", "cardano", "solana", 
-            "xrp", "polkadot", "dogecoin", "avalanche-2", "shiba-inu"
-        ],
-        "💎 DeFi Tokens": [
-            "uniswap", "aave", "maker", "compound", "sushiswap", 
-            "yearn-finance", "1inch", "curve-dao-token"
-        ],
-        "🎮 Gaming & Metaverse": [
-            "the-sandbox", "decentraland", "enjincoin", "gala", 
-            "axie-infinity", "illuvium"
-        ],
-        "🌐 Layer 1 Blockchains": [
-            "ethereum", "cardano", "solana", "polkadot", "avalanche-2", 
-            "cosmos", "algorand", "tezos"
-        ]
-    }
-    
-    selected_category = st.selectbox("Choose Category:", list(crypto_categories.keys()))
-    available_cryptos = crypto_categories[selected_category]
-    
-    # Category descriptions
-    category_descriptions = {
-        "🥇 Top 10": "The most valuable cryptocurrencies by market capitalization",
-        "💎 DeFi Tokens": "Decentralized Finance tokens powering DeFi protocols",
-        "🎮 Gaming & Metaverse": "Cryptocurrencies focused on gaming and virtual worlds",
-        "🌐 Layer 1 Blockchains": "Base layer blockchain protocols and platforms"
-    }
-    
-    st.info(f"📊 **{selected_category}**: {category_descriptions[selected_category]}")
-    
-    # Enhanced selection
     selected_cryptos = st.multiselect(
-        f"Select cryptocurrencies from {selected_category}:",
+        "📈 Select Cryptocurrencies to Track:",
         available_cryptos,
-        default=available_cryptos[:3] if len(available_cryptos) >= 3 else available_cryptos[:2]
+        default=["ethereum", "cardano"]
     )
     
     if selected_cryptos:
-        st.subheader(f"📈 Live Data for {len(selected_cryptos)} {selected_category} Tokens")
+        st.subheader(f"📊 Live Analysis for {len(selected_cryptos)} Cryptocurrencies")
         
-        # Display cryptocurrencies with enhanced cache indicators
-        crypto_cols = st.columns(min(len(selected_cryptos), 3))
+        # Create columns for crypto data
+        if len(selected_cryptos) <= 3:
+            cols = st.columns(len(selected_cryptos))
+        else:
+            cols = st.columns(3)
         
+        # Display crypto data
         for i, crypto in enumerate(selected_cryptos):
-            with crypto_cols[i % 3]:
-                with st.spinner(f"Loading {crypto}..."):
+            with cols[i % 3]:
+                with st.spinner(f"Loading {crypto.title()}..."):
                     crypto_data = api_integrator.get_crypto_price(crypto)
                     
                     if crypto_data:
-                        # Determine card type based on data source with enhanced cached data info
+                        price = crypto_data.get('price_usd', 0)
+                        change = crypto_data.get('change_24h', 0)
+                        source = crypto_data.get('source', 'API')
                         is_cached = crypto_data.get('is_cached', False)
                         cache_age = crypto_data.get('cache_age', '')
-                        source = crypto_data.get('source', 'Unknown')
+                        cached_at = crypto_data.get('cached_at_formatted', '')
+                        
+                        change_color = "#27ae60" if change >= 0 else "#e74c3c"
                         
                         if is_cached:
-                            # Enhanced cached data display
-                            cached_at = crypto_data.get('cached_at_formatted', 'Unknown time')
-                            original_source = crypto_data.get('original_source', 'Unknown API')
-                            freshness = crypto_data.get('cache_freshness', 'UNKNOWN')
-                            reliability_warning = crypto_data.get('reliability_warning')
-                            
-                            if freshness in ['VERY_FRESH', 'FRESH']:
-                                card_class = "cached-card"  # Orange/yellow
-                                status_icon = "🛡️"
-                                status_prefix = "Last Known Price"
-                            elif freshness == 'RECENT':
-                                card_class = "warning-card"  # More orange
-                                status_icon = "⚠️"
-                                status_prefix = "Older Cached Price"
-                            else:  # STALE or VERY_STALE
-                                card_class = "error-card"  # Red
-                                status_icon = "🚨"
-                                status_prefix = "Stale Cached Price"
-                            
-                            status_text = f"{status_prefix} ({cache_age})"
-                            
-                            # Add warning message for old data
-                            if reliability_warning:
-                                warning_msg = f"<br><small style='color: rgba(255,255,255,0.8);'>{reliability_warning}</small>"
-                            else:
-                                warning_msg = ""
-                                
+                            status_text = f"🛡️ Cached ({cache_age})"
+                            warning_msg = f"<br><small style='opacity: 0.7;'>Original data from: {cached_at}</small>" if cached_at else ""
                         else:
-                            card_class = "success-card"
-                            status_icon = "🟢"
-                            status_text = "Live Data"
-                            cached_at = ""
+                            status_text = "🟢 Live"
                             warning_msg = ""
                         
                         st.markdown(f"""
-                        <div class="{card_class}">
-                            <h4>{status_icon} {crypto.replace('-', ' ').title()}</h4>
-                            <div class="metric-highlight">
-                                <strong>USD:</strong> ${crypto_data.get('price_usd', 0):,.2f}
+                        <div class="crypto-card" style="
+                            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                            padding: 1.2rem; border-radius: 10px; margin: 0.5rem 0;
+                            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+                        ">
+                            <h3 style="color: white; margin: 0 0 0.5rem 0;">
+                                {crypto.replace('-', ' ').title()}
+                            </h3>
+                            <div style="color: white; font-size: 1.5rem; font-weight: bold; margin: 0.5rem 0;">
+                                ${price:,.2f}
                             </div>
-                            <div class="metric-highlight">
-                                <strong>24h Change:</strong> {crypto_data.get('change_24h', 0):+.2f}%
+                            <div style="color: {change_color}; font-weight: bold; margin: 0.5rem 0;">
+                                {change:+.2f}% (24h)
                             </div>
-                            <div class="metric-highlight">
-                                <strong>Market Cap:</strong> ${crypto_data.get('market_cap_usd', 0):,.0f}
-                            </div>
-                            <div class="cache-indicator">
+                            <div class="cache-indicator" style="color: rgba(255,255,255,0.9); font-size: 0.85rem;">
                                 📡 {status_text}<br>
                                 🔗 Source: {source}
-                                {f"<br>📅 Original data from: {cached_at}" if is_cached and cached_at else ""}
                                 {warning_msg}
                             </div>
                         </div>
                         """, unsafe_allow_html=True)
                     else:
                         st.markdown(f"""
-                        <div class="error-card">
-                            <h4>❌ {crypto.replace('-', ' ').title()}</h4>
-                            <p>No data available</p>
-                            <div class="cache-indicator">
+                        <div class="error-card" style="
+                            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+                            padding: 1.2rem; border-radius: 10px; margin: 0.5rem 0;
+                            color: white;
+                        ">
+                            <h4 style="margin: 0;">❌ {crypto.replace('-', ' ').title()}</h4>
+                            <p style="margin: 0.5rem 0;">No data available</p>
+                            <div style="opacity: 0.8; font-size: 0.85rem;">
                                 📡 All APIs failed<br>
                                 🔗 No cached data
                             </div>
