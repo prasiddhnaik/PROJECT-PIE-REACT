@@ -302,7 +302,7 @@ st.markdown("""
 # 🎪 MAIN HEADER WITH AUTO-UPDATE STATUS
 st.markdown("""
 <div class="auto-update-banner">
-    <h1>📊 Financial Analytics Hub <span class="live-indicator"></span></h1>
+    <h1>📊 Financial Analytics Hub <span class="live-indicator"></span> </h1>
     <p>🔄 Real-time data • Auto-save calculations • Live price alerts</p>
 </div>
 """, unsafe_allow_html=True)
@@ -1490,7 +1490,7 @@ st.markdown("""
 # 🎪 MAIN HEADER WITH AUTO-UPDATE STATUS
 st.markdown("""
 <div class="auto-update-banner">
-    <h1>📊 Financial Analytics Hub <span class="live-indicator"></span></h1>
+    <h1>📊 Financial Analytics Hub <span class="live-indicator"></span> </h1>
     <p>🔄 Real-time data • Auto-save calculations • Live price alerts</p>
 </div>
 """, unsafe_allow_html=True)
@@ -6079,7 +6079,7 @@ tab_list = [
     "🪙 Cryptocurrency Market Hub", 
     "💱 Forex Exchange Analytics", 
     "📈 Stock Market Intelligence",
-    "💹 Investment Hub",
+                    "💹 Investment Hub",
     "📊 Portfolio Performance Analytics",
     "🚀 Advanced Market Analytics",
     "🔗 Multi-Source API Integration",
