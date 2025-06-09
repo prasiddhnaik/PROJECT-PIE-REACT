@@ -9,6 +9,443 @@ from typing import Dict, List, Optional, Any
 import warnings
 warnings.filterwarnings('ignore')
 
+# 🎨 BEAUTIFUL ANIMATIONS & VISUAL EFFECTS
+ENHANCED_CSS = """
+<style>
+/* 🚀 Global Animation Styles */
+* {
+    transition: all 0.3s ease-in-out !important;
+}
+
+/* 🎯 Animated Loading Spinner */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+    from { transform: translateX(-100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes bounce {
+    0%, 20%, 53%, 80%, 100% { transform: translate3d(0,0,0); }
+    40%, 43% { transform: translate3d(0, -30px, 0); }
+    70% { transform: translate3d(0, -15px, 0); }
+    90% { transform: translate3d(0, -4px, 0); }
+}
+
+@keyframes glow {
+    0%, 100% { box-shadow: 0 0 5px rgba(0, 255, 127, 0.5); }
+    50% { box-shadow: 0 0 20px rgba(0, 255, 127, 0.8), 0 0 30px rgba(0, 255, 127, 0.6); }
+}
+
+@keyframes rainbow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* 🌟 Enhanced Header with Animation */
+.main-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 2rem;
+    border-radius: 15px;
+    margin-bottom: 2rem;
+    animation: fadeIn 1s ease-out;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.main-header h1 {
+    color: white;
+    text-align: center;
+    font-size: 3rem;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    animation: slideIn 1.2s ease-out;
+}
+
+.live-indicator {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    background: #00ff7f;
+    border-radius: 50%;
+    animation: glow 2s infinite;
+    margin-left: 10px;
+}
+
+/* 🎪 Animated Metrics Cards */
+.metric-card {
+    background: linear-gradient(145deg, #ffffff, #f0f2f6);
+    border-radius: 15px;
+    padding: 1.5rem;
+    margin: 1rem 0;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    animation: fadeIn 0.8s ease-out;
+    transform: translateY(0);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.metric-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    background: linear-gradient(145deg, #f8f9fa, #e9ecef);
+}
+
+/* 🌈 Status Indicators with Pulse */
+.status-success {
+    color: #28a745;
+    animation: pulse 2s infinite;
+}
+
+.status-warning {
+    color: #ffc107;
+    animation: pulse 2s infinite;
+}
+
+.status-error {
+    color: #dc3545;
+    animation: pulse 2s infinite;
+}
+
+/* 🎮 Interactive Button Animations */
+.stButton > button {
+    background: linear-gradient(45deg, #FF6B6B, #4ECDC4) !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 25px !important;
+    padding: 0.8rem 2rem !important;
+    font-weight: 600 !important;
+    font-size: 1rem !important;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+.stButton > button:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: left 0.5s;
+}
+
+.stButton > button:hover:before {
+    left: 100%;
+}
+
+.stButton > button:hover {
+    transform: scale(1.05) !important;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2) !important;
+    background: linear-gradient(45deg, #4ECDC4, #FF6B6B) !important;
+}
+
+.stButton > button:active {
+    transform: scale(0.98) !important;
+}
+
+/* 📊 Chart Container Animations */
+.plot-container {
+    animation: fadeIn 1s ease-out;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.plot-container:hover {
+    transform: scale(1.02);
+}
+
+/* 🎯 Loading Animation */
+.loading-spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-right: 10px;
+}
+
+/* 🌟 Success/Error Notifications */
+.notification {
+    padding: 1rem;
+    border-radius: 10px;
+    margin: 1rem 0;
+    animation: slideIn 0.5s ease-out;
+}
+
+.notification.success {
+    background: linear-gradient(45deg, #00C851, #00ff87);
+    color: white;
+}
+
+.notification.error {
+    background: linear-gradient(45deg, #ff4444, #CC0000);
+    color: white;
+}
+
+/* 📈 Data Display Enhancements */
+.data-row {
+    padding: 0.8rem;
+    border-radius: 8px;
+    margin: 0.5rem 0;
+    transition: all 0.3s ease;
+}
+
+.data-row:hover {
+    background: rgba(74, 144, 226, 0.1);
+    transform: translateX(5px);
+}
+
+/* 🎨 Sidebar Animations */
+.css-1d391kg {
+    animation: slideIn 0.8s ease-out;
+}
+
+/* 💫 Tab Animations */
+.stTabs [data-baseweb="tab"] {
+    transition: all 0.3s ease !important;
+    border-radius: 10px 10px 0 0 !important;
+}
+
+.stTabs [data-baseweb="tab"]:hover {
+    background: rgba(74, 144, 226, 0.1) !important;
+    transform: translateY(-2px) !important;
+}
+
+/* 🌈 Progress Bar Animation */
+@keyframes progressLoad {
+    0% { width: 0%; }
+    100% { width: 100%; }
+}
+
+.progress-bar {
+    height: 4px;
+    background: linear-gradient(90deg, #FF6B6B, #4ECDC4, #45B7D1);
+    border-radius: 2px;
+    animation: progressLoad 2s ease-out;
+}
+
+/* 🎪 Card Grid Animation */
+.card-grid {
+    display: grid;
+    gap: 1rem;
+    animation: fadeIn 1s ease-out;
+}
+
+.card-grid > div {
+    animation: fadeIn 0.8s ease-out;
+    animation-delay: calc(var(--delay, 0) * 0.1s);
+}
+
+/* 🚀 Auto-Update Status */
+.auto-update-status {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    color: white;
+    padding: 1rem;
+    border-radius: 10px;
+    text-align: center;
+    animation: fadeIn 1s ease-out;
+    margin-bottom: 1rem;
+}
+
+.auto-update-active {
+    animation: glow 2s infinite;
+}
+
+/* 💎 Premium Effects */
+.glass-effect {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+}
+
+/* 🎭 Hover Effects for Info Cards */
+.info-card {
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    cursor: pointer;
+}
+
+.info-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
+
+/* 🌟 Floating Action Effects */
+.floating-save {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 1000;
+    animation: bounce 2s infinite;
+}
+
+/* 📱 Mobile Responsive Animations */
+@media (max-width: 768px) {
+    .main-header h1 {
+        font-size: 2rem;
+    }
+    
+    .metric-card {
+        margin: 0.5rem 0;
+        padding: 1rem;
+    }
+}
+
+/* 🎪 Success Animation */
+@keyframes successPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.success-animation {
+    animation: successPulse 0.6s ease-in-out;
+}
+
+/* 🌈 Rainbow Text Effect */
+.rainbow-text {
+    background: linear-gradient(45deg, #ff0000, #ff8000, #ffff00, #80ff00, #00ff80, #0080ff, #8000ff);
+    background-size: 400% 400%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: rainbow 3s ease-in-out infinite;
+}
+
+/* 🎯 Enhanced Streamlit Components */
+.stMetric {
+    animation: fadeIn 0.8s ease-out;
+}
+
+.stSelectbox {
+    animation: fadeIn 0.6s ease-out;
+}
+
+.stSlider {
+    animation: fadeIn 0.7s ease-out;
+}
+
+/* ⚡ Live Data Indicators */
+.live-price {
+    background: linear-gradient(45deg, #00ff87, #60efff);
+    background-size: 400% 400%;
+    animation: rainbow 2s ease-in-out infinite;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+.price-up {
+    color: #00ff87;
+    animation: bounce 1s ease-in-out;
+}
+
+.price-down {
+    color: #ff4757;
+    animation: pulse 1s ease-in-out;
+}
+
+/* 🎊 Celebration Animation */
+@keyframes celebrate {
+    0%, 100% { transform: scale(1) rotate(0deg); }
+    25% { transform: scale(1.1) rotate(5deg); }
+    75% { transform: scale(1.1) rotate(-5deg); }
+}
+
+.celebrate {
+    animation: celebrate 0.5s ease-in-out;
+}
+
+/* 🌊 Wave Effect */
+@keyframes wave {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+.wave-effect {
+    animation: wave 2s ease-in-out infinite;
+}
+</style>
+"""
+
+# 🎨 ENHANCED VISUAL COMPONENTS
+def render_animated_header():
+    st.markdown(ENHANCED_CSS, unsafe_allow_html=True)
+    
+    header_html = f"""
+    <div class="main-header">
+        <h1>📊 Financial Analytics Hub <span class="live-indicator"></span></h1>
+        <div class="auto-update-status auto-update-active">
+            <div class="loading-spinner"></div>
+            🔄 Real-time data • Auto-save calculations • Live price alerts
+        </div>
+        <div class="progress-bar"></div>
+    </div>
+    """
+    st.markdown(header_html, unsafe_allow_html=True)
+
+def render_animated_metric(title, value, delta=None, card_class="metric-card"):
+    status_class = "status-success" if delta and delta > 0 else "status-warning" if delta and delta < 0 else ""
+    delta_text = f"<span class='{status_class}'>Δ {delta:+.2f}%</span>" if delta else ""
+    
+    metric_html = f"""
+    <div class="{card_class} info-card">
+        <h3 style="margin: 0; color: #2c3e50;">{title}</h3>
+        <h2 style="margin: 0.5rem 0; color: #3498db; font-weight: bold;">{value}</h2>
+        {delta_text}
+    </div>
+    """
+    st.markdown(metric_html, unsafe_allow_html=True)
+
+def render_success_notification(message):
+    notification_html = f"""
+    <div class="notification success success-animation">
+        ✅ {message}
+    </div>
+    """
+    st.markdown(notification_html, unsafe_allow_html=True)
+
+def render_loading_animation(text="Loading..."):
+    loading_html = f"""
+    <div style="text-align: center; padding: 2rem;">
+        <div class="loading-spinner"></div>
+        <span style="color: #3498db; font-weight: 600;">{text}</span>
+    </div>
+    """
+    return st.markdown(loading_html, unsafe_allow_html=True)
+
+def render_live_price_indicator(symbol, price, change_pct):
+    price_class = "price-up" if change_pct >= 0 else "price-down"
+    arrow = "⬆️" if change_pct >= 0 else "⬇️"
+    
+    price_html = f"""
+    <div class="live-price wave-effect">
+        <strong>{symbol}</strong>: ${price:,.2f} 
+        <span class="{price_class}">{arrow} {change_pct:+.2f}%</span>
+    </div>
+    """
+    return st.markdown(price_html, unsafe_allow_html=True)
+
 # Ultra-fast cache system
 ULTRA_CACHE = {}
 CACHE_TTL = 30  # seconds
@@ -5794,19 +6231,19 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# Replace the existing header with the new hero section
-st.markdown("""
-<div class="hero-section">
-            <h1 class="hero-title">🚀 Financial Analytics Hub</h1>
-            <h2 class="hero-subtitle">⚡ Lightning-Fast Market Intelligence Platform</h2>
-    <p style="font-size: 1.2rem; margin-top: 1rem; opacity: 0.9;">
-                    ⚡ Instant Loading • 📊 Preloaded Data • 🚀 Zero Delays • 💰 Investment Hub
-    </p>
-    <p style="font-size: 1rem; margin-top: 0.5rem; opacity: 0.8;">
-        Real-time market data from multiple sources with enterprise-grade backup systems
-    </p>
-</div>
-""", unsafe_allow_html=True)
+# 🎨 Apply Page Configuration for animations
+st.set_page_config(
+    page_title="Financial Analytics Hub",
+    page_icon="📊",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
+
+# 🎨 Render Animated Header
+render_animated_header()
+
+# 🔄 Render Auto-Update Controls
+render_auto_update_controls()
 
 # Sidebar with real API status and cache information
 with st.sidebar:
