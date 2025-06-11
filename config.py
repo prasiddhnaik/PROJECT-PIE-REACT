@@ -3,6 +3,12 @@
 Configuration file for Enhanced Stock Tracker
 """
 
+# 🔑 API Configuration - Alpha Vantage
+API_CONFIG = {
+    'alpha_vantage_key': 'SEMDR7C8AQ9WQTMV',  # Your Alpha Vantage API key
+    'alpha_vantage_base_url': 'https://www.alphavantage.co/query'
+}
+
 # Email Configuration (Configure with your own credentials)
 EMAIL_CONFIG = {
     'sender': 'your-email@gmail.com',
