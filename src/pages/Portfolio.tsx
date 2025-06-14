@@ -28,6 +28,37 @@ interface PortfolioAnalysis {
   };
 }
 
+interface MarketSentiment {
+  fear_greed_index: {
+    value: number;
+    classification: string;
+    description: string;
+    last_updated: string;
+  };
+  vix_index: {
+    value: number;
+    level: string;
+    description: string;
+  };
+  put_call_ratio: {
+    value: number;
+    sentiment: string;
+    description: string;
+  };
+  market_breadth: {
+    advancing: number;
+    declining: number;
+    ratio: number;
+    sentiment: string;
+  };
+  treasury_yield: {
+    ten_year: number;
+    two_year: number;
+    spread: number;
+    curve_status: string;
+  };
+}
+
 const Portfolio = () => {
   const [funds, setFunds] = useState<Fund[]>([
     { symbol: 'AAPL', name: 'Apple Inc.', allocation: 30 },
@@ -53,6 +84,18 @@ const Portfolio = () => {
     {
       enabled: funds.length > 0,
       onError: () => toast.error('Failed to analyze portfolio')
+    }
+  );
+
+  const { data: marketSentiment } = useQuery<MarketSentiment>(
+    'market-sentiment',
+    async () => {
+      const response = await axios.get(`${API_BASE_URL}/api/market/sentiment`);
+      return response.data;
+    },
+    {
+      refetchInterval: 5 * 60 * 1000, // Refresh every 5 minutes
+      onError: () => toast.error('Failed to fetch market sentiment')
     }
   );
 
@@ -203,6 +246,168 @@ const Portfolio = () => {
           {isLoading ? 'Analyzing...' : 'Analyze Portfolio'}
         </button>
       </motion.section>
+
+      {/* Market Sentiment & Fear & Greed Index */}
+      {marketSentiment && (
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.15 }}
+          className="bg-card-gradient rounded-xl p-6 border border-primary-800/30 shadow-lg"
+        >
+          <h2 className="text-2xl font-semibold text-primary-50 mb-6">
+            Market Sentiment Analysis
+          </h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {/* Fear & Greed Index */}
+            <div className="bg-primary-900/50 rounded-lg p-5 border border-primary-800/20">
+              <h3 className="text-lg font-semibold text-primary-50 mb-3">Fear & Greed Index</h3>
+              <div className="text-center">
+                <div className={`text-4xl font-bold mb-2 ${
+                  marketSentiment.fear_greed_index.value >= 75 ? 'text-red-400' :
+                  marketSentiment.fear_greed_index.value >= 55 ? 'text-yellow-400' :
+                  marketSentiment.fear_greed_index.value >= 45 ? 'text-blue-400' :
+                  marketSentiment.fear_greed_index.value >= 25 ? 'text-orange-400' :
+                  'text-red-500'
+                }`}>
+                  {marketSentiment.fear_greed_index.value}
+                </div>
+                <div className={`text-sm font-medium mb-2 ${
+                  marketSentiment.fear_greed_index.classification === 'Extreme Greed' ? 'text-red-400' :
+                  marketSentiment.fear_greed_index.classification === 'Greed' ? 'text-yellow-400' :
+                  marketSentiment.fear_greed_index.classification === 'Neutral' ? 'text-blue-400' :
+                  marketSentiment.fear_greed_index.classification === 'Fear' ? 'text-orange-400' :
+                  'text-red-500'
+                }`}>
+                  {marketSentiment.fear_greed_index.classification}
+                </div>
+                <p className="text-primary-300 text-xs">
+                  {marketSentiment.fear_greed_index.description}
+                </p>
+              </div>
+            </div>
+
+            {/* VIX Index */}
+            <div className="bg-primary-900/50 rounded-lg p-5 border border-primary-800/20">
+              <h3 className="text-lg font-semibold text-primary-50 mb-3">VIX (Volatility Index)</h3>
+              <div className="text-center">
+                <div className={`text-3xl font-bold mb-2 ${
+                  marketSentiment.vix_index.value >= 30 ? 'text-red-400' :
+                  marketSentiment.vix_index.value >= 20 ? 'text-yellow-400' :
+                  'text-green-400'
+                }`}>
+                  {marketSentiment.vix_index.value.toFixed(2)}
+                </div>
+                <div className="text-sm font-medium text-primary-200 mb-2">
+                  {marketSentiment.vix_index.level}
+                </div>
+                <p className="text-primary-300 text-xs">
+                  {marketSentiment.vix_index.description}
+                </p>
+              </div>
+            </div>
+
+            {/* Put/Call Ratio */}
+            <div className="bg-primary-900/50 rounded-lg p-5 border border-primary-800/20">
+              <h3 className="text-lg font-semibold text-primary-50 mb-3">Put/Call Ratio</h3>
+              <div className="text-center">
+                <div className={`text-3xl font-bold mb-2 ${
+                  marketSentiment.put_call_ratio.sentiment === 'Bearish' ? 'text-red-400' :
+                  marketSentiment.put_call_ratio.sentiment === 'Neutral' ? 'text-yellow-400' :
+                  'text-green-400'
+                }`}>
+                  {marketSentiment.put_call_ratio.value.toFixed(2)}
+                </div>
+                <div className="text-sm font-medium text-primary-200 mb-2">
+                  {marketSentiment.put_call_ratio.sentiment}
+                </div>
+                <p className="text-primary-300 text-xs">
+                  {marketSentiment.put_call_ratio.description}
+                </p>
+              </div>
+            </div>
+
+            {/* Market Breadth */}
+            <div className="bg-primary-900/50 rounded-lg p-5 border border-primary-800/20">
+              <h3 className="text-lg font-semibold text-primary-50 mb-3">Market Breadth</h3>
+              <div className="space-y-2">
+                <div className="flex justify-between">
+                  <span className="text-primary-300 text-sm">Advancing:</span>
+                  <span className="text-green-400 font-semibold">{marketSentiment.market_breadth.advancing}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-primary-300 text-sm">Declining:</span>
+                  <span className="text-red-400 font-semibold">{marketSentiment.market_breadth.declining}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-primary-300 text-sm">Ratio:</span>
+                  <span className="text-primary-50 font-semibold">{marketSentiment.market_breadth.ratio.toFixed(2)}</span>
+                </div>
+                <div className={`text-center text-sm font-medium ${
+                  marketSentiment.market_breadth.sentiment === 'Bullish' ? 'text-green-400' :
+                  marketSentiment.market_breadth.sentiment === 'Neutral' ? 'text-yellow-400' :
+                  'text-red-400'
+                }`}>
+                  {marketSentiment.market_breadth.sentiment}
+                </div>
+              </div>
+            </div>
+
+            {/* Treasury Yield Curve */}
+            <div className="bg-primary-900/50 rounded-lg p-5 border border-primary-800/20">
+              <h3 className="text-lg font-semibold text-primary-50 mb-3">Treasury Yield Curve</h3>
+              <div className="space-y-2">
+                <div className="flex justify-between">
+                  <span className="text-primary-300 text-sm">10-Year:</span>
+                  <span className="text-primary-50 font-semibold">{marketSentiment.treasury_yield.ten_year.toFixed(2)}%</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-primary-300 text-sm">2-Year:</span>
+                  <span className="text-primary-50 font-semibold">{marketSentiment.treasury_yield.two_year.toFixed(2)}%</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-primary-300 text-sm">Spread:</span>
+                  <span className={`font-semibold ${
+                    marketSentiment.treasury_yield.spread >= 0 ? 'text-green-400' : 'text-red-400'
+                  }`}>
+                    {marketSentiment.treasury_yield.spread > 0 ? '+' : ''}{marketSentiment.treasury_yield.spread.toFixed(2)}%
+                  </span>
+                </div>
+                <div className={`text-center text-sm font-medium ${
+                  marketSentiment.treasury_yield.curve_status === 'Normal' ? 'text-green-400' :
+                  marketSentiment.treasury_yield.curve_status === 'Flat' ? 'text-yellow-400' :
+                  'text-red-400'
+                }`}>
+                  {marketSentiment.treasury_yield.curve_status}
+                </div>
+              </div>
+            </div>
+
+            {/* Overall Market Sentiment Summary */}
+            <div className="bg-primary-900/50 rounded-lg p-5 border border-primary-800/20">
+              <h3 className="text-lg font-semibold text-primary-50 mb-3">Overall Sentiment</h3>
+              <div className="text-center">
+                <div className="text-2xl font-bold text-accent-emerald mb-2">
+                  {(() => {
+                    const fearGreed = marketSentiment.fear_greed_index.value;
+                    const vix = marketSentiment.vix_index.value;
+                    
+                    if (fearGreed >= 60 && vix < 20) return "🚀 BULLISH";
+                    if (fearGreed <= 40 && vix > 25) return "🐻 BEARISH";
+                    if (fearGreed >= 45 && fearGreed <= 55) return "⚖️ NEUTRAL";
+                    if (fearGreed > 55) return "⚠️ CAUTIOUS";
+                    return "📊 MIXED";
+                  })()}
+                </div>
+                <p className="text-primary-300 text-xs">
+                  Based on Fear & Greed Index, VIX, and market breadth analysis
+                </p>
+              </div>
+            </div>
+          </div>
+        </motion.section>
+      )}
 
       {/* Analysis Results */}
       {portfolioData && (

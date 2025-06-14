@@ -9,7 +9,7 @@ import Stocks from './pages/Stocks';
 import Crypto from './pages/Crypto';
 import Education from './pages/Education';
 import RiskAnalysis from './pages/RiskAnalysis';
-import SystemStatus from './pages/SystemStatus';
+
 import './App.css';
 
 const queryClient = new QueryClient({
@@ -36,7 +36,6 @@ function App() {
               <Route path="/crypto" element={<Crypto />} />
               <Route path="/risk-analysis" element={<RiskAnalysis />} />
               <Route path="/education" element={<Education />} />
-              <Route path="/system-status" element={<SystemStatus />} />
             </Routes>
           </main>
           <Toaster

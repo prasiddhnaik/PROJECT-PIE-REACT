@@ -8,8 +8,7 @@ import {
   ShieldCheckIcon,
   CubeIcon,
   Bars3Icon,
-  XMarkIcon,
-  ServerIcon
+  XMarkIcon
 } from '@heroicons/react/24/outline';
 
 const Navbar = () => {
@@ -23,7 +22,6 @@ const Navbar = () => {
     { name: 'Crypto', href: '/crypto', icon: CubeIcon },
     { name: 'Risk Analysis', href: '/risk-analysis', icon: ShieldCheckIcon },
     { name: 'Education', href: '/education', icon: AcademicCapIcon },
-    { name: 'System Status', href: '/system-status', icon: ServerIcon },
   ];
 
   const isActive = (path: string) => location.pathname === path;
