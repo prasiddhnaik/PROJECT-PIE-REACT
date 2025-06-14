@@ -2773,19 +2773,83 @@ async def get_market_overview():
                 except:
                     pass
                 
-                # Final fallback - realistic simulation based on REAL INDEX RANGES
+                # Try alternative data source - Alpha Vantage for indices
+                try:
+                    av_symbol = symbol.replace('^', '')  # Remove ^ for Alpha Vantage
+                    av_url = f"https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol={av_symbol}&apikey={ALPHA_VANTAGE_API_KEY}"
+                    
+                    async with aiohttp.ClientSession() as session:
+                        async with session.get(av_url, timeout=5) as response:
+                            if response.status == 200:
+                                av_data = await response.json()
+                                if 'Global Quote' in av_data and av_data['Global Quote']:
+                                    quote = av_data['Global Quote']
+                                    current_price = float(quote.get('05. price', 0))
+                                    change = float(quote.get('09. change', 0))
+                                    change_percent = float(quote.get('10. change percent', '0%').replace('%', ''))
+                                    
+                                    if current_price > 0:
+                                        indices_data[symbol] = {
+                                            'name': name,
+                                            'price': round(current_price, 2),
+                                            'change': round(change, 2),
+                                            'change_percent': round(change_percent, 2),
+                                            'source': 'alpha_vantage'
+                                        }
+                                        logger.info(f"Alpha Vantage market data for {symbol}: ${current_price:.2f}")
+                                        continue
+                except Exception as av_error:
+                    logger.warning(f"Alpha Vantage failed for {symbol}: {str(av_error)}")
+                
+                # Try Twelve Data API as third fallback
+                try:
+                    td_symbol = symbol.replace('^', '')  # Remove ^ for Twelve Data
+                    td_url = f"https://api.twelvedata.com/quote?symbol={td_symbol}&apikey={TWELVE_DATA_API_KEY}"
+                    
+                    async with aiohttp.ClientSession() as session:
+                        async with session.get(td_url, timeout=5) as response:
+                            if response.status == 200:
+                                td_data = await response.json()
+                                if 'close' in td_data and 'change' in td_data:
+                                    current_price = float(td_data['close'])
+                                    change = float(td_data['change'])
+                                    change_percent = float(td_data['percent_change'])
+                                    
+                                    if current_price > 0:
+                                        indices_data[symbol] = {
+                                            'name': name,
+                                            'price': round(current_price, 2),
+                                            'change': round(change, 2),
+                                            'change_percent': round(change_percent, 2),
+                                            'source': 'twelve_data'
+                                        }
+                                        logger.info(f"Twelve Data market data for {symbol}: ${current_price:.2f}")
+                                        continue
+                except Exception as td_error:
+                    logger.warning(f"Twelve Data failed for {symbol}: {str(td_error)}")
+                
+                # Final fallback - UPDATED realistic simulation based on CURRENT REAL INDEX RANGES
                 base_prices = {
-                    '^GSPC': 5900 + random.uniform(-100, 100),  # S&P 500 around 5900
-                    '^IXIC': 19000 + random.uniform(-300, 300), # NASDAQ around 19000  
-                    '^DJI': 42000 + random.uniform(-500, 500),  # Dow around 42000
-                    '^RUT': 2100 + random.uniform(-50, 50)      # Russell 2000 around 2100
+                    '^GSPC': 5977.0,   # S&P 500 current level
+                    '^IXIC': 19407.0,  # NASDAQ current level (from Google data)
+                    '^DJI': 42198.0,   # Dow current level  
+                    '^RUT': 2101.0     # Russell 2000 current level
                 }
                 base_price = base_prices.get(symbol, 1000.0)
                 
-                # Generate realistic mock data
-                current_price = base_price + random.uniform(-2, 2)
-                change = random.uniform(-3, 3)
-                change_percent = (change / current_price) * 100
+                # Generate realistic intraday movement
+                daily_volatility = {
+                    '^GSPC': 0.8,   # S&P 500 typical daily volatility
+                    '^IXIC': 1.3,   # NASDAQ higher volatility
+                    '^DJI': 0.7,    # Dow lower volatility
+                    '^RUT': 1.5     # Small caps highest volatility
+                }
+                vol = daily_volatility.get(symbol, 1.0)
+                
+                # Simulate realistic market movement
+                change_percent = random.uniform(-vol, vol)
+                change = (base_price * change_percent) / 100
+                current_price = base_price + change
                 
                 indices_data[symbol] = {
                     'name': name,
