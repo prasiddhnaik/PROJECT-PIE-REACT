@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2024 AI Portfolio Return Calculator
+Copyright (c) 2025 Financial Analytics Hub
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -21,50 +21,82 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 ================================================================================
-🤖 AI Portfolio Return Calculator - Professional License Information
+📊 Financial Analytics Hub - Professional License Information
 ================================================================================
 
 This project includes the following components under MIT License:
 
-📊 Core Components:
-- Portfolio calculation engine (portfolio_return_calculator.py)
-- Interactive web application (streamlit_portfolio_app.py)
-- AI advisory system and recommendation algorithms
-- Data visualization and charting modules
-- Real-time calculation and analysis tools
+🚀 Core Components:
+- FastAPI backend with 8 financial data APIs (main.py)
+- React TypeScript frontend with modern UI
+- Portfolio analysis engine with Fear & Greed Index
+- Real-time market data aggregation system
+- Risk assessment and AI insights algorithms
+- Comprehensive sector analysis (550+ stocks across 11 sectors)
 
 🎨 User Interface:
-- Streamlit-based web interface
-- Custom JavaScript scroll wheel implementation
-- Professional styling and gradient design system
-- Interactive charts and export functionality
+- React-based web application with TypeScript
+- Progressive Web App (PWA) support
+- Electron desktop app configuration
+- Emerald/purple gradient design system
+- Interactive charts and real-time data visualization
+- Responsive design for mobile and desktop
 
-📈 Sample Data:
-- Real NAV data for demonstration purposes
-- Historical performance datasets
-- Example fund comparison data
+📈 Financial Data Integration:
+- Alpha Vantage API integration
+- Twelve Data API integration
+- Finnhub API integration
+- Polygon.io API integration
+- FRED Economic Data API integration
+- CoinGecko cryptocurrency data
+- Yahoo Finance integration
+- World Bank economic indicators
 
-📚 Documentation:
-- Comprehensive project documentation
-- Technical specifications and API reference
-- Installation and deployment guides
-- User manuals and tutorials
+🔧 Technical Features:
+- Auto-updating data cache system (13-minute intervals)
+- Falling stocks monitoring (2-minute intervals)
+- Background data processing and redundancy
+- Comprehensive error handling and API fallbacks
+- Rate limiting and performance optimization
+
+📱 App Deployment:
+- Progressive Web App (PWA) manifest and service worker
+- Electron desktop application setup
+- Docker containerization ready
+- Cloud deployment configurations (Vercel, Heroku, AWS)
+- Cross-platform compatibility (Windows, macOS, Linux)
 
 ================================================================================
 🔧 Third-Party Dependencies
 ================================================================================
 
-This software uses the following open-source libraries:
-
-• Streamlit (Apache 2.0 License)
-• Plotly (MIT License)
-• Pandas (BSD 3-Clause License)
-• NumPy (BSD License)
-• Matplotlib (PSF License)
-• Seaborn (BSD 3-Clause License)
+Backend Dependencies:
+• FastAPI (MIT License)
+• Uvicorn (BSD License)
+• Pydantic (MIT License)
+• aiohttp (Apache 2.0 License)
 • yfinance (Apache 2.0 License)
-• Requests (Apache 2.0 License)
-• BeautifulSoup4 (MIT License)
+• pandas (BSD 3-Clause License)
+• numpy (BSD License)
+• requests (Apache 2.0 License)
+• python-multipart (Apache 2.0 License)
+• pycoingecko (MIT License)
+• twelvedata (MIT License)
+
+Frontend Dependencies:
+• React (MIT License)
+• TypeScript (Apache 2.0 License)
+• Tailwind CSS (MIT License)
+• Axios (MIT License)
+• React Router (MIT License)
+• Framer Motion (MIT License)
+• Plotly.js (MIT License)
+• React Query (MIT License)
+• Zustand (MIT License)
+
+Desktop App Dependencies:
+• Electron (MIT License)
+• Electron Builder (MIT License)
 
 Each dependency retains its original license terms.
 
@@ -78,6 +110,8 @@ Each dependency retains its original license terms.
 - Private and public usage
 - Integration into other projects
 - Educational and research purposes
+- Building financial applications and services
+- Creating derivative works
 
 📋 Requirements:
 - Include original copyright notice
@@ -88,6 +122,13 @@ Each dependency retains its original license terms.
 - No warranty or guarantee provided
 - Authors not liable for damages
 - No trademark rights granted
+- Financial data accuracy not guaranteed
+- Use at your own risk for investment decisions
+
+⚠️ Financial Disclaimer:
+This software is for informational and educational purposes only. It does not 
+constitute financial advice. Users should consult with qualified financial 
+advisors before making investment decisions.
 
 ================================================================================
 🌟 Attribution
@@ -95,24 +136,30 @@ Each dependency retains its original license terms.
 
 If you use this software in your project, we appreciate attribution:
 
-"Powered by AI Portfolio Return Calculator"
-"Built with AI Portfolio Return Calculator (https://github.com/your-repo)"
+"Powered by Financial Analytics Hub"
+"Built with Financial Analytics Hub (https://github.com/prasiddhnaik/PROJECT-PIE-REACT)"
 
 ================================================================================
 📞 Contact Information
 ================================================================================
 
 For license questions or commercial licensing:
-Email: ai-portfolio@example.com
-GitHub: https://github.com/your-repo/ai-portfolio-calculator
+GitHub: https://github.com/prasiddhnaik/PROJECT-PIE-REACT
+Project: Financial Analytics Hub v2.2.0
 
 ================================================================================
 🔄 License Version History
 ================================================================================
 
+Version 2.2.0 (June 2025):
+- Updated for Financial Analytics Hub
+- Added React frontend and FastAPI backend coverage
+- Included PWA and Electron app configurations
+- Added financial data API integrations
+- Enhanced with portfolio analysis features
+
 Version 1.0.0 (December 2024):
 - Initial MIT License release
-- Complete project coverage
-- Professional terms and conditions
+- Portfolio calculator coverage
 
-Last Updated: December 2024 
+Last Updated: June 2025 
