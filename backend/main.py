@@ -71,9 +71,11 @@ class CryptoRequest(BaseModel):
     currency: Optional[str] = "usd"
 
 class RiskAnalysisRequest(BaseModel):
-    symbols: List[str]
+    symbols: Optional[List[str]] = None
+    portfolio: Optional[List[Dict[str, Any]]] = None
     period: Optional[str] = "1y"
     confidence_level: Optional[float] = 0.95
+    time_horizon: Optional[str] = "daily"
 
 # Import configuration
 from config import APIConfig, DEFAULT_STOCK_SYMBOLS, DEFAULT_CRYPTO_SYMBOLS, MAJOR_INDICES
@@ -1626,25 +1628,67 @@ async def analyze_portfolio(request: PortfolioRequest):
 @app.post("/api/portfolio/risk-analysis")
 async def portfolio_risk_analysis(request: RiskAnalysisRequest):
     try:
-        portfolio_data = []
+        # Handle both request formats
+        if request.portfolio:
+            # New format: portfolio with detailed holdings
+            symbols = [holding.get('symbol') for holding in request.portfolio if holding.get('symbol')]
+            holdings = {holding['symbol']: holding for holding in request.portfolio if holding.get('symbol')}
+        elif request.symbols:
+            # Legacy format: just symbols
+            symbols = request.symbols
+            holdings = {}
+        else:
+            raise HTTPException(status_code=400, detail="Either 'symbols' or 'portfolio' must be provided")
         
-        for symbol in request.symbols:
-            ticker = yf.Ticker(symbol)
-            hist = ticker.history(period=request.period)
-            
-            if not hist.empty:
-                daily_returns = hist['Close'].pct_change().dropna()
-                portfolio_data.append(daily_returns)
+        if not symbols:
+            raise HTTPException(status_code=400, detail="No valid symbols provided")
+        
+        portfolio_data = []
+        portfolio_values = []
+        current_prices = {}
+        
+        for symbol in symbols:
+            try:
+                ticker = yf.Ticker(symbol)
+                hist = ticker.history(period=request.period)
+                
+                if not hist.empty:
+                    daily_returns = hist['Close'].pct_change().dropna()
+                    portfolio_data.append(daily_returns)
+                    
+                    # Get current price for portfolio value calculation
+                    current_price = hist['Close'].iloc[-1]
+                    current_prices[symbol] = current_price
+                    
+                    # Calculate position value if portfolio details provided
+                    if symbol in holdings:
+                        quantity = holdings[symbol].get('quantity', 0)
+                        portfolio_values.append(current_price * quantity)
+                    else:
+                        portfolio_values.append(current_price)  # Assume 1 share
+                        
+            except Exception as e:
+                logger.warning(f"Failed to fetch data for {symbol}: {str(e)}")
+                continue
         
         if not portfolio_data:
             raise HTTPException(status_code=404, detail="No valid data found for symbols")
         
         # Combine returns into DataFrame
-        returns_df = pd.concat(portfolio_data, axis=1, keys=request.symbols)
+        valid_symbols = symbols[:len(portfolio_data)]
+        returns_df = pd.concat(portfolio_data, axis=1, keys=valid_symbols)
+        
+        # Calculate portfolio weights
+        total_value = sum(portfolio_values)
+        weights = [value / total_value for value in portfolio_values] if total_value > 0 else [1/len(portfolio_values)] * len(portfolio_values)
+        
+        # Calculate weighted portfolio returns
+        portfolio_returns = (returns_df * weights).sum(axis=1)
         
         # Calculate Value at Risk (VaR)
-        portfolio_returns = returns_df.mean(axis=1)
-        var_value = np.percentile(portfolio_returns, (1 - request.confidence_level) * 100)
+        confidence_level = request.confidence_level
+        var_percentile = (1 - confidence_level) * 100
+        var_value = np.percentile(portfolio_returns, var_percentile)
         
         # Calculate Conditional VaR (Expected Shortfall)
         cvar_value = portfolio_returns[portfolio_returns <= var_value].mean()
@@ -1652,24 +1696,91 @@ async def portfolio_risk_analysis(request: RiskAnalysisRequest):
         # Portfolio metrics
         annual_return = portfolio_returns.mean() * 252
         annual_volatility = portfolio_returns.std() * np.sqrt(252)
-        max_drawdown = (portfolio_returns.cumsum() - portfolio_returns.cumsum().expanding().max()).min()
+        
+        # Maximum Drawdown
+        cumulative_returns = (1 + portfolio_returns).cumprod()
+        rolling_max = cumulative_returns.expanding().max()
+        drawdowns = (cumulative_returns - rolling_max) / rolling_max
+        max_drawdown = drawdowns.min()
+        
+        # Sharpe Ratio (assuming 2% risk-free rate)
+        risk_free_rate = 0.02
+        sharpe_ratio = (annual_return - risk_free_rate) / annual_volatility if annual_volatility > 0 else 0
+        
+        # Beta calculation (vs S&P 500)
+        try:
+            sp500 = yf.Ticker("^GSPC")
+            sp500_hist = sp500.history(period=request.period)
+            if not sp500_hist.empty:
+                sp500_returns = sp500_hist['Close'].pct_change().dropna()
+                aligned_data = portfolio_returns.align(sp500_returns, join='inner')
+                if len(aligned_data[0]) > 10:
+                    beta = np.cov(aligned_data[0], aligned_data[1])[0][1] / np.var(aligned_data[1])
+                else:
+                    beta = 1.0
+            else:
+                beta = 1.0
+        except:
+            beta = 1.0
+        
+        # Risk level assessment
+        if annual_volatility > 0.25:
+            risk_level = "HIGH"
+        elif annual_volatility > 0.15:
+            risk_level = "MEDIUM"
+        else:
+            risk_level = "LOW"
+        
+        # Generate recommendations
+        recommendations = []
+        if annual_volatility > 0.3:
+            recommendations.append("Consider reducing position sizes to lower portfolio volatility")
+        if max_drawdown < -0.2:
+            recommendations.append("Portfolio experienced significant drawdowns - consider diversification")
+        if sharpe_ratio < 0.5:
+            recommendations.append("Risk-adjusted returns are low - review asset allocation")
+        if beta > 1.5:
+            recommendations.append("Portfolio is highly sensitive to market movements")
+        
+        # Calculate portfolio value
+        total_portfolio_value = sum(portfolio_values) if portfolio_values else 100000  # Default $100k
+        
+        # VaR in dollar terms
+        var_dollar = var_value * total_portfolio_value
+        cvar_dollar = cvar_value * total_portfolio_value
         
         return {
-            "risk_metrics": {
-                "var_95": round(var_value * 100, 3),
-                "cvar_95": round(cvar_value * 100, 3),
-                "annual_return": round(annual_return * 100, 2),
-                "annual_volatility": round(annual_volatility * 100, 2),
-                "max_drawdown": round(max_drawdown * 100, 2),
-                "sharpe_ratio": round(annual_return / annual_volatility, 3) if annual_volatility > 0 else 0
+            "value_at_risk": {
+                "daily_var_95": round(var_dollar, 2) if confidence_level == 0.95 else round(np.percentile(portfolio_returns, 5) * total_portfolio_value, 2),
+                "daily_var_99": round(np.percentile(portfolio_returns, 1) * total_portfolio_value, 2),
+                "monthly_var_95": round(var_dollar * np.sqrt(21), 2),
+                "monthly_var_99": round(np.percentile(portfolio_returns, 1) * total_portfolio_value * np.sqrt(21), 2)
             },
-            "symbols": request.symbols,
-            "confidence_level": request.confidence_level,
+            "portfolio_metrics": {
+                "total_value": round(total_portfolio_value, 2),
+                "volatility": round(annual_volatility, 4),
+                "sharpe_ratio": round(sharpe_ratio, 3),
+                "max_drawdown": round(max_drawdown, 4),
+                "beta": round(beta, 3)
+            },
+            "risk_assessment": {
+                "risk_level": risk_level,
+                "recommendations": recommendations,
+                "stress_test_results": {
+                    "market_crash_scenario": round(var_dollar * 3, 2),  # 3x VaR for stress test
+                    "interest_rate_shock": round(var_dollar * 1.5, 2),
+                    "currency_crisis": round(var_dollar * 2, 2)
+                }
+            },
+            "symbols": valid_symbols,
+            "confidence_level": confidence_level,
             "period": request.period,
-            "calculation_date": datetime.now(timezone.utc).isoformat()
+            "time_horizon": request.time_horizon,
+            "last_updated": datetime.now(timezone.utc).isoformat()
         }
         
     except Exception as e:
+        logger.error(f"Risk analysis error: {str(e)}")
         raise HTTPException(status_code=500, detail=f"Risk analysis failed: {str(e)}")
 
 # Enhanced Portfolio Reporting with Market Sentiment
