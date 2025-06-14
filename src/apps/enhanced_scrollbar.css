@@ -1,0 +1,211 @@
+/* 🎨 ENHANCED SCROLLBAR FOR TAB NAVIGATION */
+
+/* ENHANCED TAB SYSTEM WITH PREMIUM SCROLLBAR */
+.stTabs [data-baseweb="tab-list"] {
+    background: linear-gradient(135deg, rgba(62, 142, 247, 0.08), rgba(62, 142, 247, 0.12)) !important;
+    border: 2px solid rgba(62, 142, 247, 0.2) !important;
+    border-radius: 12px !important;
+    padding: 0.75rem !important;
+    margin: 1.5rem 0 !important;
+    box-shadow: 0 0 20px rgba(62, 142, 247, 0.3) !important;
+    backdrop-filter: blur(20px) !important;
+    overflow-x: auto !important;
+    overflow-y: visible !important;
+    white-space: nowrap !important;
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    gap: 0.5rem !important;
+}
+
+/* PROFESSIONAL SCROLLBAR - ENHANCED FOR TABS */
+.stTabs [data-baseweb="tab-list"]::-webkit-scrollbar {
+    height: 18px !important;
+    border-radius: 14px !important;
+}
+
+.stTabs [data-baseweb="tab-list"]::-webkit-scrollbar-track {
+    background: linear-gradient(135deg, rgba(15, 17, 21, 0.9), rgba(25, 27, 31, 0.7)) !important;
+    border-radius: 14px !important;
+    border: 3px solid rgba(62, 142, 247, 0.3) !important;
+    box-shadow: inset 0 3px 10px rgba(0, 0, 0, 0.4) !important;
+}
+
+.stTabs [data-baseweb="tab-list"]::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #3E8EF7, #1E40AF, #3B82F6) !important;
+    border-radius: 14px !important;
+    border: 3px solid rgba(15, 17, 21, 0.6) !important;
+    box-shadow: 0 0 25px rgba(62, 142, 247, 0.5), inset 0 2px 5px rgba(255, 255, 255, 0.3) !important;
+    transition: all 0.3s ease !important;
+}
+
+.stTabs [data-baseweb="tab-list"]::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #60A5FA, #3E8EF7, #2563EB) !important;
+    box-shadow: 0 0 35px rgba(62, 142, 247, 0.7), inset 0 2px 6px rgba(255, 255, 255, 0.4) !important;
+    transform: scale(1.1) !important;
+    cursor: pointer !important;
+}
+
+.stTabs [data-baseweb="tab-list"]::-webkit-scrollbar-thumb:active {
+    background: linear-gradient(135deg, #3B82F6, #1D4ED8, #3E8EF7) !important;
+    box-shadow: 0 0 45px rgba(62, 142, 247, 0.9), inset 0 3px 8px rgba(255, 255, 255, 0.5) !important;
+}
+
+/* Enhanced Tab Buttons */
+.stTabs [data-baseweb="tab"] {
+    background: transparent !important;
+    border: 2px solid transparent !important;
+    color: #FFFFFF !important;
+    font-weight: 600 !important;
+    font-size: 1rem !important;
+    padding: 1rem 1.5rem !important;
+    border-radius: 10px !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    margin: 0 !important;
+    min-width: 160px !important;
+    text-align: center !important;
+    cursor: pointer !important;
+    flex-shrink: 0 !important;
+    white-space: nowrap !important;
+}
+
+.stTabs [data-baseweb="tab"]:hover {
+    background: rgba(62, 142, 247, 0.2) !important;
+    border: 2px solid #3E8EF7 !important;
+    color: white !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 0 20px rgba(62, 142, 247, 0.3) !important;
+}
+
+.stTabs [aria-selected="true"] {
+    background: #3E8EF7 !important;
+    border: 2px solid #3E8EF7 !important;
+    color: white !important;
+    box-shadow: 0 0 25px rgba(62, 142, 247, 0.4) !important;
+    transform: translateY(-2px) !important;
+    font-weight: 700 !important;
+}
+
+/* GLOBAL SCROLLBAR ENHANCEMENT */
+::-webkit-scrollbar {
+    width: 16px !important;
+    height: 16px !important;
+}
+
+::-webkit-scrollbar-track {
+    background: linear-gradient(135deg, rgba(15, 17, 21, 0.9), rgba(25, 27, 31, 0.7)) !important;
+    border-radius: 12px !important;
+    border: 2px solid rgba(62, 142, 247, 0.2) !important;
+    box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #3E8EF7, #1E40AF, #3B82F6) !important;
+    border-radius: 12px !important;
+    border: 2px solid rgba(15, 17, 21, 0.5) !important;
+    box-shadow: 0 0 20px rgba(62, 142, 247, 0.3), inset 0 1px 3px rgba(255, 255, 255, 0.2) !important;
+    transition: all 0.3s ease !important;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #60A5FA, #3E8EF7, #2563EB) !important;
+    box-shadow: 0 0 30px rgba(62, 142, 247, 0.6), inset 0 1px 5px rgba(255, 255, 255, 0.3) !important;
+    transform: scale(1.1) !important;
+    cursor: pointer !important;
+}
+
+::-webkit-scrollbar-thumb:active {
+    background: linear-gradient(135deg, #3B82F6, #1D4ED8, #3E8EF7) !important;
+    box-shadow: 0 0 40px rgba(62, 142, 247, 0.8), inset 0 2px 6px rgba(255, 255, 255, 0.4) !important;
+}
+
+::-webkit-scrollbar-corner {
+    background: #0F1115 !important;
+}
+
+/* Smooth Scroll Animation */
+.stTabs [data-baseweb="tab-list"] {
+    scroll-behavior: smooth !important;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .stTabs [data-baseweb="tab"] {
+        min-width: 120px !important;
+        padding: 0.75rem 1rem !important;
+        font-size: 0.9rem !important;
+    }
+    
+    .stTabs [data-baseweb="tab-list"]::-webkit-scrollbar {
+        height: 14px !important;
+    }
+    
+    ::-webkit-scrollbar {
+        width: 12px !important;
+        height: 12px !important;
+    }
+}
+
+/* Dark Theme Enhancements */
+body {
+    background-color: #0F1115 !important;
+    color: #FFFFFF !important;
+}
+
+.main {
+    background-color: #0F1115 !important;
+    color: #FFFFFF !important;
+}
+
+.stMarkdown {
+    color: #FFFFFF !important;
+}
+
+.stSelectbox > div > div {
+    background-color: rgba(62, 142, 247, 0.08) !important;
+    border: 2px solid rgba(62, 142, 247, 0.2) !important;
+    border-radius: 12px !important;
+    color: #FFFFFF !important;
+}
+
+.stButton > button {
+    background: linear-gradient(135deg, #3E8EF7, #1E40AF) !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 12px !important;
+    padding: 0.75rem 1.5rem !important;
+    font-weight: 600 !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 0 20px rgba(62, 142, 247, 0.3) !important;
+}
+
+.stButton > button:hover {
+    background: linear-gradient(135deg, #60A5FA, #3E8EF7) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 10px 25px rgba(62, 142, 247, 0.4) !important;
+}
+
+/* Enhanced Text Visibility */
+.stMarkdown, .stMarkdown p, .stMarkdown div, .stMarkdown span {
+    color: #FFFFFF !important;
+    font-weight: 400 !important;
+}
+
+.stMarkdown h1, .stMarkdown h2, .stMarkdown h3, .stMarkdown h4, .stMarkdown h5, .stMarkdown h6 {
+    color: #3E8EF7 !important;
+    font-weight: 600 !important;
+}
+
+/* Widget Text */
+label, .stSelectbox label, .stTextInput label, .stNumberInput label {
+    color: #FFFFFF !important;
+    font-weight: 500 !important;
+}
+
+/* Info/Success/Error boxes */
+.stInfo, .stSuccess, .stWarning, .stError {
+    color: #FFFFFF !important;
+}
+
+.stInfo div, .stSuccess div, .stWarning div, .stError div {
+    color: #FFFFFF !important;
+} 

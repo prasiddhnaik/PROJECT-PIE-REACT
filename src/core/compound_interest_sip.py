@@ -320,6 +320,7 @@ class CompoundInterestSIPCalculator:
             },
             xaxis_title="📅 Month",
             yaxis_title="💵 Amount (₹)",
+            yaxis=dict(tickformat='₹,.0f'),
             height=500,  # Reduced height for better performance
             showlegend=True,
             hovermode='x unified',
@@ -328,9 +329,6 @@ class CompoundInterestSIPCalculator:
             dragmode=False,  # Disable dragging
             scrollZoom=False,  # Disable scroll zoom
         )
-        
-        # Format y-axis for Indian currency
-        fig.update_yaxis(tickformat='₹,.0f')
         
         # Add performance indicator text
         optimization_note = ""

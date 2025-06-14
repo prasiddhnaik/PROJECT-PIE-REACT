@@ -1,0 +1,18 @@
+## [2.0.2] - 2025-06-12 - Enhanced Search UX with Dropdown Interfaces
+
+### 🔍 SEARCH INTERFACE IMPROVEMENTS
+- **CONVERTED ALL SEARCH INPUTS TO DROPDOWNS**: Replaced all text input search fields with professional dropdown selectors
+  - **🔍 Search Features** (Home Tab): Now dropdown with 10 feature options including "All Features" default
+  - **🔍 Search Cryptocurrencies** (Crypto Hub): Dropdown with 50+ crypto options formatted as "Symbol Name"
+  - **🔍 Search Currencies** (Currency Exchange): Dropdown with 40+ currency options formatted as "Code Name Flag"
+- **Enhanced User Experience**: No more typing required - users can now easily select from organized lists
+- **Professional Interface**: Consistent dropdown styling matching the dark financial theme
+- **Improved Performance**: Dropdown selection is faster than text input filtering
+- **Better Mobile UX**: Dropdowns work better on mobile devices than text inputs
+
+### 🎯 UX BENEFITS
+- **Faster Navigation**: Users can quickly find what they need without typing
+- **Error Prevention**: No typos or incorrect search terms - only valid options available
+- **Visual Organization**: Clear categorization and formatting of all available options
+- **Consistent Interface**: All search interactions now follow the same dropdown pattern
+- **Touch-Friendly**: Better interaction for tablet and mobile users 
