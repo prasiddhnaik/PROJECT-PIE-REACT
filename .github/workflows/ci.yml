@@ -85,7 +85,7 @@ jobs:
         fail_ci_if_error: false
     
     - name: 📋 Upload Test Results
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       if: always()
       with:
         name: test-results-${{ matrix.python-version }}
@@ -142,7 +142,7 @@ jobs:
       run: mypy . --ignore-missing-imports || true
     
     - name: 📋 Upload Security Reports
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       if: always()
       with:
         name: security-reports
@@ -181,7 +181,7 @@ jobs:
           --benchmark-json=benchmark-results.json
     
     - name: 📊 Upload Benchmark Results
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: benchmark-results
         path: benchmark-results.json
@@ -367,7 +367,7 @@ jobs:
         twine check dist/*
     
     - name: 📋 Upload Build Artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: dist-packages
         path: dist/
@@ -433,7 +433,7 @@ jobs:
     
     steps:
     - name: 📥 Download All Artifacts
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
     
     - name: 📊 Generate Summary Report
       run: |
@@ -452,7 +452,7 @@ jobs:
         echo "- **Timestamp**: $(date)" >> report.md
     
     - name: 📋 Upload Final Report
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: ci-cd-report
         path: report.md
