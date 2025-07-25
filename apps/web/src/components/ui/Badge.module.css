@@ -1,0 +1,168 @@
+/* Base badge styles */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: var(--radius-full);
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+  border: 1px solid transparent;
+  gap: var(--space-1);
+  white-space: nowrap;
+}
+
+/* Variant styles */
+.default {
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  border-color: var(--border-primary);
+}
+
+.success {
+  background: var(--brand-success);
+  color: white;
+  border-color: var(--brand-success);
+}
+
+.error {
+  background: var(--brand-danger);
+  color: white;
+  border-color: var(--brand-danger);
+}
+
+.warning {
+  background: #f59e0b;
+  color: white;
+  border-color: #f59e0b;
+}
+
+.info {
+  background: var(--primary-500);
+  color: white;
+  border-color: var(--primary-500);
+}
+
+.outline {
+  background: transparent;
+  color: var(--text-primary);
+  border-color: var(--border-secondary);
+}
+
+/* Size styles */
+.sm {
+  height: var(--space-5);
+  padding: 0 var(--space-2);
+  font-size: var(--text-xs);
+}
+
+.md {
+  height: var(--space-6);
+  padding: 0 var(--space-3);
+  font-size: var(--text-sm);
+}
+
+.lg {
+  height: var(--space-7);
+  padding: 0 var(--space-4);
+  font-size: var(--text-base);
+}
+
+/* Pulse animation */
+.pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* Icon sizes */
+.iconSm {
+  width: var(--space-3);
+  height: var(--space-3);
+}
+
+.iconMd {
+  width: var(--space-4);
+  height: var(--space-4);
+}
+
+.iconLg {
+  width: var(--space-5);
+  height: var(--space-5);
+}
+
+/* Special crypto variants */
+.bitcoin {
+  background: var(--bitcoin);
+  color: white;
+  border-color: var(--bitcoin);
+}
+
+.ethereum {
+  background: var(--ethereum);
+  color: white;
+  border-color: var(--ethereum);
+}
+
+.cardano {
+  background: var(--cardano);
+  color: white;
+  border-color: var(--cardano);
+}
+
+.solana {
+  background: var(--solana);
+  color: white;
+  border-color: var(--solana);
+}
+
+.polkadot {
+  background: var(--polkadot);
+  color: white;
+  border-color: var(--polkadot);
+}
+
+.chainlink {
+  background: var(--chainlink);
+  color: white;
+  border-color: var(--chainlink);
+}
+
+/* Market trend variants */
+.bullish {
+  background: linear-gradient(135deg, var(--brand-success), #16a34a);
+  color: white;
+  border-color: var(--brand-success);
+}
+
+.bearish {
+  background: linear-gradient(135deg, var(--brand-danger), #dc2626);
+  color: white;
+  border-color: var(--brand-danger);
+}
+
+.neutral {
+  background: #6b7280;
+  color: white;
+  border-color: #6b7280;
+}
+
+/* Dark mode adjustments */
+@media (prefers-color-scheme: dark) {
+  .default {
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+    border-color: var(--border-secondary);
+  }
+  
+  .outline {
+    background: transparent;
+    color: var(--text-primary);
+    border-color: var(--border-secondary);
+  }
+} 

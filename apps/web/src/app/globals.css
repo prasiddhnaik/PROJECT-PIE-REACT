@@ -1,0 +1,126 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Tahoma:wght@400;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Tahoma', sans-serif;
+    font-size: 11px;
+}
+
+body {
+    background: linear-gradient(135deg, #235bd4 0%, #4b8df8 25%, #8db5f2 75%, #a8c8f5 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+    cursor: default;
+    overflow: hidden;
+}
+
+.xp-window {
+    position: absolute;
+    background: #ece9d8;
+    border: 2px outset #ece9d8;
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+    min-width: 200px;
+    min-height: 100px;
+}
+
+.xp-titlebar {
+    height: 25px;
+    background: linear-gradient(to bottom, #0054e3 0%, #0054e3 3%, #4e8cde 6%, #1c5dc7 10%, #0054e3 14%, #0054e3 86%, #1c5dc7 90%, #4e8cde 94%, #0054e3 97%, #0054e3 100%);
+    color: white;
+    display: flex;
+    align-items: center;
+    padding: 0 5px;
+    cursor: move;
+    user-select: none;
+}
+
+.xp-titlebar.inactive {
+    background: linear-gradient(to bottom, #7a7a7a 0%, #a8a8a8 50%, #7a7a7a 100%);
+}
+
+.xp-titlebar-text {
+    flex: 1;
+    font-weight: bold;
+    font-size: 11px;
+    margin-left: 5px;
+}
+
+.xp-titlebar-buttons {
+    display: flex;
+    gap: 2px;
+}
+
+.xp-titlebar-button {
+    width: 16px;
+    height: 14px;
+    background: linear-gradient(to bottom, #ffffff 0%, #ddd 50%, #bbb 100%);
+    border: 1px outset #ddd;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 8px;
+    font-weight: bold;
+}
+
+.xp-titlebar-button:hover {
+    background: linear-gradient(to bottom, #f0f0f0 0%, #e0e0e0 50%, #d0d0d0 100%);
+}
+
+.xp-titlebar-button:active {
+    border: 1px inset #ddd;
+}
+
+.xp-window-content {
+    padding: 8px;
+    background: #ece9d8;
+    height: calc(100% - 25px);
+    overflow: auto;
+}
+
+.xp-button {
+    background: linear-gradient(to bottom, #ffffff 0%, #ece9d8 50%, #d7d3c8 100%);
+    border: 1px outset #ece9d8;
+    padding: 4px 8px;
+    cursor: pointer;
+    font-family: 'Tahoma', sans-serif;
+    font-size: 11px;
+    user-select: none;
+}
+
+.xp-button:hover {
+    background: linear-gradient(to bottom, #f8f8f8 0%, #e8e5d8 50%, #d0ccc0 100%);
+}
+
+.xp-button:active {
+    border: 1px inset #ece9d8;
+    background: linear-gradient(to bottom, #d7d3c8 0%, #ece9d8 50%, #ffffff 100%);
+}
+
+.xp-input {
+    border: 2px inset #ece9d8;
+    padding: 2px 4px;
+    background: white;
+    font-family: 'Tahoma', sans-serif;
+    font-size: 11px;
+}
+
+.xp-input:focus {
+    outline: none;
+    background: #e6f3ff;
+}
+
+.xp-listview {
+    border: 2px inset #ece9d8;
+    background: white;
+    height: 200px;
+    overflow: auto;
+}
+
+/* Add more XP styles as needed */

@@ -1,0 +1,13 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Financial Analytics Hub Backend",
+  "main": "index.js",
+  "scripts": {
+    "dev": ".venv/bin/python -m uvicorn main:app --reload-dir . --port 8001 --log-level info",
+    "start": ".venv/bin/python -m uvicorn main:app --port 8001",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+} 

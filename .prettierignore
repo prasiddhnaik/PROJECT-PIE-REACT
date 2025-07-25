@@ -1,0 +1,19 @@
+# Generated build output
+.next
+out
+dist
+build
+
+# Node modules
+node_modules
+
+# Turborepo cache
+.turbo
+
+# Coverage reports
+coverage
+
+# Logs
+npm-debug.log*
+.yarn*
+.pnpm* 

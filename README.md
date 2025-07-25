@@ -1,13 +1,13 @@
-# 🤖 Financial Analytics Hub
+# ₿ Crypto Analytics Platform
 
 <div align="center">
 
-![Financial Analytics](https://img.shields.io/badge/Financial-Analytics-blue?style=for-the-badge&logo=chart-line)
+![Crypto Analytics](https://img.shields.io/badge/Crypto-Analytics-orange?style=for-the-badge&logo=bitcoin)
 ![AI Powered](https://img.shields.io/badge/AI-Powered-purple?style=for-the-badge&logo=robot)
 ![Python](https://img.shields.io/badge/Python-3.9+-green?style=for-the-badge&logo=python)
-![Streamlit](https://img.shields.io/badge/Streamlit-Latest-red?style=for-the-badge&logo=streamlit)
+![React](https://img.shields.io/badge/React-Next.js-blue?style=for-the-badge&logo=react)
 
-**Professional-grade financial analytics platform with AI-powered portfolio analysis, real-time stock tracking, and comprehensive educational tools**
+**Advanced crypto analytics platform with AI-powered analysis, real-time cryptocurrency tracking, and OpenRouter AI integration**
 
 [🚀 Quick Start](#-quick-start) • [📊 Features](#-features) • [📖 Documentation](#-documentation) • [🤝 Contributing](#-contributing)
 
@@ -15,17 +15,17 @@
 
 ---
 
-## 🌟 **What is Financial Analytics Hub?**
+## 🌟 **What is Crypto Analytics Platform?**
 
-A **revolutionary financial analytics platform** that combines advanced mathematics, artificial intelligence, and modern web technology to deliver professional-grade investment insights.
+A **revolutionary crypto analytics platform** that combines advanced cryptocurrency analysis, artificial intelligence, and modern web technology to deliver professional-grade crypto investment insights.
 
 ### **🎯 Key Highlights**
-- ⚡ **Lightning-Fast Performance** - Optimized caching and instant responses
-- 🤖 **AI-Powered Insights** - Intelligent warnings and recommendations  
-- 📊 **Professional Visualizations** - Interactive charts with in-memory rendering
-- 🎓 **Educational Content** - Complete financial curriculum (Modules 3-16)
-- 📈 **Multi-Asset Analytics** - Stocks, Crypto, Forex with 17+ API sources
-- 🚫 **Real Data Only** - No demos, only genuine financial data
+- ⚡ **Lightning-Fast Performance** - Real-time crypto data with optimized caching
+- 🤖 **AI-Powered Crypto Analysis** - OpenRouter AI integration with GPT-4, Claude, and Gemini
+- 📊 **Professional Crypto Visualizations** - Interactive crypto charts and market data
+- ₿ **Comprehensive Crypto Coverage** - Top 100 cryptocurrencies with trending analysis
+- 🔗 **Multi-Source Crypto Data** - CoinGecko and Binance API integration
+- 🚫 **Real Crypto Data Only** - No demos, only genuine cryptocurrency market data
 
 ---
 
@@ -56,6 +56,21 @@ streamlit run src/apps/api_dashboard.py --server.port=8506
 # Navigate to: http://localhost:8506
 ```
 
+## Quick Start (Local)
+
+```bash
+# install workspace deps
+pnpm install
+
+# create env file for web
+cp apps/web/.env.example apps/web/.env.local
+
+# build & run all packages in parallel
+pnpm dev
+```
+
+The web app will be at http://localhost:3000 and the FastAPI service at http://localhost:8001.
+
 ---
 
 ## 📊 **Features**
@@ -79,17 +94,17 @@ streamlit run src/apps/api_dashboard.py --server.port=8506
 </td>
 <td width="50%">
 
-### **📈 Multi-Asset Analytics**
-- **Cryptocurrency Hub**: Multi-coin tracking (Ethereum, Cardano, Solana, etc.)
-- **Stock Intelligence**: Professional metrics with 10+ backup APIs
-- **Forex Analytics**: Real-time exchange rates with failover
-- **Investment Hub**: 16 educational modules with AI simulations
+### **₿ Crypto Analytics**
+- **Cryptocurrency Hub**: Top 100 crypto tracking (Bitcoin, Ethereum, Solana, etc.)
+- **Market Intelligence**: Real-time crypto prices with multiple API sources
+- **Trending Analysis**: Hot cryptocurrencies and market movements
+- **AI Integration**: OpenRouter models for crypto analysis and predictions
 
-### **🎓 Educational Tools**
-- **Investment Modules**: Complete curriculum (Modules 3-16)
-- **Financial Concepts**: Expected value, normal distribution, correlation
-- **Risk Analysis**: VaR, Sharpe ratio, beta calculations
-- **AI Simulations**: Predictive models and trading scenarios
+### **🤖 AI-Powered Features**
+- **Crypto Analysis**: GPT-4, Claude, and Gemini integration for market insights
+- **Technical Indicators**: RSI, moving averages, and crypto-specific metrics
+- **Market Sentiment**: AI-powered sentiment analysis for crypto markets
+- **Price Predictions**: Advanced AI models for cryptocurrency forecasting
 
 </td>
 </tr>
@@ -149,14 +164,14 @@ Financial-Analytics-Hub/
 
 | Component | Technology | Purpose |
 |-----------|------------|---------|
-| **Frontend** | Streamlit 1.35.0 | Interactive web interface |
-| **Backend** | Python 3.9+ | Core processing engine |
-| **Data Analysis** | Pandas, NumPy | Mathematical computations |
-| **Visualization** | Plotly 5.5.0 | Interactive charts |
-| **APIs** | 17 Financial APIs | Real-time market data |
-| **AI Logic** | Custom algorithms | Investment recommendations |
-| **Testing** | pytest | 595-line test suite |
-| **CI/CD** | GitHub Actions | Automated deployment |
+| **Frontend** | Next.js + React | Modern crypto dashboard |
+| **Backend** | FastAPI + Python | High-performance crypto API |
+| **Data Analysis** | Real-time processing | Crypto market computations |
+| **Visualization** | Tailwind CSS | Responsive crypto charts |
+| **APIs** | CoinGecko + Binance | Real-time crypto data |
+| **AI Logic** | OpenRouter AI | GPT-4, Claude, Gemini integration |
+| **Testing** | TypeScript | Type-safe development |
+| **CI/CD** | Modern DevOps | Automated deployment |
 
 ---
 

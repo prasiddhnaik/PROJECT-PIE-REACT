@@ -1,0 +1,12 @@
+apiVersion: v2
+name: fa-backend
+description: Financial Analytics Hub – FastAPI backend service.
+# Chart version (independent of the app version)
+version: 0.1.0
+# The version of the application enclosed in the chart
+appVersion: "2.2.0"
+
+# This chart can be packaged with:
+#   helm package charts/backend
+ 
+ 

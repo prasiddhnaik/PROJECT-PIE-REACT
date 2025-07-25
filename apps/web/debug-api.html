@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>API Debug Test</title>
+</head>
+<body>
+    <h1>API Debug Test</h1>
+    <div id="results"></div>
+    <button onclick="testAPI()">Test API</button>
+    
+    <script>
+        async function testAPI() {
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = 'Testing...';
+            
+            try {
+                console.log('Testing API calls...');
+                
+                // Test market overview
+                const overviewResponse = await fetch('http://localhost:8001/api/market/overview', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                    },
+                });
+                
+                if (!overviewResponse.ok) {
+                    throw new Error(`Overview API returned ${overviewResponse.status}: ${overviewResponse.statusText}`);
+                }
+                
+                const overviewData = await overviewResponse.json();
+                
+                // Test fear & greed
+                const fearGreedResponse = await fetch('http://localhost:8001/api/market/fear-greed', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                    },
+                });
+                
+                if (!fearGreedResponse.ok) {
+                    throw new Error(`Fear & Greed API returned ${fearGreedResponse.status}: ${fearGreedResponse.statusText}`);
+                }
+                
+                const fearGreedData = await fearGreedResponse.json();
+                
+                resultsDiv.innerHTML = `
+                    <h2>✅ API Test Successful!</h2>
+                    <h3>Market Overview:</h3>
+                    <pre>${JSON.stringify(overviewData, null, 2)}</pre>
+                    <h3>Fear & Greed:</h3>
+                    <pre>${JSON.stringify(fearGreedData, null, 2)}</pre>
+                `;
+                
+            } catch (error) {
+                console.error('API test failed:', error);
+                resultsDiv.innerHTML = `
+                    <h2>❌ API Test Failed</h2>
+                    <p>Error: ${error.message}</p>
+                    <p>Check console for details</p>
+                `;
+            }
+        }
+    </script>
+</body>
+</html> 

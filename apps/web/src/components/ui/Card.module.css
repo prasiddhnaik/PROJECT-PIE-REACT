@@ -1,0 +1,174 @@
+/* Base card styles */
+.card {
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-primary);
+  background: var(--bg-primary);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease-in-out;
+  overflow: hidden;
+}
+
+/* Card variants */
+.default {
+  background: var(--bg-primary);
+  border-color: var(--border-primary);
+}
+
+.elevated {
+  background: var(--bg-primary);
+  border-color: var(--border-primary);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07), 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.elevated:hover {
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
+  transform: translateY(-2px);
+}
+
+.outlined {
+  background: transparent;
+  border-color: var(--border-secondary);
+  border-width: 2px;
+}
+
+.gradient {
+  background: linear-gradient(135deg, var(--bg-primary), var(--bg-secondary));
+  border-color: var(--border-primary);
+  position: relative;
+}
+
+.gradient::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, var(--primary-500), var(--purple-500), var(--primary-500));
+}
+
+/* Interactive states */
+.interactive {
+  cursor: pointer;
+}
+
+.interactive:hover {
+  border-color: var(--border-secondary);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-1px);
+}
+
+.interactive:focus {
+  outline: 2px solid var(--primary-500);
+  outline-offset: 2px;
+}
+
+/* Card header */
+.cardHeader {
+  padding: var(--space-6);
+  border-bottom: 1px solid var(--border-primary);
+  background: var(--bg-secondary);
+}
+
+.cardHeaderNoBorder {
+  padding: var(--space-6);
+  border-bottom: none;
+}
+
+.cardHeaderTight {
+  padding: var(--space-4);
+  border-bottom: 1px solid var(--border-primary);
+  background: var(--bg-secondary);
+}
+
+/* Card content */
+.cardContent {
+  padding: var(--space-6);
+}
+
+.cardContentTight {
+  padding: var(--space-4);
+}
+
+.cardContentLoose {
+  padding: var(--space-8);
+}
+
+.cardContentNoPadding {
+  padding: 0;
+}
+
+/* Card footer */
+.cardFooter {
+  padding: var(--space-6);
+  border-top: 1px solid var(--border-primary);
+  background: var(--bg-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cardFooterNoBorder {
+  padding: var(--space-6);
+  border-top: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cardFooterCenter {
+  padding: var(--space-6);
+  border-top: 1px solid var(--border-primary);
+  background: var(--bg-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Special card variants for crypto */
+.cryptoCard {
+  background: linear-gradient(135deg, var(--bg-primary), var(--bg-secondary));
+  border: 1px solid var(--border-primary);
+  position: relative;
+  overflow: hidden;
+}
+
+.cryptoCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--bitcoin), var(--ethereum), var(--bitcoin));
+}
+
+.statsCard {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-primary);
+  text-align: center;
+}
+
+.statsCard:hover {
+  border-color: var(--primary-500);
+  box-shadow: 0 4px 12px rgba(var(--primary-500-rgb), 0.1);
+}
+
+/* Dark mode adjustments */
+@media (prefers-color-scheme: dark) {
+  .card {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  }
+  
+  .elevated {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2), 0 1px 3px rgba(0, 0, 0, 0.15);
+  }
+  
+  .elevated:hover {
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3), 0 4px 6px rgba(0, 0, 0, 0.2);
+  }
+  
+  .interactive:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+} 

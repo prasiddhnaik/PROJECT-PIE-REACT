@@ -32,62 +32,59 @@ else
 fi
 
 # Install Python dependencies
-if [ ! -d "backend/venv" ]; then
+if [ ! -d "services/backend/.venv" ]; then
     echo -e "${PURPLE}Creating Python virtual environment...${NC}"
-    cd backend
-    python3 -m venv venv
-    source venv/bin/activate
+    cd services/backend
+    python3 -m venv .venv
+    source .venv/bin/activate
     pip install -r requirements.txt
-    cd ..
+    cd ../..
 else
     echo -e "${PURPLE}Python virtual environment already exists ✓${NC}"
 fi
 
 echo -e "${GREEN}🌟 Starting services...${NC}"
 
-# Function to cleanup background processes
-cleanup() {
-    echo -e "\n${GREEN}🛑 Shutting down services...${NC}"
-    kill $(jobs -p) 2>/dev/null
-    exit 0
-}
+# Kill existing processes
+echo "Cleaning up existing processes..."
+lsof -ti:8001 | xargs kill -9 2>/dev/null || true
+lsof -ti:8002 | xargs kill -9 2>/dev/null || true
+lsof -ti:3001 | xargs kill -9 2>/dev/null || true
+lsof -ti:3000 | xargs kill -9 2>/dev/null || true
 
-# Set trap to cleanup on script exit
-trap cleanup SIGINT SIGTERM
-
-# Start Python FastAPI backend
-echo -e "${PURPLE}🐍 Starting Python FastAPI backend on http://localhost:8000${NC}"
-cd backend
-source venv/bin/activate
-uvicorn main:app --reload --host 0.0.0.0 --port 8000 &
+# Start backend
+echo "Starting backend on port 8001..."
+cd services/backend
+source .venv/bin/activate
+uvicorn main:app --reload --port 8001 --log-level info &
 BACKEND_PID=$!
-cd ..
 
-# Wait a moment for backend to start
-sleep 3
+# Wait for backend to start
+sleep 5
+echo "Backend started with PID: $BACKEND_PID"
 
-# Start React frontend
-echo -e "${BLUE}⚛️  Starting React frontend on http://localhost:3000${NC}"
-npm start &
+# Start frontend
+echo "Starting frontend on port 3000..."
+cd ../../apps/web
+npm run dev &
 FRONTEND_PID=$!
+echo "Frontend started with PID: $FRONTEND_PID"
 
-echo ""
-echo -e "${GREEN}✅ Services started successfully!${NC}"
-echo -e "${GREEN}🌐 Frontend: http://localhost:3000${NC}"
-echo -e "${PURPLE}🔗 Backend API: http://localhost:8000${NC}"
-echo -e "${BLUE}📚 API Docs: http://localhost:8000/docs${NC}"
-echo ""
-echo -e "${GREEN}💡 Features Available:${NC}"
-echo "   • Portfolio Analysis with AI insights"
-echo "   • Real-time Stock & Crypto tracking"
-echo "   • Risk Assessment & Value at Risk"
-echo "   • Educational modules (3-16)"
-echo "   • Professional-grade visualizations"
-echo ""
-echo -e "${GREEN}🎨 Theme: Emerald-Purple Gradient${NC}"
-echo -e "${GREEN}🚫 Zero Demo Data - Real APIs Only${NC}"
+echo "Financial Analytics Hub is running!"
+echo "- Backend: http://localhost:8001"
+echo "- Frontend: http://localhost:3000"
 echo ""
 echo "Press Ctrl+C to stop all services"
 
-# Wait for both processes
-wait $BACKEND_PID $FRONTEND_PID 
+# Handle shutdown
+function cleanup {
+  echo "Shutting down services..."
+  kill $BACKEND_PID 2>/dev/null
+  kill $FRONTEND_PID 2>/dev/null
+  exit 0
+}
+
+trap cleanup INT TERM
+
+# Keep script running
+wait 

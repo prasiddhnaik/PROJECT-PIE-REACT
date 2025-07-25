@@ -1,0 +1,10 @@
+packages:
+  # All apps in the apps directory
+  - 'apps/*'
+  # All packages in the packages directory
+  - 'packages/*'
+  # All services in the services directory
+  - 'services/*'
+  # Exclude test fixtures
+  - '!**/test/**'
+  - '!**/.test/**' 

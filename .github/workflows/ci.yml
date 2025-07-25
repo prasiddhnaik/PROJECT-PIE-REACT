@@ -475,4 +475,50 @@ jobs:
 # Workflow concurrency control
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true 
+  cancel-in-progress: true # New job for CI
+build:
+  runs-on: ubuntu-latest
+
+  steps:
+    - name: Checkout source
+      uses: actions/checkout@v4
+
+    # ---------- Node.js workspace (frontend + monorepo tooling) ----------
+    - name: Setup PNPM
+      uses: pnpm/action-setup@v2
+      with:
+        version: 8
+    - name: Setup Node.js 20
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
+        cache: "pnpm"
+
+    - name: Install JS deps (workspace root)
+      run: pnpm install --frozen-lockfile --prefer-offline
+
+    # ---------- Python workspace (backend) ------------------------------
+    - name: Setup Python 3.11
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+        cache: pip
+
+    - name: Install backend requirements
+      run: pip install -r services/backend/requirements.txt
+
+    # ---------- Build & type-check  ------------------------------------
+    - name: Run Turbo build (caches enabled)
+      run: pnpm turbo run build --filter=!test
+
+    - name: FastAPI lint (imports resolve?)
+      run: python -m compileall -q services/backend || true
+
+    # ---------- Collect artefacts (optional) ---------------------------
+    - name: Upload built web next.js output
+      if: success()
+      uses: actions/upload-artifact@v4
+      with:
+        name: web-nextjs-output
+        path: apps/web/.next 
+

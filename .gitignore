@@ -546,3 +546,6 @@ Icon?
 # Note: This gitignore is designed for professional development
 # Modify according to your specific project needs
 # Last updated: December 2024 
+
+# Allow backend package.json
+!services/backend/package.json 
