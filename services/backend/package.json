@@ -6,7 +6,7 @@
   "scripts": {
     "dev": ".venv/bin/python -m uvicorn main:app --reload-dir . --port 8001 --log-level info",
     "start": ".venv/bin/python -m uvicorn main:app --port 8001",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"No tests yet\" && exit 0"
   },
   "author": "",
   "license": "ISC"
