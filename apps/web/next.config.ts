@@ -1,6 +1,12 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Enable static export for GitHub Pages
+  output: 'export',
+  trailingSlash: true,
+  images: {
+    unoptimized: true,
+  },
   experimental: {
     // Enable React 19 features
     optimizeCss: true,
@@ -82,7 +88,6 @@ const nextConfig: NextConfig = {
   // CSS optimization
   productionBrowserSourceMaps: false,
   // Enable static optimization
-  trailingSlash: false,
   // Compression
   compress: true,
   // Power-ups for better performance
