@@ -1,0 +1,29 @@
+services:
+  - type: web
+    name: financial-analytics-platform
+    env: docker
+    region: oregon
+    plan: free
+    branch: main
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 8001
+      - key: NEXT_PUBLIC_BACKEND_URL
+        value: https://financial-analytics-platform.onrender.com
+      - key: OPENROUTER_API_KEY
+        sync: false
+      - key: ALPHA_VANTAGE_API_KEY
+        sync: false
+      - key: POLYGON_API_KEY
+        sync: false
+      - key: FINNHUB_API_KEY
+        sync: false
+    buildCommand: |
+      echo "🚀 Building Financial Analytics Platform..."
+      cd apps/web && npm install && npm run build
+    startCommand: |
+      echo "🎉 Starting Financial Analytics Platform..."
+      cd backup_cleanup/backend_python && python3 main.py 
