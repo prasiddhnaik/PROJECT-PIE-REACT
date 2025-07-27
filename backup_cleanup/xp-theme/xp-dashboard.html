@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced Financial Analytics Platform - Windows XP Theme</title>
+    <link rel="stylesheet" href="xp-styles.css">
+    <style>
+        /* Additional dashboard-specific styles */
+        .xp-desktop {
+            background: linear-gradient(135deg, #245EDC 0%, #1941A5 100%);
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+        }
+        
+        .xp-taskbar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 30px;
+            background: linear-gradient(to bottom, #245EDC, #1941A5);
+            border-top: 1px solid #0054E3;
+            display: flex;
+            align-items: center;
+            padding: 0 4px;
+            z-index: 1000;
+        }
+        
+        .xp-start-button {
+            background: linear-gradient(to bottom, #73D216, #4E9A06);
+            border: 1px outset #73D216;
+            color: white;
+            padding: 2px 8px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-right: 8px;
+        }
+        
+        .xp-start-button:hover {
+            background: linear-gradient(to bottom, #8ED21A, #5EAA06);
+        }
+        
+        .xp-taskbar-items {
+            display: flex;
+            gap: 2px;
+            flex: 1;
+        }
+        
+        .xp-taskbar-item {
+            background: linear-gradient(to bottom, #FFFFFF, #ECE9D8);
+            border: 1px outset #ACA899;
+            padding: 2px 8px;
+            font-size: 11px;
+            cursor: pointer;
+            min-width: 100px;
+            text-align: center;
+        }
+        
+        .xp-taskbar-item:hover {
+            background: linear-gradient(to bottom, #FFFFFF, #DBEAF9);
+        }
+        
+        .xp-taskbar-item.active {
+            background: linear-gradient(to bottom, #FFFFFF, #DBEAF9);
+            border: 1px inset #ACA899;
+        }
+        
+        .xp-systray {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 0 8px;
+            color: white;
+            font-size: 11px;
+        }
+        
+        .xp-window-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .xp-window.minimized {
+            display: none;
+        }
+        
+        .xp-window.maximized {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 30px;
+            margin: 0;
+            z-index: 999;
+        }
+        
+        .xp-menu {
+            position: absolute;
+            background: var(--xp-window-gray);
+            border: 1px outset var(--xp-window-gray);
+            padding: 2px;
+            min-width: 150px;
+            z-index: 1001;
+            display: none;
+        }
+        
+        .xp-menu-item {
+            padding: 4px 8px;
+            cursor: pointer;
+            font-size: 11px;
+        }
+        
+        .xp-menu-item:hover {
+            background: var(--xp-luna-blue);
+            color: white;
+        }
+        
+        .xp-menu-separator {
+            height: 1px;
+            background: var(--xp-border-gray);
+            margin: 2px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="xp-desktop">
+        <!-- Main Dashboard Windows -->
+        <div class="xp-window-grid">
+            
+            <!-- Financial Data Window -->
+            <div class="xp-window" id="financial-window">
+                <div class="xp-titlebar">
+                    <div class="xp-title">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjE2IiBoZWlnaHQ9IjE2IiBmaWxsPSIjMDA1NEUzIi8+CjxwYXRoIGQ9Ik0yIDJIMTRWMTBIMlYyWiIgZmlsbD0id2hpdGUiLz4KPHBhdGggZD0iTTQgNEgxMlY4SDVWNkg0VjRaIiBmaWxsPSIjMDA1NEUzIi8+Cjwvc3ZnPgo=" class="xp-icon" alt="">
+                        Financial Analytics
+                    </div>
+                    <div class="xp-controls">
+                        <button class="xp-minimize" onclick="minimizeWindow('financial-window')">_</button>
+                        <button class="xp-maximize" onclick="maximizeWindow('financial-window')">□</button>
+                        <button class="xp-close" onclick="closeWindow('financial-window')">×</button>
+                    </div>
+                </div>
+                <div class="xp-content">
+                    <div class="xp-toolbar">
+                        <button class="xp-toolbar-button" onclick="loadStockData()">
+                            📈 Stocks
+                        </button>
+                        <button class="xp-toolbar-button" onclick="loadCryptoData()">
+                            🪙 Crypto
+                        </button>
+                        <button class="xp-toolbar-button" onclick="loadMarketData()">
+                            📊 Market
+                        </button>
+                        <div class="xp-toolbar-separator"></div>
+                        <button class="xp-toolbar-button" onclick="refreshData()">
+                            🔄 Refresh
+                        </button>
+                    </div>
+                    
+                    <div id="financial-content">
+                        <div class="xp-loading">
+                            <span>Loading financial data...</span>
+                            <div class="xp-loading-dots">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="xp-statusbar">
+                        <span>Ready</span>
+                        <span>Last updated: <span id="last-updated">Never</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Enhanced APIs Window -->
+            <div class="xp-window" id="enhanced-apis-window">
+                <div class="xp-titlebar">
+                    <div class="xp-title">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjE2IiBoZWlnaHQ9IjE2IiBmaWxsPSIjNzNEMjE2Ii8+CjxwYXRoIGQ9Ik0yIDJIMTRWMTBIMlYyWiIgZmlsbD0id2hpdGUiLz4KPHBhdGggZD0iTTQgNEgxMlY4SDVWNkg0VjRaIiBmaWxsPSIjNzNEMjE2Ii8+Cjwvc3ZnPgo=" class="xp-icon" alt="">
+                        Enhanced APIs (10 Free Non-Finance)
+                    </div>
+                    <div class="xp-controls">
+                        <button class="xp-minimize" onclick="minimizeWindow('enhanced-apis-window')">_</button>
+                        <button class="xp-maximize" onclick="maximizeWindow('enhanced-apis-window')">□</button>
+                        <button class="xp-close" onclick="closeWindow('enhanced-apis-window')">×</button>
+                    </div>
+                </div>
+                <div class="xp-content">
+                    <div class="xp-toolbar">
+                        <button class="xp-toolbar-button" onclick="loadWeatherData()">
+                            🌤️ Weather
+                        </button>
+                        <button class="xp-toolbar-button" onclick="loadNutritionData()">
+                            🍎 Nutrition
+                        </button>
+                        <button class="xp-toolbar-button" onclick="loadQuotesData()">
+                            💬 Quotes
+                        </button>
+                        <button class="xp-toolbar-button" onclick="loadEntertainmentData()">
+                            🎭 Entertainment
+                        </button>
+                        <div class="xp-toolbar-separator"></div>
+                        <button class="xp-toolbar-button" onclick="loadDailyInsights()">
+                            📊 Daily Insights
+                        </button>
+                    </div>
+                    
+                    <div id="enhanced-apis-content">
+                        <div class="xp-loading">
+                            <span>Loading enhanced APIs...</span>
+                            <div class="xp-loading-dots">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="xp-statusbar">
+                        <span>10 APIs Available</span>
+                        <span>Status: <span class="xp-api-status online">Online</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI Chat Window -->
+            <div class="xp-window" id="ai-chat-window">
+                <div class="xp-titlebar">
+                    <div class="xp-title">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjE2IiBoZWlnaHQ9IjE2IiBmaWxsPSIjRkY2QjAwIi8+CjxwYXRoIGQ9Ik0yIDJIMTRWMTBIMlYyWiIgZmlsbD0id2hpdGUiLz4KPHBhdGggZD0iTTQgNEgxMlY4SDVWNkg0VjRaIiBmaWxsPSIjRkY2QjAwIi8+Cjwvc3ZnPgo=" class="xp-icon" alt="">
+                        AI Assistant
+                    </div>
+                    <div class="xp-controls">
+                        <button class="xp-minimize" onclick="minimizeWindow('ai-chat-window')">_</button>
+                        <button class="xp-maximize" onclick="maximizeWindow('ai-chat-window')">□</button>
+                        <button class="xp-close" onclick="closeWindow('ai-chat-window')">×</button>
+                    </div>
+                </div>
+                <div class="xp-content">
+                    <div class="xp-toolbar">
+                        <button class="xp-toolbar-button" onclick="clearChat()">
+                            🗑️ Clear
+                        </button>
+                        <button class="xp-toolbar-button" onclick="exportChat()">
+                            💾 Export
+                        </button>
+                        <div class="xp-toolbar-separator"></div>
+                        <button class="xp-toolbar-button" onclick="toggleVoice()">
+                            🎤 Voice
+                        </button>
+                    </div>
+                    
+                    <div class="xp-chat-container" id="chat-container">
+                        <div class="xp-chat-message assistant">
+                            <strong>AI Assistant:</strong> Hello! I'm your AI assistant for the Enhanced Financial Analytics Platform. I can help you with financial analysis, weather insights, nutrition tracking, and more. What would you like to know?
+                        </div>
+                    </div>
+                    
+                    <div class="xp-chat-input">
+                        <input type="text" id="chat-input" class="xp-input" placeholder="Type your message..." onkeypress="handleChatKeyPress(event)">
+                        <button class="xp-button" onclick="sendMessage()">Send</button>
+                    </div>
+                    
+                    <div class="xp-statusbar">
+                        <span>AI Status: <span class="xp-api-status online">Connected</span></span>
+                        <span>Model: GPT-4</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Monitoring Dashboard -->
+            <div class="xp-window" id="monitoring-window">
+                <div class="xp-titlebar">
+                    <div class="xp-title">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjE2IiBoZWlnaHQ9IjE2IiBmaWxsPSIjRkZBNTAwIi8+CjxwYXRoIGQ9Ik0yIDJIMTRWMTBIMlYyWiIgZmlsbD0id2hpdGUiLz4KPHBhdGggZD0iTTQgNEgxMlY4SDVWNkg0VjRaIiBmaWxsPSIjRkZBNTAwIi8+Cjwvc3ZnPgo=" class="xp-icon" alt="">
+                        System Monitoring
+                    </div>
+                    <div class="xp-controls">
+                        <button class="xp-minimize" onclick="minimizeWindow('monitoring-window')">_</button>
+                        <button class="xp-maximize" onclick="maximizeWindow('monitoring-window')">□</button>
+                        <button class="xp-close" onclick="closeWindow('monitoring-window')">×</button>
+                    </div>
+                </div>
+                <div class="xp-content">
+                    <div class="xp-toolbar">
+                        <button class="xp-toolbar-button" onclick="loadSystemMetrics()">
+                            💻 System
+                        </button>
+                        <button class="xp-toolbar-button" onclick="loadAPIMetrics()">
+                            🔌 APIs
+                        </button>
+                        <button class="xp-toolbar-button" onclick="loadCacheMetrics()">
+                            💾 Cache
+                        </button>
+                        <div class="xp-toolbar-separator"></div>
+                        <button class="xp-toolbar-button" onclick="refreshMetrics()">
+                            🔄 Refresh
+                        </button>
+                    </div>
+                    
+                    <div id="monitoring-content">
+                        <div class="xp-loading">
+                            <span>Loading system metrics...</span>
+                            <div class="xp-loading-dots">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="xp-statusbar">
+                        <span>Monitoring Active</span>
+                        <span>Last check: <span id="last-metrics-check">Never</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Weather & Market Impact -->
+            <div class="xp-window" id="weather-window">
+                <div class="xp-titlebar">
+                    <div class="xp-title">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjE2IiBoZWlnaHQ9IjE2IiBmaWxsPSIjMDA5OENGRiIvPgo8cGF0aCBkPSJNMiAySDE0VjEwSDJWMloiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGQ9Ik00IDRIMTJWOEg1VjZINFY0WiIgZmlsbD0iIzAwOThDRkYiLz4KPC9zdmc+Cg==" class="xp-icon" alt="">
+                        Weather & Market Impact
+                    </div>
+                    <div class="xp-controls">
+                        <button class="xp-minimize" onclick="minimizeWindow('weather-window')">_</button>
+                        <button class="xp-maximize" onclick="maximizeWindow('weather-window')">□</button>
+                        <button class="xp-close" onclick="closeWindow('weather-window')">×</button>
+                    </div>
+                </div>
+                <div class="xp-content">
+                    <div class="xp-toolbar">
+                        <button class="xp-toolbar-button" onclick="loadCurrentWeather()">
+                            🌤️ Current
+                        </button>
+                        <button class="xp-toolbar-button" onclick="loadWeatherForecast()">
+                            📅 Forecast
+                        </button>
+                        <button class="xp-toolbar-button" onclick="loadMarketImpact()">
+                            📊 Market Impact
+                        </button>
+                        <div class="xp-toolbar-separator"></div>
+                        <select class="xp-select" id="weather-city" onchange="changeWeatherCity()">
+                            <option value="New York,US">New York</option>
+                            <option value="London,GB">London</option>
+                            <option value="Tokyo,JP">Tokyo</option>
+                            <option value="Sydney,AU">Sydney</option>
+                        </select>
+                    </div>
+                    
+                    <div id="weather-content">
+                        <div class="xp-loading">
+                            <span>Loading weather data...</span>
+                            <div class="xp-loading-dots">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="xp-statusbar">
+                        <span>Weather API: <span class="xp-api-status online">Online</span></span>
+                        <span>Location: <span id="current-location">New York</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Health & Nutrition -->
+            <div class="xp-window" id="nutrition-window">
+                <div class="xp-titlebar">
+                    <div class="xp-title">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjE2IiBoZWlnaHQ9IjE2IiBmaWxsPSIjRkY2QjAwIi8+CjxwYXRoIGQ9Ik0yIDJIMTRWMTBIMlYyWiIgZmlsbD0id2hpdGUiLz4KPHBhdGggZD0iTTQgNEgxMlY4SDVWNkg0VjRaIiBmaWxsPSIjRkY2QjAwIi8+Cjwvc3ZnPgo=" class="xp-icon" alt="">
+                        Health & Nutrition
+                    </div>
+                    <div class="xp-controls">
+                        <button class="xp-minimize" onclick="minimizeWindow('nutrition-window')">_</button>
+                        <button class="xp-maximize" onclick="maximizeWindow('nutrition-window')">□</button>
+                        <button class="xp-close" onclick="closeWindow('nutrition-window')">×</button>
+                    </div>
+                </div>
+                <div class="xp-content">
+                    <div class="xp-toolbar">
+                        <button class="xp-toolbar-button" onclick="searchNutrition()">
+                            🔍 Search
+                        </button>
+                        <button class="xp-toolbar-button" onclick="analyzeMeal()">
+                            🍽️ Analyze Meal
+                        </button>
+                        <button class="xp-toolbar-button" onclick="loadHealthTips()">
+                            💡 Health Tips
+                        </button>
+                        <div class="xp-toolbar-separator"></div>
+                        <input type="text" class="xp-input" id="nutrition-search" placeholder="Enter food item..." style="width: 150px;">
+                    </div>
+                    
+                    <div id="nutrition-content">
+                        <div class="xp-loading">
+                            <span>Ready for nutrition analysis...</span>
+                        </div>
+                    </div>
+                    
+                    <div class="xp-statusbar">
+                        <span>Nutrition API: <span class="xp-api-status online">Online</span></span>
+                        <span>Database: 10,000+ foods</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Start Menu -->
+        <div class="xp-menu" id="start-menu">
+            <div class="xp-menu-item" onclick="showWindow('financial-window')">
+                📈 Financial Analytics
+            </div>
+            <div class="xp-menu-item" onclick="showWindow('enhanced-apis-window')">
+                🔌 Enhanced APIs
+            </div>
+            <div class="xp-menu-item" onclick="showWindow('ai-chat-window')">
+                🤖 AI Assistant
+            </div>
+            <div class="xp-menu-item" onclick="showWindow('monitoring-window')">
+                📊 System Monitoring
+            </div>
+            <div class="xp-menu-separator"></div>
+            <div class="xp-menu-item" onclick="showWindow('weather-window')">
+                🌤️ Weather & Market Impact
+            </div>
+            <div class="xp-menu-item" onclick="showWindow('nutrition-window')">
+                🍎 Health & Nutrition
+            </div>
+            <div class="xp-menu-separator"></div>
+            <div class="xp-menu-item" onclick="openDocumentation()">
+                📖 Documentation
+            </div>
+            <div class="xp-menu-item" onclick="openSettings()">
+                ⚙️ Settings
+            </div>
+            <div class="xp-menu-separator"></div>
+            <div class="xp-menu-item" onclick="exitApplication()">
+                🚪 Exit
+            </div>
+        </div>
+    </div>
+
+    <!-- Taskbar -->
+    <div class="xp-taskbar">
+        <button class="xp-start-button" onclick="toggleStartMenu()">
+            Start
+        </button>
+        
+        <div class="xp-taskbar-items">
+            <div class="xp-taskbar-item active" onclick="showWindow('financial-window')">
+                📈 Financial
+            </div>
+            <div class="xp-taskbar-item" onclick="showWindow('enhanced-apis-window')">
+                🔌 APIs
+            </div>
+            <div class="xp-taskbar-item" onclick="showWindow('ai-chat-window')">
+                🤖 AI
+            </div>
+            <div class="xp-taskbar-item" onclick="showWindow('monitoring-window')">
+                📊 Monitor
+            </div>
+            <div class="xp-taskbar-item" onclick="showWindow('weather-window')">
+                🌤️ Weather
+            </div>
+            <div class="xp-taskbar-item" onclick="showWindow('nutrition-window')">
+                🍎 Health
+            </div>
+        </div>
+        
+        <div class="xp-systray">
+            <span id="current-time">12:00 PM</span>
+            <span>|</span>
+            <span class="xp-api-status online">●</span>
+        </div>
+    </div>
+
+    <script>
+        // Window Management
+        function minimizeWindow(windowId) {
+            document.getElementById(windowId).classList.add('minimized');
+            updateTaskbarItem(windowId, false);
+        }
+
+        function maximizeWindow(windowId) {
+            const window = document.getElementById(windowId);
+            if (window.classList.contains('maximized')) {
+                window.classList.remove('maximized');
+            } else {
+                window.classList.add('maximized');
+            }
+        }
+
+        function closeWindow(windowId) {
+            document.getElementById(windowId).style.display = 'none';
+            updateTaskbarItem(windowId, false);
+        }
+
+        function showWindow(windowId) {
+            document.getElementById(windowId).style.display = 'block';
+            document.getElementById(windowId).classList.remove('minimized');
+            updateTaskbarItem(windowId, true);
+            hideStartMenu();
+        }
+
+        function updateTaskbarItem(windowId, active) {
+            const taskbarItems = document.querySelectorAll('.xp-taskbar-item');
+            taskbarItems.forEach(item => item.classList.remove('active'));
+            
+            const windowMap = {
+                'financial-window': 0,
+                'enhanced-apis-window': 1,
+                'ai-chat-window': 2,
+                'monitoring-window': 3,
+                'weather-window': 4,
+                'nutrition-window': 5
+            };
+            
+            if (active && windowMap[windowId] !== undefined) {
+                taskbarItems[windowMap[windowId]].classList.add('active');
+            }
+        }
+
+        // Start Menu
+        function toggleStartMenu() {
+            const menu = document.getElementById('start-menu');
+            if (menu.style.display === 'block') {
+                hideStartMenu();
+            } else {
+                showStartMenu();
+            }
+        }
+
+        function showStartMenu() {
+            const menu = document.getElementById('start-menu');
+            menu.style.display = 'block';
+            menu.style.left = '4px';
+            menu.style.bottom = '34px';
+        }
+
+        function hideStartMenu() {
+            document.getElementById('start-menu').style.display = 'none';
+        }
+
+        // Chat Functionality
+        function handleChatKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('chat-input');
+            const message = input.value.trim();
+            if (message) {
+                addChatMessage('user', message);
+                input.value = '';
+                
+                // Simulate AI response
+                setTimeout(() => {
+                    addChatMessage('assistant', `I understand you said: "${message}". How can I help you with financial analysis, weather insights, or any other features of this platform?`);
+                }, 1000);
+            }
+        }
+
+        function addChatMessage(type, content) {
+            const container = document.getElementById('chat-container');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `xp-chat-message ${type}`;
+            messageDiv.innerHTML = `<strong>${type === 'user' ? 'You' : 'AI Assistant'}:</strong> ${content}`;
+            container.appendChild(messageDiv);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function clearChat() {
+            document.getElementById('chat-container').innerHTML = `
+                <div class="xp-chat-message assistant">
+                    <strong>AI Assistant:</strong> Chat cleared. How can I help you today?
+                </div>
+            `;
+        }
+
+        function exportChat() {
+            const container = document.getElementById('chat-container');
+            const text = container.innerText;
+            const blob = new Blob([text], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'chat-export.txt';
+            a.click();
+        }
+
+        // Data Loading Functions
+        function loadStockData() {
+            const content = document.getElementById('financial-content');
+            content.innerHTML = `
+                <div class="xp-stock-price">
+                    <span class="xp-stock-symbol">AAPL</span>
+                    <span>$150.25</span>
+                    <span class="xp-stock-change positive">+2.15 (+1.45%)</span>
+                </div>
+                <div class="xp-stock-price">
+                    <span class="xp-stock-symbol">GOOGL</span>
+                    <span>$2,850.75</span>
+                    <span class="xp-stock-change positive">+15.30 (+0.54%)</span>
+                </div>
+                <div class="xp-stock-price">
+                    <span class="xp-stock-symbol">MSFT</span>
+                    <span>$320.45</span>
+                    <span class="xp-stock-change negative">-1.20 (-0.37%)</span>
+                </div>
+            `;
+            document.getElementById('last-updated').textContent = new Date().toLocaleTimeString();
+        }
+
+        function loadWeatherData() {
+            const content = document.getElementById('enhanced-apis-content');
+            content.innerHTML = `
+                <div class="xp-weather-widget">
+                    <img src="https://openweathermap.org/img/wn/01d@2x.png" class="xp-weather-icon" alt="Sunny">
+                    <div class="xp-weather-info">
+                        <div class="xp-weather-temp">72°F</div>
+                        <div class="xp-weather-desc">Sunny</div>
+                    </div>
+                </div>
+                <div class="xp-text-center xp-mt-4">
+                    <strong>Market Impact:</strong> Normal energy demand, favorable retail conditions
+                </div>
+            `;
+        }
+
+        function loadNutritionData() {
+            const content = document.getElementById('nutrition-content');
+            content.innerHTML = `
+                <div class="xp-text-center xp-mb-4">
+                    <strong>Apple Nutrition (100g)</strong>
+                </div>
+                <div class="xp-flex xp-justify-between xp-mb-4">
+                    <span>Calories:</span>
+                    <span>52 kcal</span>
+                </div>
+                <div class="xp-flex xp-justify-between xp-mb-4">
+                    <span>Protein:</span>
+                    <span>0.3g</span>
+                </div>
+                <div class="xp-flex xp-justify-between xp-mb-4">
+                    <span>Carbs:</span>
+                    <span>14g</span>
+                </div>
+                <div class="xp-flex xp-justify-between">
+                    <span>Fiber:</span>
+                    <span>2.4g</span>
+                </div>
+            `;
+        }
+
+        function loadQuotesData() {
+            const content = document.getElementById('enhanced-apis-content');
+            content.innerHTML = `
+                <div class="xp-text-center xp-mb-4">
+                    <strong>Daily Inspiration</strong>
+                </div>
+                <div class="xp-text-center xp-mb-4" style="font-style: italic;">
+                    "Success is not final, failure is not fatal: it is the courage to continue that counts."
+                </div>
+                <div class="xp-text-center" style="color: #808080;">
+                    — Winston Churchill
+                </div>
+            `;
+        }
+
+        function loadEntertainmentData() {
+            const content = document.getElementById('enhanced-apis-content');
+            content.innerHTML = `
+                <div class="xp-text-center xp-mb-4">
+                    <strong>Random Cat</strong>
+                </div>
+                <div class="xp-text-center xp-mb-4">
+                    <img src="https://placekitten.com/200/150" alt="Random Cat" style="border: 1px solid #ACA899;">
+                </div>
+                <div class="xp-text-center xp-mb-4">
+                    <strong>Random Joke</strong>
+                </div>
+                <div class="xp-text-center" style="font-style: italic;">
+                    Why do programmers prefer dark mode? Because light attracts bugs!
+                </div>
+            `;
+        }
+
+        function loadDailyInsights() {
+            const content = document.getElementById('enhanced-apis-content');
+            content.innerHTML = `
+                <div class="xp-text-center xp-mb-4">
+                    <strong>Daily Insights</strong>
+                </div>
+                <div class="xp-mb-4">
+                    <strong>Weather:</strong> Sunny in New York, energy demand normal
+                </div>
+                <div class="xp-mb-4">
+                    <strong>Quote:</strong> "The best investment you can make is in yourself."
+                </div>
+                <div class="xp-mb-4">
+                    <strong>Health:</strong> Consider adding more fiber to your diet
+                </div>
+                <div>
+                    <strong>Entertainment:</strong> Random cat image loaded successfully
+                </div>
+            `;
+        }
+
+        function loadSystemMetrics() {
+            const content = document.getElementById('monitoring-content');
+            content.innerHTML = `
+                <div class="xp-mb-4">
+                    <strong>CPU Usage:</strong>
+                    <div class="xp-progress xp-mt-2">
+                        <div class="xp-progress-bar" style="width: 45%"></div>
+                    </div>
+                    <span>45%</span>
+                </div>
+                <div class="xp-mb-4">
+                    <strong>Memory Usage:</strong>
+                    <div class="xp-progress xp-mt-2">
+                        <div class="xp-progress-bar" style="width: 62%"></div>
+                    </div>
+                    <span>62%</span>
+                </div>
+                <div class="xp-mb-4">
+                    <strong>Disk Usage:</strong>
+                    <div class="xp-progress xp-mt-2">
+                        <div class="xp-progress-bar" style="width: 28%"></div>
+                    </div>
+                    <span>28%</span>
+                </div>
+            `;
+            document.getElementById('last-metrics-check').textContent = new Date().toLocaleTimeString();
+        }
+
+        function loadAPIMetrics() {
+            const content = document.getElementById('monitoring-content');
+            content.innerHTML = `
+                <div class="xp-mb-4">
+                    <strong>API Response Times:</strong>
+                </div>
+                <div class="xp-mb-2">Financial APIs: <span class="xp-api-status online">245ms</span></div>
+                <div class="xp-mb-2">Weather APIs: <span class="xp-api-status online">189ms</span></div>
+                <div class="xp-mb-2">Nutrition APIs: <span class="xp-api-status online">156ms</span></div>
+                <div class="xp-mb-4">Entertainment APIs: <span class="xp-api-status online">203ms</span></div>
+                <div class="xp-mb-4">
+                    <strong>Cache Hit Rate:</strong>
+                    <div class="xp-progress xp-mt-2">
+                        <div class="xp-progress-bar" style="width: 87%"></div>
+                    </div>
+                    <span>87%</span>
+                </div>
+            `;
+        }
+
+        function loadCacheMetrics() {
+            const content = document.getElementById('monitoring-content');
+            content.innerHTML = `
+                <div class="xp-mb-4">
+                    <strong>Cache Statistics:</strong>
+                </div>
+                <div class="xp-mb-2">Total Requests: 1,247</div>
+                <div class="xp-mb-2">Cache Hits: 1,084</div>
+                <div class="xp-mb-2">Cache Misses: 163</div>
+                <div class="xp-mb-4">Hit Rate: 87%</div>
+                <div class="xp-mb-4">
+                    <strong>Cache Size:</strong>
+                    <div class="xp-progress xp-mt-2">
+                        <div class="xp-progress-bar" style="width: 34%"></div>
+                    </div>
+                    <span>34% (340/1000 items)</span>
+                </div>
+            `;
+        }
+
+        function loadCurrentWeather() {
+            const content = document.getElementById('weather-content');
+            content.innerHTML = `
+                <div class="xp-weather-widget">
+                    <img src="https://openweathermap.org/img/wn/01d@2x.png" class="xp-weather-icon" alt="Sunny">
+                    <div class="xp-weather-info">
+                        <div class="xp-weather-temp">72°F</div>
+                        <div class="xp-weather-desc">Sunny</div>
+                        <div>Humidity: 45%</div>
+                        <div>Wind: 8 mph</div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function loadWeatherForecast() {
+            const content = document.getElementById('weather-content');
+            content.innerHTML = `
+                <div class="xp-mb-4">
+                    <strong>5-Day Forecast</strong>
+                </div>
+                <div class="xp-flex xp-gap-4">
+                    <div class="xp-text-center">
+                        <div>Mon</div>
+                        <div>72°F</div>
+                        <div>☀️</div>
+                    </div>
+                    <div class="xp-text-center">
+                        <div>Tue</div>
+                        <div>68°F</div>
+                        <div>⛅</div>
+                    </div>
+                    <div class="xp-text-center">
+                        <div>Wed</div>
+                        <div>75°F</div>
+                        <div>☀️</div>
+                    </div>
+                    <div class="xp-text-center">
+                        <div>Thu</div>
+                        <div>70°F</div>
+                        <div>🌧️</div>
+                    </div>
+                    <div class="xp-text-center">
+                        <div>Fri</div>
+                        <div>73°F</div>
+                        <div>⛅</div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function loadMarketImpact() {
+            const content = document.getElementById('weather-content');
+            content.innerHTML = `
+                <div class="xp-mb-4">
+                    <strong>Weather Market Impact Analysis</strong>
+                </div>
+                <div class="xp-mb-2">
+                    <strong>Energy Sector:</strong> Normal demand expected
+                </div>
+                <div class="xp-mb-2">
+                    <strong>Agriculture:</strong> Favorable conditions
+                </div>
+                <div class="xp-mb-2">
+                    <strong>Transportation:</strong> Normal operations
+                </div>
+                <div class="xp-mb-2">
+                    <strong>Retail:</strong> Positive impact expected
+                </div>
+                <div class="xp-mb-4">
+                    <strong>Overall Sentiment:</strong> <span class="xp-api-status online">Positive</span>
+                </div>
+            `;
+        }
+
+        function changeWeatherCity() {
+            const city = document.getElementById('weather-city').value;
+            document.getElementById('current-location').textContent = city.split(',')[0];
+            loadCurrentWeather();
+        }
+
+        function searchNutrition() {
+            const searchTerm = document.getElementById('nutrition-search').value;
+            if (searchTerm) {
+                loadNutritionData();
+            }
+        }
+
+        function analyzeMeal() {
+            const content = document.getElementById('nutrition-content');
+            content.innerHTML = `
+                <div class="xp-text-center xp-mb-4">
+                    <strong>Meal Analysis</strong>
+                </div>
+                <div class="xp-mb-4">
+                    <strong>Sample Meal:</strong> Apple, Banana, Chicken Breast
+                </div>
+                <div class="xp-mb-2">Total Calories: 287 kcal</div>
+                <div class="xp-mb-2">Total Protein: 25.3g</div>
+                <div class="xp-mb-2">Total Carbs: 42.1g</div>
+                <div class="xp-mb-4">Total Fiber: 5.2g</div>
+                <div class="xp-text-center">
+                    <span class="xp-api-status online">Healthy Meal!</span>
+                </div>
+            `;
+        }
+
+        function loadHealthTips() {
+            const content = document.getElementById('nutrition-content');
+            content.innerHTML = `
+                <div class="xp-text-center xp-mb-4">
+                    <strong>Health Tips</strong>
+                </div>
+                <div class="xp-mb-2">• Drink 8 glasses of water daily</div>
+                <div class="xp-mb-2">• Include protein in every meal</div>
+                <div class="xp-mb-2">• Eat colorful fruits and vegetables</div>
+                <div class="xp-mb-2">• Limit processed foods</div>
+                <div class="xp-mb-4">• Exercise regularly</div>
+            `;
+        }
+
+        // Utility Functions
+        function refreshData() {
+            loadStockData();
+        }
+
+        function refreshMetrics() {
+            loadSystemMetrics();
+        }
+
+        function toggleVoice() {
+            alert('Voice feature coming soon!');
+        }
+
+        function openDocumentation() {
+            window.open('COMPREHENSIVE_DOCUMENTATION.md', '_blank');
+        }
+
+        function openSettings() {
+            alert('Settings window coming soon!');
+        }
+
+        function exitApplication() {
+            if (confirm('Are you sure you want to exit?')) {
+                window.close();
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set current time
+            function updateTime() {
+                document.getElementById('current-time').textContent = new Date().toLocaleTimeString();
+            }
+            updateTime();
+            setInterval(updateTime, 1000);
+
+            // Load initial data
+            loadStockData();
+            loadWeatherData();
+            loadSystemMetrics();
+
+            // Hide start menu when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.xp-start-button') && !e.target.closest('#start-menu')) {
+                    hideStartMenu();
+                }
+            });
+
+            // Make windows draggable
+            const titlebars = document.querySelectorAll('.xp-titlebar');
+            titlebars.forEach(titlebar => {
+                titlebar.addEventListener('mousedown', function(e) {
+                    const window = titlebar.closest('.xp-window');
+                    if (!window.classList.contains('maximized')) {
+                        // Simple drag implementation
+                        console.log('Window dragging would be implemented here');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html> 

@@ -1,11 +1,6 @@
-const config = {
+export default {
   plugins: {
-    'postcss-import': {},
-    'tailwindcss': {},
-    'postcss-nesting': {},
+    '@tailwindcss/postcss': {},
     autoprefixer: {},
-    ...(process.env.NODE_ENV === 'production' ? { cssnano: {} } : {})
   },
 };
-
-export default config;
