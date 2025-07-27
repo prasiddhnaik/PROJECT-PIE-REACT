@@ -1,0 +1,1 @@
+web: cd backup_cleanup/backend_python && python3 main.py 
