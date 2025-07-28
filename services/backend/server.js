@@ -92,7 +92,7 @@ async function fetchNSEData(symbol) {
       };
     }
   } catch (error) {
-    console.log(`Failed to fetch ${symbol} from NSE:`, error.message);
+    // Silent fallback to mock data
   }
   
   // Return mock data as fallback

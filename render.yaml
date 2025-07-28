@@ -20,10 +20,4 @@ services:
       - key: POLYGON_API_KEY
         sync: false
       - key: FINNHUB_API_KEY
-        sync: false
-    buildCommand: |
-      echo "🚀 Building Financial Analytics Platform..."
-      cd apps/web && npm install && npm run build
-    startCommand: |
-      echo "🎉 Starting Financial Analytics Platform..."
-      cd backup_cleanup/backend_python && python3 main.py 
+        sync: false 

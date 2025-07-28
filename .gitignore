@@ -548,4 +548,4 @@ Icon?
 # Last updated: December 2024 
 
 # Allow backend package.json
-!services/backend/package.json 
+!services/backend/package.json AgentGPT/

@@ -28,12 +28,12 @@ try:
     import sys
     import os
     sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'backend'))
-    from providers.crypto.base_crypto_provider import BaseCryptoProvider
-    from providers.crypto.coinbase_provider import CoinbaseProvider
-    from providers.crypto.binance_provider import BinanceProvider
-    from providers.crypto.kraken_provider import KrakenProvider
-    from providers.crypto.coingecko_provider import CoinGeckoProvider
-    from providers.crypto.generic_crypto_provider import GenericCryptoProvider
+    from backend_python.providers.crypto.base_crypto_provider import BaseCryptoProvider
+    from backend_python.providers.crypto.coinbase_provider import CoinbaseProvider
+    from backend_python.providers.crypto.binance_provider import BinanceProvider
+    from backend_python.providers.crypto.kraken_provider import KrakenProvider
+    from backend_python.providers.crypto.coingecko_provider import CoinGeckoProvider
+    from backend_python.providers.crypto.generic_crypto_provider import GenericCryptoProvider
 except ImportError as e:
     # Fallback if crypto providers are not available
     logger.warning(f"Crypto providers not available: {e}")
