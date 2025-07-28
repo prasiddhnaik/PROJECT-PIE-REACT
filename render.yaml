@@ -6,6 +6,8 @@ services:
     plan: free
     branch: main
     healthCheckPath: /health
+    dockerfilePath: ./Dockerfile
+    rootDir: .
     envVars:
       - key: NODE_ENV
         value: production
