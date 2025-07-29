@@ -1152,7 +1152,10 @@ async def get_crypto_symbol_mapping(
 
 if __name__ == "__main__":
     import uvicorn
+    # Use Render's PORT environment variable, fallback to API_PORT
+    port = int(os.getenv("PORT", API_PORT))
+    host = "0.0.0.0"  # Always bind to 0.0.0.0 for Render
     if DEBUG:
-        uvicorn.run("main:app", host=API_HOST, port=API_PORT, reload=True)
+        uvicorn.run("main:app", host=host, port=port, reload=True)
     else:
-        uvicorn.run(app, host=API_HOST, port=API_PORT) 
+        uvicorn.run(app, host=host, port=port) 
