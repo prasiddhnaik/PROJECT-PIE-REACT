@@ -17,15 +17,18 @@ COPY backup_cleanup/backend_python/ ./backend/
 
 # Set environment variables
 ENV API_HOST=0.0.0.0
-ENV API_PORT=8001
 ENV DEBUG=False
 ENV PYTHONPATH=/app/backend
 
-EXPOSE 8001
+# Let Render set the PORT environment variable
+EXPOSE 10000
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 \
-    CMD curl -f http://localhost:8001/health || exit 1
+    CMD curl -f http://localhost:${PORT:-10000}/health || exit 1
+
+# Copy startup script
+COPY start.sh ./start.sh
 
 # Start the backend with proper error handling
-CMD ["python", "-u", "backend/main.py"] 
+CMD ["./start.sh"] 

@@ -1152,10 +1152,22 @@ async def get_crypto_symbol_mapping(
 
 if __name__ == "__main__":
     import uvicorn
+    import sys
+    
     # Use Render's PORT environment variable, fallback to API_PORT
     port = int(os.getenv("PORT", API_PORT))
     host = "0.0.0.0"  # Always bind to 0.0.0.0 for Render
-    if DEBUG:
-        uvicorn.run("main:app", host=host, port=port, reload=True)
-    else:
-        uvicorn.run(app, host=host, port=port) 
+    
+    print(f"🚀 Starting FastAPI server on {host}:{port}")
+    print(f"📊 Environment: {'DEBUG' if DEBUG else 'PRODUCTION'}")
+    print(f"🔧 Crypto Provider: {'✅ Available' if CRYPTO_AVAILABLE else '❌ Unavailable'}")
+    print(f"🤖 AI Services: {'✅ Available' if AI_AVAILABLE else '❌ Unavailable'}")
+    
+    try:
+        if DEBUG:
+            uvicorn.run("main:app", host=host, port=port, reload=True, log_level="info")
+        else:
+            uvicorn.run(app, host=host, port=port, log_level="info")
+    except Exception as e:
+        print(f"❌ Failed to start server: {e}")
+        sys.exit(1) 
