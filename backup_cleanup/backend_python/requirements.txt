@@ -63,6 +63,7 @@ alembic>=1.11.0
 
 # Logging & Monitoring
 structlog>=23.1.0
+loguru>=0.7.0
 
 # Security
 cryptography>=41.0.0
