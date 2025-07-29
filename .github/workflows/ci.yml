@@ -19,13 +19,13 @@ jobs:
           node-version: 18
 
       - name: Install JS dependencies
-        run: pnpm install
+        run: pnpm install || npm install
 
       - name: Lint and typecheck JS/TS
-        run: pnpm lint && pnpm tsc --noEmit || true
+        run: pnpm lint && pnpm tsc --noEmit || npm run lint || true
 
       - name: Run JS/TS tests
-        run: pnpm test || true
+        run: pnpm test || npm test || true
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -33,7 +33,7 @@ jobs:
           python-version: '3.11'
 
       - name: Install Python dependencies
-        run: pip install -r services/backend/requirements.txt
+        run: pip install -r backup_cleanup/backend_python/requirements.txt
 
       - name: Run Python tests
         run: pytest || true
