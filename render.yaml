@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: financial-analytics-platform
+    name: project-pie-react
     env: docker
     region: oregon
     plan: free
@@ -20,7 +20,7 @@ services:
       - key: DEBUG
         value: false
       - key: NEXT_PUBLIC_BACKEND_URL
-        value: https://financial-analytics-platform.onrender.com
+        value: https://project-pie-react.onrender.com
       - key: OPENROUTER_API_KEY
         sync: false
       - key: ALPHA_VANTAGE_API_KEY
