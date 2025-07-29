@@ -6,13 +6,19 @@ services:
     plan: free
     branch: main
     healthCheckPath: /health
-    dockerfilePath: ./Dockerfile
+    dockerfilePath: ./Dockerfile.backend
     rootDir: .
     envVars:
       - key: NODE_ENV
         value: production
       - key: PORT
         value: 8001
+      - key: API_HOST
+        value: 0.0.0.0
+      - key: API_PORT
+        value: 8001
+      - key: DEBUG
+        value: false
       - key: NEXT_PUBLIC_BACKEND_URL
         value: https://financial-analytics-platform.onrender.com
       - key: OPENROUTER_API_KEY
