@@ -15,6 +15,13 @@ echo "   DEBUG: $DEBUG"
 # Change to backend directory
 cd backend
 
-# Start the FastAPI application
-echo "🔧 Starting FastAPI server..."
-python -u main.py 
+# Test import first
+echo "🧪 Testing app import..."
+python -c "import main; print('✅ App imports successfully')" || {
+    echo "❌ App import failed"
+    exit 1
+}
+
+# Start the FastAPI application with explicit host and port
+echo "🔧 Starting FastAPI server on 0.0.0.0:$PORT..."
+exec python -u main.py 
