@@ -1,297 +1,248 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'FinanceFlow - Advanced Financial Intelligence Platform',
-  description: 'Experience the future of financial markets with lightning-fast data, advanced analytics, and institutional-grade insights. Real-time market intelligence for professional traders.',
+  title: 'FinanceFlow - Professional Financial Intelligence',
+  description: 'Clean, professional financial intelligence platform with real-time market data, advanced analytics, and institutional-grade insights for serious traders.',
 }
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 text-gray-900">
-      {/* Modern Navigation */}
-      <nav className="fixed top-0 w-full z-50 nav-modern">
-        <div className="max-w-7xl mx-auto px-6 py-6">
+    <div className="min-h-screen bg-white text-gray-900">
+      {/* Clean Navigation */}
+      <nav className="fixed top-0 w-full z-50 nav-clean">
+        <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center">
-                <span className="text-white font-bold text-lg">F</span>
+              <div className="w-8 h-8 bg-gray-800 rounded-lg flex items-center justify-center">
+                <span className="text-white font-bold text-sm">F</span>
               </div>
-              <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              <span className="text-xl font-semibold text-gray-800">
                 FinanceFlow
               </span>
             </div>
             <div className="hidden md:flex items-center space-x-8">
-              <a href="#features" className="text-gray-700 hover:text-blue-600 transition-all duration-300 font-medium">Features</a>
-              <a href="#markets" className="text-gray-700 hover:text-blue-600 transition-all duration-300 font-medium">Markets</a>
-              <a href="#analytics" className="text-gray-700 hover:text-blue-600 transition-all duration-300 font-medium">Analytics</a>
-              <a href="/dashboard" className="text-gray-700 hover:text-blue-600 transition-all duration-300 font-medium">Dashboard</a>
-              <a href="/screener" className="text-gray-700 hover:text-blue-600 transition-all duration-300 font-medium">Screener</a>
+              <a href="#features" className="text-gray-600 hover:text-gray-900 transition-colors">Features</a>
+              <a href="#markets" className="text-gray-600 hover:text-gray-900 transition-colors">Markets</a>
+              <a href="#analytics" className="text-gray-600 hover:text-gray-900 transition-colors">Analytics</a>
+              <a href="/dashboard" className="text-gray-600 hover:text-gray-900 transition-colors">Dashboard</a>
+              <a href="/screener" className="text-gray-600 hover:text-gray-900 transition-colors">Screener</a>
                 </div>
-            <button className="modern-button text-sm px-6 py-3">
+            <button className="clean-button text-sm px-4 py-2">
               Get Started
             </button>
             </div>
                     </div>
       </nav>
 
-      {/* Modern Hero Section */}
-      <section className="pt-32 pb-20 px-6 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-purple-600/10"></div>
-        <div className="relative max-w-7xl mx-auto text-center">
-          <div className="inline-flex items-center px-4 py-2 bg-blue-100 text-blue-800 rounded-full text-sm font-medium mb-8">
-            🚀 Real-time Market Intelligence Platform
-          </div>
-
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-8 leading-tight">
-            <span className="bg-gradient-to-r from-gray-900 via-blue-800 to-purple-800 bg-clip-text text-transparent">
-              Financial
-            </span>
-            <br />
-            <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent font-extrabold">
-              Intelligence
+      {/* Clean Hero Section */}
+      <section className="pt-24 pb-16 px-6">
+        <div className="max-w-6xl mx-auto text-center">
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 text-gray-900 leading-tight">
+            Financial Intelligence
+            <span className="block text-3xl md:text-5xl font-normal text-gray-600 mt-2">
+              Platform
             </span>
           </h1>
 
-          <p className="text-xl md:text-2xl text-gray-600 mb-12 max-w-4xl mx-auto leading-relaxed">
-            Experience the future of financial markets with lightning-fast data,
-            advanced analytics, and institutional-grade insights. No delays, just pure intelligence.
+          <p className="text-lg md:text-xl text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed">
+            Real-time market data with advanced technical analysis.
+            Professional-grade financial intelligence for serious traders.
           </p>
 
           {/* Hero Stats */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-            <div className="modern-card p-8 text-center">
-              <div className="text-5xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent mb-3">$2.8T+</div>
-              <div className="text-gray-600 font-medium">Market Cap Tracked</div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            <div className="clean-card p-6 text-center">
+              <div className="text-3xl font-bold text-green-600 mb-2">$2.8T+</div>
+              <div className="text-gray-600 text-sm">Market Cap Tracked</div>
                     </div>
-            <div className="modern-card p-8 text-center">
-              <div className="text-5xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent mb-3">99.9%</div>
-              <div className="text-gray-600 font-medium">Uptime Guarantee</div>
+            <div className="clean-card p-6 text-center">
+              <div className="text-3xl font-bold text-blue-600 mb-2">99.9%</div>
+              <div className="text-gray-600 text-sm">Uptime Guarantee</div>
                 </div>
-            <div className="modern-card p-8 text-center">
-              <div className="text-5xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-3">&lt;50ms</div>
-              <div className="text-gray-600 font-medium">Data Latency</div>
+            <div className="clean-card p-6 text-center">
+              <div className="text-3xl font-bold text-purple-600 mb-2">&lt;50ms</div>
+              <div className="text-gray-600 text-sm">Data Latency</div>
                     </div>
                     </div>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <button className="modern-button text-lg px-8 py-4">
-              🚀 Start Trading Now
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <button className="clean-button px-6 py-3">
+              Get Started
             </button>
-            <button className="modern-button-outline text-lg px-8 py-4">
-              📊 View Demo
+            <button className="clean-button-outline px-6 py-3">
+              Learn More
             </button>
           </div>
                     </div>
       </section>
 
-      {/* Modern Features Section */}
-      <section id="features" className="py-24 px-6 bg-white">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-20">
-            <h2 className="text-4xl md:text-6xl font-bold mb-6">
-              <span className="bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
-                Powerful
-              </span>
-              <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"> Features</span>
+      {/* Clean Features Section */}
+      <section id="features" className="py-16 px-6 bg-gray-50">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
+              Powerful Features
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
               Everything you need for professional-grade financial analysis and trading insights.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="group cursor-pointer">
-              <div className="modern-card p-8 h-full flex flex-col justify-between text-center">
-                <div className="mb-6">
-                  <div className="w-16 h-16 bg-gradient-to-r from-green-500 to-emerald-500 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                    <span className="text-2xl">📈</span>
-                  </div>
-                  <h3 className="text-2xl font-bold mb-4 text-gray-900">Real-Time Data</h3>
-                  <p className="text-gray-600 leading-relaxed">Live market data from multiple exchanges with sub-second latency and institutional-grade accuracy</p>
-                </div>
-                <div className="text-green-600 font-semibold text-sm bg-green-50 px-3 py-1 rounded-full">
-                  Alpha Vantage • Finnhub • Polygon
-                </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="clean-card p-6 text-center">
+              <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+                <span className="text-green-600 text-xl">📈</span>
+              </div>
+              <h3 className="text-lg font-semibold mb-3 text-gray-900">Real-Time Data</h3>
+              <p className="text-gray-600 text-sm leading-relaxed">Live market data from multiple exchanges with sub-second latency</p>
+              <div className="mt-3 text-green-600 text-xs font-medium">
+                Alpha Vantage • Finnhub • Polygon
               </div>
             </div>
 
-            <div className="group cursor-pointer">
-              <div className="modern-card p-8 h-full flex flex-col justify-between text-center">
-                <div className="mb-6">
-                  <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                    <span className="text-2xl">🧠</span>
-                  </div>
-                  <h3 className="text-2xl font-bold mb-4 text-gray-900">Technical Analysis</h3>
-                  <p className="text-gray-600 leading-relaxed">Advanced algorithms with MACD, RSI, Bollinger Bands, and 50+ professional indicators</p>
-                </div>
-                <div className="text-blue-600 font-semibold text-sm bg-blue-50 px-3 py-1 rounded-full">
-                  Advanced Algorithms
-                </div>
+            <div className="clean-card p-6 text-center">
+              <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+                <span className="text-blue-600 text-xl">🧠</span>
+              </div>
+              <h3 className="text-lg font-semibold mb-3 text-gray-900">Technical Analysis</h3>
+              <p className="text-gray-600 text-sm leading-relaxed">MACD, RSI, Bollinger Bands, and 50+ technical indicators</p>
+              <div className="mt-3 text-blue-600 text-xs font-medium">
+                Advanced Algorithms
               </div>
             </div>
 
-            <div className="group cursor-pointer">
-              <div className="modern-card p-8 h-full flex flex-col justify-between text-center">
-                <div className="mb-6">
-                  <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                    <span className="text-2xl">📰</span>
-                  </div>
-                  <h3 className="text-2xl font-bold mb-4 text-gray-900">Market Intelligence</h3>
-                  <p className="text-gray-600 leading-relaxed">AI-powered news analysis with real-time sentiment tracking and market impact assessment</p>
-                </div>
-                <div className="text-purple-600 font-semibold text-sm bg-purple-50 px-3 py-1 rounded-full">
-                  Real-Time Feeds
-                </div>
+            <div className="clean-card p-6 text-center">
+              <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+                <span className="text-purple-600 text-xl">📰</span>
+              </div>
+              <h3 className="text-lg font-semibold mb-3 text-gray-900">Market Intelligence</h3>
+              <p className="text-gray-600 text-sm leading-relaxed">AI-powered news analysis and market sentiment tracking</p>
+              <div className="mt-3 text-purple-600 text-xs font-medium">
+                Real-Time Feeds
               </div>
             </div>
 
-            <div className="group cursor-pointer">
-              <div className="modern-card p-8 h-full flex flex-col justify-between text-center">
-                <div className="mb-6">
-                  <div className="w-16 h-16 bg-gradient-to-r from-amber-500 to-orange-500 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                    <span className="text-2xl">⚡</span>
-                  </div>
-                  <h3 className="text-2xl font-bold mb-4 text-gray-900">Lightning Fast</h3>
-                  <p className="text-gray-600 leading-relaxed">Built on Next.js 15 with optimized API routes, advanced caching, and edge computing</p>
-                </div>
-                <div className="text-amber-600 font-semibold text-sm bg-amber-50 px-3 py-1 rounded-full">
-                  Blazing Performance
-                </div>
+            <div className="clean-card p-6 text-center">
+              <div className="w-12 h-12 bg-amber-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+                <span className="text-amber-600 text-xl">⚡</span>
+              </div>
+              <h3 className="text-lg font-semibold mb-3 text-gray-900">Lightning Fast</h3>
+              <p className="text-gray-600 text-sm leading-relaxed">Next.js 15 with optimized API routes and caching layers</p>
+              <div className="mt-3 text-amber-600 text-xs font-medium">
+                High Performance
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Modern Market Data Section */}
-      <section id="markets" className="py-24 px-6 bg-gradient-to-br from-gray-50 to-blue-50">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-6xl font-bold mb-6">
-              <span className="bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
-                Live
-              </span>
-              <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"> Markets</span>
+      {/* Clean Market Data Section */}
+      <section id="markets" className="py-16 px-6 bg-white">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
+              Live Markets
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Real-time market data from global exchanges with institutional-grade accuracy and speed.
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+              Real-time market data from global exchanges with institutional-grade accuracy.
             </p>
           </div>
 
-          <div className="modern-card p-12 rounded-3xl">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-              <div className="text-center p-8 bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl border border-green-100">
-                <div className="text-4xl font-bold text-green-600 mb-3">24,467.80</div>
-                <div className="text-gray-700 font-semibold text-lg mb-2">NIFTY 50</div>
-                <div className="inline-flex items-center px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-medium">
-                  <span className="w-2 h-2 bg-green-500 rounded-full mr-2"></span>
-                  +1.2%
-                </div>
+          <div className="clean-card p-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+              <div className="text-center p-6 bg-green-50 rounded-lg border border-green-200">
+                <div className="text-3xl font-bold text-green-600 mb-2">24,467.80</div>
+                <div className="text-gray-700 font-medium mb-1">NIFTY 50</div>
+                <div className="text-green-600 text-sm font-medium">+1.2%</div>
               </div>
 
-              <div className="text-center p-8 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl border border-blue-100">
-                <div className="text-4xl font-bold text-blue-600 mb-3">80,845.00</div>
-                <div className="text-gray-700 font-semibold text-lg mb-2">SENSEX</div>
-                <div className="inline-flex items-center px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium">
-                  <span className="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
-                  +0.8%
-                </div>
+              <div className="text-center p-6 bg-blue-50 rounded-lg border border-blue-200">
+                <div className="text-3xl font-bold text-blue-600 mb-2">80,845.00</div>
+                <div className="text-gray-700 font-medium mb-1">SENSEX</div>
+                <div className="text-blue-600 text-sm font-medium">+0.8%</div>
               </div>
 
-              <div className="text-center p-8 bg-gradient-to-br from-red-50 to-rose-50 rounded-2xl border border-red-100">
-                <div className="text-4xl font-bold text-red-600 mb-3">51,234.50</div>
-                <div className="text-gray-700 font-semibold text-lg mb-2">BANK NIFTY</div>
-                <div className="inline-flex items-center px-3 py-1 bg-red-100 text-red-700 rounded-full text-sm font-medium">
-                  <span className="w-2 h-2 bg-red-500 rounded-full mr-2"></span>
-                  -0.3%
-                </div>
+              <div className="text-center p-6 bg-red-50 rounded-lg border border-red-200">
+                <div className="text-3xl font-bold text-red-600 mb-2">51,234.50</div>
+                <div className="text-gray-700 font-medium mb-1">BANK NIFTY</div>
+                <div className="text-red-600 text-sm font-medium">-0.3%</div>
               </div>
             </div>
 
             <div className="text-center">
-              <button className="modern-button-outline px-10 py-4 text-lg">
-                📈 View Full Market Dashboard
+              <button className="clean-button-outline px-6 py-3">
+                View Full Market Data
               </button>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Modern API Section */}
-      <section id="analytics" className="py-24 px-6 bg-white">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-20">
-            <h2 className="text-4xl md:text-6xl font-bold mb-6">
-              <span className="bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
-                Developer
-              </span>
-              <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"> APIs</span>
+      {/* Clean API Section */}
+      <section id="analytics" className="py-16 px-6 bg-gray-50">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
+              Developer APIs
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
               Powerful REST APIs for seamless integration with your applications and trading systems.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             <div>
-              <h3 className="text-3xl font-bold mb-8 text-gray-900">Real-Time Endpoints</h3>
-              <div className="space-y-6">
-                <div className="modern-card p-6 border-l-4 border-green-500">
-                  <div className="flex items-center gap-4 mb-4">
-                    <span className="bg-green-600 text-white px-3 py-1 rounded-lg text-sm font-mono font-bold">GET</span>
-                    <code className="text-blue-600 font-mono text-lg">/api/stock-data</code>
+              <h3 className="text-2xl font-semibold mb-6 text-gray-900">Real-Time Endpoints</h3>
+              <div className="space-y-4">
+                <div className="clean-card p-4 border-l-4 border-green-500">
+                  <div className="flex items-center gap-3 mb-2">
+                    <span className="bg-green-600 text-white px-2 py-1 rounded text-xs font-mono">GET</span>
+                    <code className="text-blue-600 font-mono">/api/stock-data</code>
                   </div>
-                  <p className="text-gray-600">Real-time stock quotes with comprehensive technical indicators and market analysis</p>
+                  <p className="text-gray-600 text-sm">Real-time stock quotes with technical indicators</p>
                 </div>
 
-                <div className="modern-card p-6 border-l-4 border-blue-500">
-                  <div className="flex items-center gap-4 mb-4">
-                    <span className="bg-blue-600 text-white px-3 py-1 rounded-lg text-sm font-mono font-bold">GET</span>
-                    <code className="text-blue-600 font-mono text-lg">/api/news</code>
+                <div className="clean-card p-4 border-l-4 border-blue-500">
+                  <div className="flex items-center gap-3 mb-2">
+                    <span className="bg-blue-600 text-white px-2 py-1 rounded text-xs font-mono">GET</span>
+                    <code className="text-blue-600 font-mono">/api/news</code>
                   </div>
-                  <p className="text-gray-600">Latest financial news and market sentiment from trusted global sources</p>
+                  <p className="text-gray-600 text-sm">Latest financial news from multiple sources</p>
                 </div>
 
-                <div className="modern-card p-6 border-l-4 border-purple-500">
-                  <div className="flex items-center gap-4 mb-4">
-                    <span className="bg-purple-600 text-white px-3 py-1 rounded-lg text-sm font-mono font-bold">GET</span>
-                    <code className="text-blue-600 font-mono text-lg">/api/market-overview</code>
+                <div className="clean-card p-4 border-l-4 border-purple-500">
+                  <div className="flex items-center gap-3 mb-2">
+                    <span className="bg-purple-600 text-white px-2 py-1 rounded text-xs font-mono">GET</span>
+                    <code className="text-blue-600 font-mono">/api/market-overview</code>
                   </div>
-                  <p className="text-gray-600">Comprehensive market summary with major indices and sector performance</p>
+                  <p className="text-gray-600 text-sm">Market summary and major indices</p>
                 </div>
               </div>
             </div>
 
             <div>
-              <h3 className="text-3xl font-bold mb-8 text-gray-900">Example Response</h3>
-              <div className="modern-card p-8 bg-gray-900 text-gray-100">
-                <pre className="text-sm overflow-x-auto leading-relaxed">
+              <h3 className="text-2xl font-semibold mb-6 text-gray-900">Example Response</h3>
+              <div className="clean-card p-6 bg-gray-800 text-gray-100">
+                <pre className="text-sm overflow-x-auto">
 {`{
   "symbol": "AAPL",
   "currentPrice": 253.85,
   "change": -1.62,
   "changePercent": -0.63,
-  "volume": 5833776,
   "indicators": {
     "rsi": 62.4,
     "macd": {
       "MACD": 1.23,
       "signal": 0.98,
       "histogram": 0.25
-    },
-    "bollingerBands": {
-      "upper": 185.67,
-      "middle": 180.23,
-      "lower": 174.79
     }
-  },
-  "timestamp": "2025-09-29T19:25:34"
+  }
 }`}
                 </pre>
               </div>
-              <div className="mt-6 text-center">
-                <button className="modern-button-outline text-sm px-6 py-3">
-                  📖 View Full Documentation
+              <div className="mt-4 text-center">
+                <button className="clean-button-outline text-sm px-4 py-2">
+                  View Documentation
                 </button>
               </div>
             </div>
@@ -299,92 +250,75 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Modern CTA Section */}
-      <section className="py-24 px-6 bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-700 relative overflow-hidden">
-        <div className="absolute inset-0 bg-black/20"></div>
-        <div className="relative max-w-5xl mx-auto text-center">
-          <h2 className="text-4xl md:text-6xl font-bold mb-8 text-white">
-            Ready to Transform Your
-            <span className="block bg-gradient-to-r from-yellow-300 to-orange-300 bg-clip-text text-transparent">
-              Trading Experience?
-            </span>
+      {/* Clean CTA Section */}
+      <section className="py-16 px-6 bg-gray-50">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900">
+            Ready to Get Started?
           </h2>
-          <p className="text-xl md:text-2xl text-blue-100 mb-12 leading-relaxed">
-            Join thousands of traders who trust our platform for institutional-grade market intelligence and lightning-fast execution.
+          <p className="text-lg text-gray-600 mb-8">
+            Experience the future of financial data with our lightning-fast platform.
           </p>
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-            <button className="bg-white text-gray-900 px-10 py-4 rounded-2xl text-xl font-bold hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-xl">
-              🚀 Start Free Trial
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <button className="clean-button px-6 py-3">
+              Start Free Trial
             </button>
-            <button className="border-2 border-white text-white px-10 py-4 rounded-2xl text-xl font-bold hover:bg-white hover:text-gray-900 transition-all duration-300">
-              📊 Schedule Demo
+            <button className="clean-button-outline px-6 py-3">
+              View Documentation
             </button>
           </div>
         </div>
       </section>
 
-      {/* Modern Footer */}
-      <footer className="bg-gray-900 text-white py-16 px-6">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
-            <div className="col-span-1 md:col-span-2">
-              <div className="flex items-center space-x-3 mb-6">
-                <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-2xl flex items-center justify-center">
-                  <span className="text-white font-bold text-xl">F</span>
+      {/* Clean Footer */}
+      <footer className="bg-gray-800 text-white py-12 px-6">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+              <div className="flex items-center space-x-2 mb-4">
+                <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
+                  <span className="text-gray-800 font-bold">F</span>
                 </div>
-                <span className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                  FinanceFlow
-                </span>
+                <span className="text-xl font-semibold">FinanceFlow</span>
               </div>
-              <p className="text-gray-300 text-lg leading-relaxed mb-6">
-                The most advanced financial intelligence platform, powered by real-time market data and cutting-edge analytics.
-                Trusted by professional traders worldwide.
+              <p className="text-gray-300 text-sm">
+                Advanced financial intelligence platform powered by real-time market data.
               </p>
-              <div className="flex space-x-4">
-                <div className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center hover:bg-blue-700 transition-colors cursor-pointer">
-                  <span className="text-white">📧</span>
-                </div>
-                <div className="w-10 h-10 bg-purple-600 rounded-xl flex items-center justify-center hover:bg-purple-700 transition-colors cursor-pointer">
-                  <span className="text-white">🐦</span>
-                </div>
-                <div className="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center hover:bg-indigo-700 transition-colors cursor-pointer">
-                  <span className="text-white">💼</span>
-                </div>
-              </div>
             </div>
 
             <div>
-              <h4 className="font-bold text-xl mb-6 text-white">Platform</h4>
-              <ul className="space-y-3 text-gray-300">
-                <li><a href="#" className="hover:text-blue-400 transition-colors text-lg">📈 Markets</a></li>
-                <li><a href="#" className="hover:text-blue-400 transition-colors text-lg">🧠 Analytics</a></li>
-                <li><a href="#" className="hover:text-blue-400 transition-colors text-lg">📰 News</a></li>
-                <li><a href="#" className="hover:text-blue-400 transition-colors text-lg">🔌 API</a></li>
+              <h4 className="font-semibold mb-4 text-white">Platform</h4>
+              <ul className="space-y-2 text-sm text-gray-300">
+                <li><a href="#" className="hover:text-white transition-colors">Markets</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Analytics</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">News</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">API</a></li>
               </ul>
             </div>
 
             <div>
-              <h4 className="font-bold text-xl mb-6 text-white">Resources</h4>
-              <ul className="space-y-3 text-gray-300">
-                <li><a href="#" className="hover:text-blue-400 transition-colors text-lg">📚 Documentation</a></li>
-                <li><a href="#" className="hover:text-blue-400 transition-colors text-lg">🛠️ Support</a></li>
-                <li><a href="#" className="hover:text-blue-400 transition-colors text-lg">📝 Blog</a></li>
-                <li><a href="#" className="hover:text-blue-400 transition-colors text-lg">🔍 Status</a></li>
+              <h4 className="font-semibold mb-4 text-white">Resources</h4>
+              <ul className="space-y-2 text-sm text-gray-300">
+                <li><a href="#" className="hover:text-white transition-colors">Documentation</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Support</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Blog</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Status</a></li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="font-semibold mb-4 text-white">Company</h4>
+              <ul className="space-y-2 text-sm text-gray-300">
+                <li><a href="#" className="hover:text-white transition-colors">About</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Careers</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Privacy</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Terms</a></li>
               </ul>
             </div>
           </div>
 
-          <div className="border-t border-gray-700 mt-16 pt-8">
-            <div className="flex flex-col md:flex-row justify-between items-center">
-              <p className="text-gray-400 text-lg">
-                © 2024 FinanceFlow. Real data • Advanced analytics • Lightning fast
-              </p>
-              <div className="flex space-x-8 mt-4 md:mt-0">
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">Privacy</a>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">Terms</a>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">Security</a>
-              </div>
-            </div>
+          <div className="border-t border-gray-700 mt-8 pt-6 text-center text-gray-400 text-sm">
+            © 2024 FinanceFlow. Real data • Advanced analytics • Lightning fast
           </div>
         </div>
       </footer>
