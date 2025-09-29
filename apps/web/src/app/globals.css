@@ -2,125 +2,240 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Tahoma:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Tahoma', sans-serif;
-    font-size: 11px;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    background: linear-gradient(135deg, #235bd4 0%, #4b8df8 25%, #8db5f2 75%, #a8c8f5 100%);
-    background-attachment: fixed;
-    min-height: 100vh;
-    cursor: default;
-    overflow: hidden;
+  font-family: 'Inter', sans-serif;
+  background: #000000;
+  color: #ffffff;
+  overflow-x: hidden;
 }
 
-.xp-window {
-    position: absolute;
-    background: #ece9d8;
-    border: 2px outset #ece9d8;
-    box-shadow: 2px 2px 8px rgba(0,0,0,0.3);
-    min-width: 200px;
-    min-height: 100px;
+/* Tesla-inspired smooth scrolling */
+html {
+  scroll-behavior: smooth;
 }
 
-.xp-titlebar {
-    height: 25px;
-    background: linear-gradient(to bottom, #0054e3 0%, #0054e3 3%, #4e8cde 6%, #1c5dc7 10%, #0054e3 14%, #0054e3 86%, #1c5dc7 90%, #4e8cde 94%, #0054e3 97%, #0054e3 100%);
-    color: white;
-    display: flex;
-    align-items: center;
-    padding: 0 5px;
-    cursor: move;
-    user-select: none;
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
 }
 
-.xp-titlebar.inactive {
-    background: linear-gradient(to bottom, #7a7a7a 0%, #a8a8a8 50%, #7a7a7a 100%);
+::-webkit-scrollbar-track {
+  background: #1a1a1a;
 }
 
-.xp-titlebar-text {
-    flex: 1;
-    font-weight: bold;
-    font-size: 11px;
-    margin-left: 5px;
+::-webkit-scrollbar-thumb {
+  background: #404040;
+  border-radius: 3px;
 }
 
-.xp-titlebar-buttons {
-    display: flex;
-    gap: 2px;
+::-webkit-scrollbar-thumb:hover {
+  background: #606060;
 }
 
-.xp-titlebar-button {
-    width: 16px;
-    height: 14px;
-    background: linear-gradient(to bottom, #ffffff 0%, #ddd 50%, #bbb 100%);
-    border: 1px outset #ddd;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 8px;
-    font-weight: bold;
+/* Tesla-style animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.xp-titlebar-button:hover {
-    background: linear-gradient(to bottom, #f0f0f0 0%, #e0e0e0 50%, #d0d0d0 100%);
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
-.xp-titlebar-button:active {
-    border: 1px inset #ddd;
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
 }
 
-.xp-window-content {
-    padding: 8px;
-    background: #ece9d8;
-    height: calc(100% - 25px);
-    overflow: auto;
+/* Custom components */
+.tesla-gradient {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
 }
 
-.xp-button {
-    background: linear-gradient(to bottom, #ffffff 0%, #ece9d8 50%, #d7d3c8 100%);
-    border: 1px outset #ece9d8;
-    padding: 4px 8px;
-    cursor: pointer;
-    font-family: 'Tahoma', sans-serif;
-    font-size: 11px;
-    user-select: none;
+.tesla-card {
+  background: rgba(26, 26, 26, 0.8);
+  border: 1px solid rgba(64, 64, 64, 0.3);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
 }
 
-.xp-button:hover {
-    background: linear-gradient(to bottom, #f8f8f8 0%, #e8e5d8 50%, #d0ccc0 100%);
+.tesla-card:hover {
+  border-color: rgba(128, 128, 128, 0.5);
+  transform: translateY(-2px);
 }
 
-.xp-button:active {
-    border: 1px inset #ece9d8;
-    background: linear-gradient(to bottom, #d7d3c8 0%, #ece9d8 50%, #ffffff 100%);
+.tesla-button {
+  background: #ffffff;
+  color: #000000;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-transform: none;
 }
 
-.xp-input {
-    border: 2px inset #ece9d8;
-    padding: 2px 4px;
-    background: white;
-    font-family: 'Tahoma', sans-serif;
-    font-size: 11px;
+.tesla-button:hover {
+  background: #e0e0e0;
+  transform: scale(1.02);
 }
 
-.xp-input:focus {
-    outline: none;
-    background: #e6f3ff;
+.tesla-button-outline {
+  background: transparent;
+  color: #ffffff;
+  border: 1px solid #606060;
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-.xp-listview {
-    border: 2px inset #ece9d8;
-    background: white;
-    height: 200px;
-    overflow: auto;
+.tesla-button-outline:hover {
+  border-color: #ffffff;
+  background: rgba(255, 255, 255, 0.1);
 }
 
-/* Add more XP styles as needed */
+/* Navigation styles */
+.nav-blur {
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(64, 64, 64, 0.3);
+}
+
+/* Market data styles */
+.market-positive {
+  color: #4ade80;
+}
+
+.market-negative {
+  color: #f87171;
+}
+
+.market-neutral {
+  color: #9ca3af;
+}
+
+/* Loading animation */
+.loading-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Text styles */
+.text-hero {
+  font-size: clamp(3rem, 8vw, 8rem);
+  font-weight: 300;
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+}
+
+.text-hero-bold {
+  font-weight: 700;
+}
+
+/* Grid styles */
+.grid-auto-fit {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+/* Focus styles */
+button:focus,
+a:focus {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+}
+
+/* Tesla-style section transitions */
+section {
+  opacity: 0;
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+section:nth-child(2) { animation-delay: 0.1s; }
+section:nth-child(3) { animation-delay: 0.2s; }
+section:nth-child(4) { animation-delay: 0.3s; }
+
+/* Interactive elements */
+.interactive-scale {
+  transition: transform 0.2s ease;
+}
+
+.interactive-scale:hover {
+  transform: scale(1.05);
+}
+
+.interactive-scale:active {
+  transform: scale(0.98);
+}
+
+/* Glass morphism effect */
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Responsive text */
+@media (max-width: 768px) {
+  .text-hero {
+    font-size: clamp(2.5rem, 10vw, 4rem);
+  }
+}
+
+/* Dark mode optimizations */
+@media (prefers-color-scheme: dark) {
+  body {
+    background: #000000;
+    color: #ffffff;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .tesla-card {
+    border-color: #ffffff;
+  }
+  
+  .tesla-button-outline {
+    border-color: #ffffff;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  html {
+    scroll-behavior: auto;
+  }
+}

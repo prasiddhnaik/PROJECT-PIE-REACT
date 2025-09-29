@@ -9,11 +9,11 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy Python backend requirements and install
-COPY backup_cleanup/backend_python/requirements.txt ./requirements.txt
+COPY backend/backend_python/requirements.txt ./requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the entire backend directory
-COPY backup_cleanup/backend_python/ ./backend/
+COPY backend/backend_python/ ./backend/
 
 # Set environment variables
 ENV API_HOST=0.0.0.0
