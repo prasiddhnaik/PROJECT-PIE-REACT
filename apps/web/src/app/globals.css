@@ -12,8 +12,8 @@
 
 body {
   font-family: 'Inter', sans-serif;
-  background: #000000;
-  color: #ffffff;
+  background: #f8f9fa;
+  color: #1a365d;
   overflow-x: hidden;
 }
 
@@ -24,20 +24,20 @@ html {
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #1a1a1a;
+  background: #e2e8f0;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #404040;
-  border-radius: 3px;
+  background: #4a5568;
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #606060;
+  background: #2d3748;
 }
 
 /* Tesla-style animations */
@@ -72,74 +72,82 @@ html {
   }
 }
 
-/* Custom components */
-.tesla-gradient {
-  background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+/* Financial components */
+.financial-gradient {
+  background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
 }
 
-.tesla-card {
-  background: rgba(26, 26, 26, 0.8);
-  border: 1px solid rgba(64, 64, 64, 0.3);
-  backdrop-filter: blur(10px);
+.financial-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
   transition: all 0.3s ease;
 }
 
-.tesla-card:hover {
-  border-color: rgba(128, 128, 128, 0.5);
+.financial-card:hover {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   transform: translateY(-2px);
 }
 
-.tesla-button {
-  background: #ffffff;
-  color: #000000;
+.financial-button {
+  background: #1e3a8a;
+  color: #ffffff;
   border: none;
   padding: 12px 24px;
-  border-radius: 6px;
+  border-radius: 8px;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease;
   text-transform: none;
 }
 
-.tesla-button:hover {
-  background: #e0e0e0;
-  transform: scale(1.02);
+.financial-button:hover {
+  background: #1e40af;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(30, 58, 138, 0.3);
 }
 
-.tesla-button-outline {
+.financial-button-outline {
   background: transparent;
-  color: #ffffff;
-  border: 1px solid #606060;
+  color: #1e3a8a;
+  border: 2px solid #1e3a8a;
   padding: 12px 24px;
-  border-radius: 6px;
+  border-radius: 8px;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
-.tesla-button-outline:hover {
-  border-color: #ffffff;
-  background: rgba(255, 255, 255, 0.1);
+.financial-button-outline:hover {
+  background: #1e3a8a;
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(30, 58, 138, 0.2);
 }
 
 /* Navigation styles */
-.nav-blur {
-  background: rgba(0, 0, 0, 0.8);
+.nav-clean {
+  background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(64, 64, 64, 0.3);
+  border-bottom: 1px solid #e2e8f0;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
 }
 
 /* Market data styles */
 .market-positive {
-  color: #4ade80;
+  color: #059669;
 }
 
 .market-negative {
-  color: #f87171;
+  color: #dc2626;
 }
 
 .market-neutral {
-  color: #9ca3af;
+  color: #6b7280;
+}
+
+.market-gold {
+  color: #d97706;
 }
 
 /* Loading animation */
@@ -194,11 +202,11 @@ section:nth-child(4) { animation-delay: 0.3s; }
   transform: scale(0.98);
 }
 
-/* Glass morphism effect */
-.glass {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+/* Clean card effect */
+.clean-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
 }
 
 /* Responsive text */
@@ -208,22 +216,22 @@ section:nth-child(4) { animation-delay: 0.3s; }
   }
 }
 
-/* Dark mode optimizations */
-@media (prefers-color-scheme: dark) {
+/* Light mode optimizations */
+@media (prefers-color-scheme: light) {
   body {
-    background: #000000;
-    color: #ffffff;
+    background: #f8f9fa;
+    color: #1a365d;
   }
 }
 
 /* High contrast mode support */
 @media (prefers-contrast: high) {
-  .tesla-card {
-    border-color: #ffffff;
+  .financial-card {
+    border-color: #1a365d;
   }
-  
-  .tesla-button-outline {
-    border-color: #ffffff;
+
+  .financial-button-outline {
+    border-color: #1a365d;
   }
 }
 
