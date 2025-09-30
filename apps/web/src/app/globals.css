@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 * {
   margin: 0;
@@ -12,39 +12,194 @@
 
 body {
   font-family: 'Inter', sans-serif;
-  background: #f8f9fa;
-  color: #1a365d;
-  overflow-x: hidden;
+  background: #ffffff;
+  color: #1a1a1a;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Tesla-inspired smooth scrolling */
-html {
-  scroll-behavior: smooth;
+/* Professional Financial Styling */
+.financial-nav {
+  background: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
+.financial-hero {
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border-bottom: 1px solid #e2e8f0;
 }
 
-::-webkit-scrollbar-track {
-  background: #e2e8f0;
+.financial-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
 }
 
-::-webkit-scrollbar-thumb {
-  background: #4a5568;
-  border-radius: 4px;
+.financial-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border-color: #cbd5e1;
+  transform: translateY(-1px);
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #2d3748;
+.financial-button-primary {
+  background: #1e40af;
+  color: #ffffff;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-transform: none;
 }
 
-/* Tesla-style animations */
+.financial-button-primary:hover {
+  background: #1d4ed8;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(30, 64, 175, 0.3);
+}
+
+.financial-button-secondary {
+  background: transparent;
+  color: #1e40af;
+  border: 2px solid #1e40af;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.financial-button-secondary:hover {
+  background: #1e40af;
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(30, 64, 175, 0.2);
+}
+
+.financial-stats-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 24px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: all 0.2s ease;
+}
+
+.financial-stats-card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+
+.financial-metric {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.financial-metric-positive {
+  color: #059669;
+}
+
+.financial-metric-negative {
+  color: #dc2626;
+}
+
+.financial-metric-neutral {
+  color: #6b7280;
+}
+
+/* Professional Typography */
+.heading-primary {
+  font-size: 3.5rem;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+}
+
+.heading-secondary {
+  font-size: 2.25rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.text-professional {
+  color: #374151;
+  line-height: 1.7;
+}
+
+.text-muted {
+  color: #6b7280;
+}
+
+/* Professional Layout */
+.section-padding {
+  padding: 5rem 0;
+}
+
+.container-professional {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Professional Grid */
+.grid-professional {
+  display: grid;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .grid-professional {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid-professional {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Professional Spacing */
+.space-professional > * + * {
+  margin-top: 1.5rem;
+}
+
+/* Focus States */
+.financial-button-primary:focus,
+.financial-button-secondary:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .heading-primary {
+    font-size: 2.5rem;
+  }
+
+  .heading-secondary {
+    font-size: 1.875rem;
+  }
+
+  .section-padding {
+    padding: 3rem 0;
+  }
+}
+
+/* Subtle Animations */
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(20px);
   }
   to {
     opacity: 1;
@@ -52,197 +207,31 @@ html {
   }
 }
 
-@keyframes slideInRight {
-  from {
-    opacity: 0;
-    transform: translateX(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+.financial-card {
+  animation: fadeInUp 0.6s ease-out;
 }
 
-@keyframes pulse {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.5;
-  }
+/* Professional Colors */
+.color-primary {
+  color: #1e40af;
 }
 
-/* Clean Professional Components */
-.clean-gradient {
-  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-}
-
-.clean-card {
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
-  border-radius: 8px;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
-  transition: all 0.2s ease;
-}
-
-.clean-card:hover {
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  border-color: #d1d5db;
-}
-
-.clean-button {
-  background: #1f2937;
-  color: #ffffff;
-  border: none;
-  padding: 12px 24px;
-  border-radius: 6px;
-  font-weight: 500;
-  font-size: 14px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  text-transform: none;
-}
-
-.clean-button:hover {
-  background: #111827;
-  transform: translateY(-1px);
-}
-
-.clean-button-outline {
-  background: transparent;
-  color: #1f2937;
-  border: 1px solid #1f2937;
-  padding: 12px 24px;
-  border-radius: 6px;
-  font-weight: 500;
-  font-size: 14px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.clean-button-outline:hover {
-  background: #1f2937;
-  color: #ffffff;
-}
-
-/* Clean Navigation */
-.nav-clean {
-  background: #ffffff;
-  border-bottom: 1px solid #e5e7eb;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
-}
-
-/* Market data styles */
-.market-positive {
-  color: #059669;
-}
-
-.market-negative {
-  color: #dc2626;
-}
-
-.market-neutral {
+.color-secondary {
   color: #6b7280;
 }
 
-.market-gold {
-  color: #d97706;
+.color-accent {
+  color: #059669;
 }
 
-/* Loading animation */
-.loading-pulse {
-  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+.bg-primary {
+  background-color: #1e40af;
 }
 
-/* Text styles */
-.text-hero {
-  font-size: clamp(3rem, 8vw, 8rem);
-  font-weight: 300;
-  line-height: 0.9;
-  letter-spacing: -0.02em;
+.bg-secondary {
+  background-color: #f8fafc;
 }
 
-.text-hero-bold {
-  font-weight: 700;
-}
-
-/* Grid styles */
-.grid-auto-fit {
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-}
-
-/* Focus styles */
-button:focus,
-a:focus {
-  outline: 2px solid #ffffff;
-  outline-offset: 2px;
-}
-
-/* Tesla-style section transitions */
-section {
-  opacity: 0;
-  animation: fadeInUp 0.8s ease forwards;
-}
-
-section:nth-child(2) { animation-delay: 0.1s; }
-section:nth-child(3) { animation-delay: 0.2s; }
-section:nth-child(4) { animation-delay: 0.3s; }
-
-/* Interactive elements */
-.interactive-scale {
-  transition: transform 0.2s ease;
-}
-
-.interactive-scale:hover {
-  transform: scale(1.05);
-}
-
-.interactive-scale:active {
-  transform: scale(0.98);
-}
-
-/* Clean card effect */
-.clean-card {
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
-}
-
-/* Responsive text */
-@media (max-width: 768px) {
-  .text-hero {
-    font-size: clamp(2.5rem, 10vw, 4rem);
-  }
-}
-
-/* Light mode optimizations */
-@media (prefers-color-scheme: light) {
-  body {
-    background: #f8f9fa;
-    color: #1a365d;
-  }
-}
-
-/* High contrast mode support */
-@media (prefers-contrast: high) {
-  .financial-card {
-    border-color: #1a365d;
-  }
-
-  .financial-button-outline {
-    border-color: #1a365d;
-  }
-}
-
-/* Reduced motion support */
-@media (prefers-reduced-motion: reduce) {
-  * {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-  
-  html {
-    scroll-behavior: auto;
-  }
+.bg-accent {
+  background-color: #ecfdf5;
 }
