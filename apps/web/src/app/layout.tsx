@@ -16,25 +16,34 @@ import ReactQueryProvider from "./providers/ReactQueryProvider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const viewport: Viewport = {
-  width: 'device-width',
+  width: "device-width",
   initialScale: 1,
 };
 
 export const metadata: Metadata = {
-  title: "XP Trading Pro - Windows XP Style Trading Platform",
-  description: "Windows XP-style trading platform with real-time NSE stock data, portfolio management, and interactive trading tools.",
-  keywords: ["trading", "stocks", "NSE", "portfolio", "windows-xp", "trading-platform"],
-  authors: [{ name: "XP Trading Team" }],
+  title: "CapitalFlow Intelligence Platform",
+  description:
+    "Institutional-grade financial dashboard delivering live market coverage, analytics, portfolio insights, and research in a single command center.",
+  keywords: [
+    "capitalflow",
+    "financial dashboard",
+    "market analytics",
+    "portfolio intelligence",
+    "institutional trading",
+  ],
+  authors: [{ name: "CapitalFlow Team" }],
   openGraph: {
-    title: "XP Trading Pro",
-    description: "Windows XP-style trading platform with real-time NSE data",
+    title: "CapitalFlow Intelligence Platform",
+    description:
+      "Professional market intelligence with real-time data, algorithmic analytics, and actionable insights for institutional teams.",
     type: "website",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "XP Trading Pro",
-    description: "Windows XP-style trading platform with real-time NSE data",
+    title: "CapitalFlow Intelligence Platform",
+    description:
+      "Professional market intelligence with real-time data, algorithmic analytics, and actionable insights for institutional teams.",
   },
   robots: {
     index: true,
@@ -51,9 +60,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html lang="en">
       <body className={inter.className}>
         <ReactQueryProvider>
-          <main>
-            {children}
-          </main>
+          <main>{children}</main>
         </ReactQueryProvider>
       </body>
     </html>
